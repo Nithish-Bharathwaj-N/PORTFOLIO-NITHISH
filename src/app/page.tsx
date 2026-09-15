@@ -45,7 +45,7 @@ const MetricCTAHijack = () => {
             <StatsSection showOnly="top" />
             <section className="relative">
                 {/* Layer 1: The Blog/Book Slider (Sticky) */}
-                <div className="sticky top-0 z-0 overflow-hidden">
+                <div className="sticky top-0 z-0 overflow-hidden overflow-x-clip">
                     <StatsSection showOnly="bottom" />
                 </div>
 
@@ -136,7 +136,7 @@ export default function HomePage() {
                     <ExpertiseSection />
                     <AboutSection />
                     <MetricCTAHijack />
-                    <SocialCorner className="fixed bottom-12 right-12 z-[30]" />
+                    <SocialCorner className="fixed bottom-4 right-4 md:bottom-12 md:right-12 z-[30]" />
                 </DeferredMount>
             </motion.main>
         </>

@@ -127,7 +127,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
     ]);
 
     return (
-        <div className="relative w-screen h-full flex flex-col items-center justify-center overflow-hidden bg-background dark:bg-black">
+        <div className="relative w-screen h-full flex flex-col items-center justify-center overflow-hidden overflow-x-clip bg-background dark:bg-black">
             {/* Phase 0: The Lead-in UI (Visible before card scales) */}
             <motion.div
                 style={{ opacity: phase0Opacity }}
@@ -137,8 +137,8 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                 <div className="mb-16 pointer-events-auto">
                     <MagneticEffect>
                         <div className="group flex items-center gap-2 cursor-pointer">
-                            <div className="relative px-10 py-5 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden transition-all duration-500 shadow-lg group-hover:shadow-[0_0_30px_rgba(193,228,74,0.3)]">
-                                <div className="relative z-10 h-7 overflow-hidden">
+                            <div className="relative px-10 py-5 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip transition-all duration-500 shadow-lg group-hover:shadow-[0_0_30px_rgba(193,228,74,0.3)]">
+                                <div className="relative z-10 h-7 overflow-hidden overflow-x-clip">
                                     <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
                                         <span className="text-white dark:text-black group-hover:text-black font-bold text-xl leading-7 transition-colors duration-500">
                                             {t("leadIn.aboutMe")}
@@ -150,8 +150,8 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 </div>
                             </div>
 
-                            <div className="relative w-16 h-16 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden flex items-center justify-center transition-all duration-500 shadow-lg">
-                                <div className="relative z-10 h-8 overflow-hidden">
+                            <div className="relative w-16 h-16 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip flex items-center justify-center transition-all duration-500 shadow-lg">
+                                <div className="relative z-10 h-8 overflow-hidden overflow-x-clip">
                                     <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
                                         <ArrowUpRight className="w-8 h-8 text-white dark:text-black group-hover:text-black transition-colors duration-500" />
                                         <ArrowUpRight className="w-8 h-8 text-black transition-colors duration-500" />
@@ -190,7 +190,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     backgroundColor: cardBgValue,
                     willChange: "transform, background-color",
                 }}
-                className="relative w-full h-full flex flex-col overflow-hidden origin-bottom z-10"
+                className="relative w-full h-full flex flex-col overflow-hidden overflow-x-clip origin-bottom z-10"
             >
                 {/* Unified Scrolling Content Wrapper */}
                 <motion.div
@@ -218,7 +218,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                             className="relative w-full h-full max-w-[1500px] group/photo cursor-pointer"
                         >
                             {/* Image area - THIS is what clips. Vault frame is OUTSIDE this. */}
-                            <div className="absolute inset-0 overflow-hidden">
+                            <div className="absolute inset-0 overflow-hidden overflow-x-clip">
                                 <motion.div
                                     style={{
                                         scale: photoScale,
@@ -250,7 +250,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 </motion.div>
                             </div>
 
-                            {/* Vault frame - OUTSIDE overflow-hidden, extends 1px beyond clip edge to cover it */}
+                            {/* Vault frame - OUTSIDE overflow-hidden overflow-x-clip, extends 1px beyond clip edge to cover it */}
                             <div className="absolute inset-0 pointer-events-none z-20">
                                 {/* Top bar: -top-px + h-[52px] covers the clip edge by 1px */}
                                 <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -top-px left-0 w-full h-[52px]" />
@@ -292,7 +292,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     {/* Phase 4: Tech Stack & Tools Scrollers */}
                     <motion.div
                         style={{ opacity: textOpacity }}
-                        className="w-full max-w-[1700px] mx-auto py-20 flex flex-col gap-8 flex-shrink-0"
+                        className="w-full max-w-[1700px] mx-auto py-8 md:py-20 flex flex-col gap-8 flex-shrink-0"
                     >
                         <div className="px-8 md:px-16 lg:px-24 mb-6">
                             <h4 className="text-lg md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">

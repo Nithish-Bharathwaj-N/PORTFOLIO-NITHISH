@@ -58,7 +58,7 @@ export const ProjectContact = ({ isLowPowerMode }: { isLowPowerMode?: boolean })
     const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
 
     return (
-        <section className="relative z-10 w-full bg-transparent px-6 md:px-12 py-20 md:py-32 overflow-hidden">
+        <section className="relative z-10 w-full bg-transparent px-6 md:px-12 py-8 md:py-20 md:py-32 overflow-hidden overflow-x-clip">
 
             {/* Ambient Background Glow - Smoother */}
             {!isLowPowerMode && (
@@ -84,7 +84,7 @@ export const ProjectContact = ({ isLowPowerMode }: { isLowPowerMode?: boolean })
                 </div>
 
                 <div className="relative z-10 w-full lg:w-1/2 flex justify-center lg:justify-end h-[400px] md:h-[500px]">
-                    <div className="relative w-full h-full overflow-hidden flex items-center justify-center [mask-image:radial-gradient(circle_at_center,black_40%,transparent_75%)] md:[mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)] translate-x-6 lg:translate-x-12">
+                    <div className="relative w-full h-full overflow-hidden overflow-x-clip flex items-center justify-center [mask-image:radial-gradient(circle_at_center,black_40%,transparent_75%)] md:[mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)] translate-x-6 lg:translate-x-12">
                         <div className="absolute inset-0 scale-[1.15] md:scale-110">
                             <InteractiveRobotSpline
                                 scene={ROBOT_SCENE_URL}
@@ -131,7 +131,7 @@ const BlockInTextCard = ({
                         <span className="relative text-2xl md:text-4xl font-bold uppercase tracking-wide text-foreground pb-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-foreground group-hover:after:w-full after:transition-all after:duration-300 after:ease-out">
                             Send Message
                         </span>
-                        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-foreground text-background transition-all duration-300 ease-out group-hover:-rotate-45 group-hover:scale-110">
+                        <div className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden overflow-x-clip rounded-full bg-foreground text-background transition-all duration-300 ease-out group-hover:-rotate-45 group-hover:scale-110">
                             <ArrowUpRight className="h-6 w-6" />
                         </div>
                     </Link>

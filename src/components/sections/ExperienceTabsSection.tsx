@@ -131,7 +131,7 @@ function EducationContent() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="overflow-hidden"
+                        className="overflow-hidden overflow-x-clip"
                     >
                         <div className="space-y-4 pt-4 border-t border-border">
                             {portfolioData.education.map((edu: Education, index: number) => (

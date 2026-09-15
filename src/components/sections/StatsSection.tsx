@@ -84,7 +84,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
             {/* Header for the Gallery Section */}
             {(showOnly === 'top' || !showOnly) && (
                 <>
-                    <div className="max-w-6xl mx-auto px-6 w-full pt-32 pb-16 text-center space-y-4">
+                    <div className="max-w-6xl mx-auto px-6 w-full pt-12 md:pt-32 pb-16 text-center space-y-4">
                         <motion.h2
                             initial={{ opacity: 0, y: 15 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +121,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
 
             {/* Book Showcase Integration */}
             {(showOnly === 'bottom' || !showOnly) && (
-                <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 pt-16 pb-32 space-y-16 relative">
+                <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 pt-16 pb-12 md:pb-32 space-y-16 relative">
                     <div className="flex items-center justify-between border-b border-border/50 pb-8">
                         <div className="space-y-1">
                             <h3 className="text-2xl font-bold text-foreground flex items-center gap-3">
@@ -172,7 +172,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                         </div>
 
                         <div className="overflow-visible w-full lg:max-w-[1400px] mx-auto px-4 md:px-12">
-                            <div className="flex gap-8 md:gap-24 justify-center pt-12 pb-32 min-h-[600px] items-start relative">
+                            <div className="flex gap-8 md:gap-24 justify-center pt-12 pb-12 md:pb-32 min-h-[600px] items-start relative">
                                 <AnimatePresence mode="popLayout" initial={false}>
                                     {getVisibleBlogs().map((blog, index) => (
                                         <motion.div

@@ -103,7 +103,7 @@ function ParallaxText({ children, baseVelocity = 100, isLowPowerMode = false }: 
 
     if (isLowPowerMode) {
         return (
-            <div className="overflow-hidden whitespace-nowrap w-full py-1">
+            <div className="overflow-hidden overflow-x-clip whitespace-nowrap w-full py-1">
                 <div
                     className={cn(
                         "flex",
@@ -122,7 +122,7 @@ function ParallaxText({ children, baseVelocity = 100, isLowPowerMode = false }: 
 
     return (
         <div
-            className="overflow-hidden whitespace-nowrap w-full py-1"
+            className="overflow-hidden overflow-x-clip whitespace-nowrap w-full py-1"
             onMouseEnter={() => (isHovered.current = true)}
             onMouseLeave={() => (isHovered.current = false)}
         >
@@ -211,7 +211,7 @@ export default function ExperienceMarquee() {
     };
 
     return (
-        <section className="py-2 md:py-8 bg-background relative z-10 overflow-hidden">
+        <section className="py-2 md:py-8 bg-background relative z-10 overflow-hidden overflow-x-clip">
             {/* Fog/Blur Blending */}
             <div className="absolute top-0 left-0 w-full h-16 md:h-32 bg-gradient-to-b from-background via-background/80 to-transparent z-20 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-full h-16 md:h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-20 pointer-events-none" />

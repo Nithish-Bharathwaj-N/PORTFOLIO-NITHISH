@@ -123,11 +123,11 @@ const AboutLeadInImageStack = () => {
     if (!mounted || randomData.length === 0) return null;
 
     return (
-        <div className="relative flex items-center justify-center w-56 h-32 md:w-72 md:h-44 mb-8 lg:mb-10 overflow-visible">
+        <div className="relative flex items-center justify-center w-full max-w-[14rem] h-28 md:w-72 md:h-44 mb-8 lg:mb-10 overflow-visible">
             {randomData.map((item, i) => (
                 <div
                     key={item.src}
-                    className="absolute w-24 h-28 md:w-32 md:h-40 rounded-xl overflow-hidden border-[4px] border-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] bg-white"
+                    className="absolute w-20 h-24 md:w-32 md:h-40 rounded-xl overflow-hidden overflow-x-clip border-[4px] border-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] bg-white"
                     style={{
                         zIndex: i === 1 ? 20 : 10,
                         transform: `translate(${item.x}px, ${item.y}px) rotate(${item.rotate}deg)`,
@@ -188,7 +188,7 @@ const AboutLeadIn = () => {
                         transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
                     }
                 }}
-                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-12 lg:p-16 overflow-hidden shadow-xl dark:shadow-2xl transition-colors duration-500 group"
+                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-12 lg:p-16 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"
             >
 
                 {/* 1. Grid Background Overlay (Dynamic Colors) */}
@@ -201,7 +201,7 @@ const AboutLeadIn = () => {
                 <div className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-red-600 translate-x-1 translate-y-[50%] z-10" />
 
                 {/* 3. Glare Sweep Effect (Premium Hover Shine via Framer Motion) */}
-                <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden overflow-x-clip">
                     <motion.div
                         variants={{
                             hidden: { left: "-150%" },
@@ -209,7 +209,7 @@ const AboutLeadIn = () => {
                             hover: { left: "150%" }
                         }}
                         transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
-                        className="absolute inset-y-0 w-[150%] md:w-[75%] bg-gradient-to-r from-transparent via-white/80 dark:via-white/30 to-transparent skew-x-[-25deg]"
+                        className="absolute inset-y-0 w-[200%] md:w-[75%] bg-gradient-to-r from-transparent via-white/80 dark:via-white/30 to-transparent skew-x-[-25deg]"
                     />
                 </div>
 
@@ -217,14 +217,14 @@ const AboutLeadIn = () => {
                 <div className="relative z-10">
                     {/* Top Tagline */}
                     <div className="flex justify-between items-start mb-6 md:mb-10">
-                        <span className="text-red-600 dark:text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">{t('leadIn.tagline')}</span>
+                        <span className="text-red-600 dark:text-red-500 text-4xl md:text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">{t('leadIn.tagline')}</span>
                         <span className="text-zinc-400 dark:text-zinc-600 text-[9px] font-mono tracking-widest uppercase hidden md:block">{t('leadIn.role')}</span>
                     </div>
 
                     {/* Massive Typography - Quote Style */}
                     <div className="mb-8 md:mb-14 relative cursor-default">
                         {/* Original Text with glow */}
-                        <h2 className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[88px] font-bold tracking-tight leading-[0.92] text-zinc-900 dark:text-white transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        <h2 className="text-[28px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[88px] font-bold tracking-tight leading-[0.92] text-zinc-900 dark:text-white transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                             <span className="text-zinc-300 dark:text-zinc-700 mr-2 transition-colors duration-700 group-hover:text-zinc-400 dark:group-hover:text-zinc-500">"</span>
                             {t('leadIn.headlineAI')} <span className="text-zinc-400 dark:text-zinc-500 font-medium transition-colors duration-700 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">{t('leadIn.headlineData')}</span> <br className="hidden md:block" />
                             <span className="font-serif italic font-normal text-zinc-900 dark:text-white lowercase opacity-90 transition-opacity duration-700 group-hover:opacity-100">{t('leadIn.headlineSoftware')}</span>
@@ -243,7 +243,7 @@ const AboutLeadIn = () => {
                         </div>
 
                         {/* Right columns */}
-                        <div className="md:col-span-7 flex flex-col sm:flex-row gap-8 text-[13px]">
+                        <div className="md:col-span-7 flex flex-col sm:flex-row gap-8 text-4xl md:text-[13px]">
                             <div className="flex-1 space-y-3">
                                 <span className="text-zinc-800 dark:text-zinc-200 font-bold uppercase tracking-widest block border-b border-zinc-100 dark:border-zinc-900 pb-3">Scope & Platform</span>
                                 <p className="text-zinc-500 leading-relaxed">
@@ -298,7 +298,7 @@ const CoreEngineeringPanel = ({ scrollYProgress }: { scrollYProgress: any }) => 
     const blur = useTransform(scrollYProgress, [0.45, 0.6], [0, 10]);
 
     return (
-        <div className="w-screen h-full flex items-center justify-center bg-background transition-colors duration-500 overflow-hidden">
+        <div className="w-screen h-full flex items-center justify-center bg-background transition-colors duration-500 overflow-hidden overflow-x-clip">
             <motion.div
                 style={{
                     opacity,
@@ -329,7 +329,7 @@ const ClosingCard = ({ title, subtitle, desc, index, direction }: { title: strin
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`group relative h-[50vh] flex flex-col justify-center ${direction === 'right' ? 'items-end text-right' : 'items-start text-left'}`}
+        className={`group relative min-h-[30vh] md:min-h-[50vh] flex flex-col justify-center ${direction === 'right' ? 'items-end text-right' : 'items-start text-left'}`}
     >
         <div className={`flex flex-col gap-6 relative z-10 w-full px-4 ${direction === 'right' ? 'items-end' : 'items-start'}`}>
             {/* Minimalist Index & Role Indicator */}
@@ -359,7 +359,7 @@ const ClosingCard = ({ title, subtitle, desc, index, direction }: { title: strin
 const ViewMoreCard = ({ href, title }: { href: string, title: string }) => {
     const t = useTranslations('about');
     return (
-        <Link href={href} className="group block h-[50vh] flex flex-col justify-center">
+        <Link href={href} className="group block min-h-[30vh] md:min-h-[50vh] flex flex-col justify-center">
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -448,15 +448,15 @@ const AuditFunnel = () => {
     }, []);
 
     return (
-        <div ref={sectionRef} className="relative overflow-visible group min-h-[80vh] md:min-h-[120vh] flex items-center justify-center bg-background z-10 pb-10 md:pb-32">
-            <div className="flex flex-col items-center text-center py-20 md:py-40 space-y-12 md:space-y-16 pointer-events-none w-full origin-top">
+        <div ref={sectionRef} className="relative overflow-visible group min-h-[60vh] md:min-h-[120vh] flex items-center justify-center bg-background z-10 pb-10 md:pb-32">
+            <div className="flex flex-col items-center text-center py-12 md:py-40 space-y-12 md:space-y-16 pointer-events-none w-full origin-top">
                 <motion.div
                     style={{ y: yExit, scale: scaleExit, opacity: opacityExit }}
                     className="space-y-6 md:space-y-10 flex flex-col items-center px-6 relative z-10 mix-blend-difference w-full"
                 >
                     <motion.h4
                         style={{ scale, willChange: "transform" }}
-                        className="text-4xl md:text-6xl lg:text-[7rem] font-black tracking-[-0.05em] text-white max-w-7xl tracking-tighter leading-[0.9] lg:px-6 uppercase text-center"
+                        className="text-4xl md:text-6xl text-5xl md:text-6xl lg:text-[7rem] font-black tracking-[-0.05em] text-white max-w-7xl tracking-tighter leading-[0.9] lg:px-6 uppercase text-center"
                     >
                         {t('architecting')} <br></br>
                         <motion.span
@@ -530,7 +530,7 @@ const ScrollHijackSection = () => {
 
     return (
         <div ref={sectionRef} className="relative h-[600vh]">
-            <div className="sticky top-0 h-screen w-full overflow-hidden z-10">
+            <div className="sticky top-0 h-screen w-full overflow-hidden overflow-x-clip z-10">
                 <motion.div
                     style={{ scale: exitScale, opacity: exitOpacity, borderRadius: exitBorderRadius }}
                     className="w-full h-full relative origin-center"
@@ -591,7 +591,7 @@ export default function AboutSection() {
             className="relative bg-background text-foreground dark:bg-black dark:text-white transition-colors duration-500"
         >
             {/* 1. STICKY PLANE - Lead-in */}
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden pointer-events-none">
+            <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none">
                 <motion.div
                     style={{ scale, opacity, y: yLeadIn }}
                     className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
@@ -610,7 +610,7 @@ export default function AboutSection() {
                     <ScrollAdventure />
                     <ArgentLoopInfiniteSlider />
                     {/* Seamless solid background section overlapping the slider's dead space */}
-                    <div className="-mt-[50vh] flex flex-col items-center w-full bg-background relative z-20 pt-32 pb-32">
+                    <div className="-mt-[50vh] flex flex-col items-center w-full bg-background relative z-20 pt-12 md:pt-32 pb-32">
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
                             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -628,7 +628,7 @@ export default function AboutSection() {
                                     content: member.id === 'view-more' ? (
                                         <Link
                                             href={member.social?.website || '/experience'}
-                                            className="relative flex items-center h-[140px] w-[250px] z-30"
+                                            className="relative flex items-center h-[100px] md:h-[140px] w-[200px] md:w-[250px] z-30"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="p-4 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(var(--primary),0.3)]">
@@ -655,7 +655,7 @@ export default function AboutSection() {
                                                 </p>
                                             )}
 
-                                            <div className="w-full mt-4 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden relative group/card h-32">
+                                            <div className="w-full mt-4 rounded-xl border border-neutral-200 dark:border-neutral-800 overflow-hidden overflow-x-clip relative group/card h-32">
                                                 <img
                                                     src={member.image}
                                                     alt={member.name}

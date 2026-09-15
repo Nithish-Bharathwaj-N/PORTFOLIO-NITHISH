@@ -48,7 +48,7 @@ export default function CTASection() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden bg-background">
+        <section ref={sectionRef} className="relative py-12 lg:py-16 overflow-hidden overflow-x-clip bg-background">
             {/* Infinite Ribbons - Moved from Stats Section */}
             <div className="relative flex h-[300px] w-full items-center justify-center pointer-events-none mb-10">
                 <InfiniteRibbon rotation={6} baseVelocity={1} className="z-10 py-5 border-y border-blue-200 dark:border-white/5 shadow-xl" background="bg-white dark:bg-zinc-900" textColor="text-blue-700 dark:text-zinc-400 font-mono tracking-tighter">

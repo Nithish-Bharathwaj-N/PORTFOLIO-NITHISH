@@ -30,7 +30,7 @@ const PreviewCard = ({
             className="group relative"
         >
             <Link href={href} className="block h-full">
-                <div className="relative h-full p-8 md:p-12 bg-zinc-50 dark:bg-zinc-950 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden transition-all duration-700 hover:bg-white dark:hover:bg-zinc-900 group-hover:border-primary/20">
+                <div className="relative h-full p-8 md:p-12 bg-zinc-50 dark:bg-zinc-950 border border-black/5 dark:border-white/5 rounded-3xl overflow-hidden overflow-x-clip transition-all duration-700 hover:bg-white dark:hover:bg-zinc-900 group-hover:border-primary/20">
                     {/* Background Pattern */}
                     <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.01] pointer-events-none group-hover:opacity-[0.05] transition-opacity duration-700">
                         <div className="absolute inset-0" style={{
@@ -118,7 +118,7 @@ export default function AboutMeHub() {
     ];
 
     return (
-        <section ref={sectionRef} className="relative py-32 overflow-hidden bg-background dark:bg-black">
+        <section ref={sectionRef} className="relative py-32 overflow-hidden overflow-x-clip bg-background dark:bg-black">
             {/* Background elements */}
             <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.01] pointer-events-none">
                 <div className="absolute inset-0" style={{

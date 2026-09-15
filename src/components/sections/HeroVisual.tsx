@@ -126,13 +126,13 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="relative min-h-screen w-full flex flex-col bg-background text-foreground overflow-hidden selection:bg-primary/20"
+      className="relative min-h-screen w-full flex flex-col bg-background text-foreground overflow-hidden overflow-x-clip selection:bg-primary/20"
     >
       {/* Background Pattern */}
       <div className="w-full absolute h-full z-0 bg-[radial-gradient(circle,_#888_0.5px,_transparent_0.5px)] dark:bg-[radial-gradient(circle,_#444_0.5px,_transparent_0.5px)] opacity-20 [background-size:24px_24px]" />
 
       {/* Spotlight Effect - Dramatic lighting */}
-      <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 z-[5] pointer-events-none overflow-hidden overflow-x-clip">
         <Spotlight
           duration={10}
           xOffset={120}
@@ -148,7 +148,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         initial={{ opacity: 0, scale: 1.05 }}
         animate={{ opacity: 0.9, scale: 1 }}
         transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-0 top-0 bottom-0 w-full lg:w-[42%] xl:w-[38%] pointer-events-none overflow-hidden z-[1]"
+        className="absolute right-0 top-0 bottom-0 w-full lg:w-[42%] xl:w-[38%] pointer-events-none overflow-hidden overflow-x-clip z-[1]"
       >
         <Image
           src="/images/nithish-suit.jpg"
@@ -171,7 +171,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute right-6 md:right-16 bottom-36 md:bottom-44 z-20 hidden md:flex flex-col gap-1.5 p-4 md:p-5 rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 shadow-2xl max-w-xs md:max-w-sm pointer-events-auto group hover:border-sky-500/40 transition-colors"
+        className="absolute right-4 bottom-24 md:right-16 md:bottom-44 z-20 hidden md:flex flex-col gap-1.5 p-4 md:p-5 rounded-2xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 shadow-2xl max-w-xs md:max-w-sm pointer-events-auto group hover:border-sky-500/40 transition-colors"
       >
         <div className="flex items-center justify-between gap-3 mb-0.5">
           <div className="flex items-center gap-2">
@@ -188,8 +188,8 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         </span>
       </motion.div>
 
-      <main className="relative flex-1 flex flex-col justify-center pt-40 pb-20 z-10 max-w-[105rem] w-full mx-auto">
-        <div className="flex relative gap-2 px-4 md:px-12 w-full max-w-[56vw] flex-col justify-center items-start text-left">
+      <main className="relative flex-1 flex flex-col justify-center pt-24 pb-12 md:pt-40 md:pb-20 z-10 max-w-[105rem] w-full mx-auto">
+        <div className="flex relative gap-2 px-4 md:px-12 w-full max-w-full md:max-w-[56vw] flex-col justify-center items-start text-left">
 
           {/* Follow-Cursor Tooltip */}
           <AnimatePresence>
@@ -229,7 +229,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
               initial={{ opacity: 0, y: 30 }}
               animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3.2rem,8.5vw,10.5rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
+              className="text-[clamp(2.5rem,8.5vw,10.5rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
             >
               CYBER
             </motion.h1>
@@ -250,7 +250,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
               initial={{ opacity: 0, y: 30 }}
               animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 1.2, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3.2rem,8.5vw,10.5rem)] flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
+              className="text-[clamp(2.5rem,8.5vw,10.5rem)] flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
             >
               <span>SECU</span>
               <div
@@ -292,7 +292,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
               initial={{ opacity: 0, y: 30 }}
               animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3.2rem,8.5vw,10.5rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap shrink-0"
+              className="text-[clamp(2.5rem,8.5vw,10.5rem)] font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap shrink-0"
             >
               & AI
             </motion.h1>
@@ -338,7 +338,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
               initial={{ opacity: 0, y: 30 }}
               animate={isExiting ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(3.2rem,8.5vw,10.5rem)] flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
+              className="text-[clamp(2.5rem,8.5vw,10.5rem)] flex items-center font-black leading-[0.85] tracking-tighter text-shiny will-change-transform text-left whitespace-nowrap"
             >
               <span>EN</span><span>GI</span>
               <div
@@ -453,9 +453,9 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
                 className="group flex items-center"
               >
                 <motion.div
-                  className="relative flex items-center bg-zinc-100 dark:bg-white h-10 w-10 group-hover:w-36 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden shadow-xl"
+                  className="relative flex items-center bg-zinc-100 dark:bg-white h-10 w-10 group-hover:w-36 rounded-full transition-all duration-500 ease-[0.23,1,0.32,1] overflow-hidden overflow-x-clip shadow-xl"
                 >
-                  <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-black pl-4 pr-10">
+                  <span className="whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 group-hover:delay-150 text-4xl md:text-[10px] font-black uppercase tracking-widest text-zinc-900 dark:text-black pl-4 pr-10">
                     View Resume
                   </span>
                   <div className="absolute right-0 flex items-center justify-center size-10 text-zinc-900 dark:text-black group-hover:rotate-45 transition-transform duration-500">
@@ -481,7 +481,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         <div className="relative z-50">
           <motion.div
             whileHover={{ x: 10 }}
-            className="bg-white text-black py-10 px-4 text-[10px] font-black uppercase tracking-[0.5em] shadow-2xl rounded-r-3xl border-r border-y border-zinc-200 cursor-pointer"
+            className="bg-white text-black py-10 px-4 text-4xl md:text-[10px] font-black uppercase tracking-[0.5em] shadow-2xl rounded-r-3xl border-r border-y border-zinc-200 cursor-pointer"
           >
             <span className="rotate-0 [writing-mode:vertical-rl]">
               AVAILABLE FOR OPPORTUNITY

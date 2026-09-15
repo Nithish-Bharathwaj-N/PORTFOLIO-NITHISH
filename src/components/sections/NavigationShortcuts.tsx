@@ -131,7 +131,7 @@ export const NavigationShortcuts = () => {
         >
             {/* Innovative Cross-Fade Background - Only render when menu is open */}
             {isOpen && (
-                <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+                <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden overflow-x-clip">
                     {/* Mobile/Fallback Subtle Background */}
                     <div className="absolute inset-0 bg-background lg:hidden opacity-50 dark:opacity-20" />
                     <div className="absolute inset-0 lg:hidden pointer-events-none">
@@ -165,13 +165,13 @@ export const NavigationShortcuts = () => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 
                                     {/* Scan Line Overlay */}
-                                    <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+                                    <div className="absolute inset-0 pointer-events-none overflow-hidden overflow-x-clip opacity-10">
                                         <div className="w-full h-1 bg-primary/40 absolute top-[-5%] animate-[scan_4s_linear_infinite]" />
                                         <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]" />
                                     </div>
 
                                     {/* Preview Metadata */}
-                                    <div className="absolute bottom-12 right-12 text-right hidden md:block">
+                                    <div className="absolute bottom-4 right-4 md:bottom-12 md:right-12 text-right hidden md:block">
                                         <div className="text-[10px] font-mono tracking-[0.2em] text-primary/60 uppercase mb-1">PREVIEW</div>
                                         <div className="text-[10px] font-mono tracking-[0.1em] text-primary/40">ID_REF: {hoveredImage?.split('/').pop()}</div>
                                     </div>
@@ -190,7 +190,7 @@ export const NavigationShortcuts = () => {
                         onClick={() => setIsOpen(!isOpen)}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="bg-white dark:bg-white text-black h-14 w-14 md:h-18 md:w-18 flex items-center justify-center rounded-full shadow-[0_0_50px_rgba(255,255,255,0.3)] dark:shadow-none border border-black/5 dark:border-transparent group transition-all duration-500 overflow-hidden relative"
+                        className="bg-white dark:bg-white text-black h-14 w-14 md:h-18 md:w-18 flex items-center justify-center rounded-full shadow-[0_0_50px_rgba(255,255,255,0.3)] dark:shadow-none border border-black/5 dark:border-transparent group transition-all duration-500 overflow-hidden overflow-x-clip relative"
                     >
                         <motion.div
                             animate={{
@@ -215,7 +215,7 @@ export const NavigationShortcuts = () => {
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
+                        className="overflow-hidden overflow-x-clip"
                     >
                         <div className="pt-8 px-8 md:px-16 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-16">
                             {categories.map((category, catIdx) => (
