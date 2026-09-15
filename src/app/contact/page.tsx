@@ -18,6 +18,7 @@ const Meteors = dynamic(() => import('@/components/ui/meteors').then(mod => mod.
 
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import { DeferredMount } from '@/components/ui/DeferredMount';
+import { ProfileIDCard } from '@/components/ui/ProfileIDCard';
 
 function DirectContactCards() {
     const [copiedEmail, setCopiedEmail] = useState(false);
@@ -494,12 +495,12 @@ export default function ContactPage() {
             >
 
                 {/* Header Section (Flows normally) */}
-                <div className="relative w-full pt-48 pb-20">
+                <div className="relative w-full pt-28 sm:pt-40 md:pt-48 pb-10 sm:pb-16 md:pb-20 overflow-hidden">
                     <div className="w-full flex items-center justify-center opacity-20 select-none pointer-events-none">
                         <DynamicScrollVelocity
                             texts={[t('hero.ticker.build'), t('hero.ticker.freelance')]}
                             velocity={20}
-                            className="text-7xl md:text-[9rem] font-black tracking-tight uppercase whitespace-nowrap"
+                            className="text-4xl sm:text-7xl md:text-[9rem] font-black tracking-tight uppercase whitespace-nowrap"
                             isLowPowerMode={isLowPowerMode}
                         />
                     </div>
@@ -510,8 +511,8 @@ export default function ContactPage() {
                 <div className="container-creative px-4 md:px-8 max-w-[1800px] mx-auto pb-40">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
-                        {/* LEFT COLUMN: Lanyard */}
-                        <div className="col-span-1 lg:col-span-4 relative lg:sticky top-28 h-[600px] md:h-[680px] lg:h-[780px] flex items-center justify-center z-20 overflow-hidden rounded-3xl border border-white/5 bg-white/[0.01]">
+                        {/* LEFT COLUMN: Lanyard / Profile ID Card */}
+                        <div className="col-span-1 lg:col-span-4 relative lg:sticky top-28 h-auto min-h-[520px] sm:min-h-[620px] lg:h-[780px] flex items-center justify-center z-20 overflow-hidden rounded-3xl border border-white/5 bg-white/[0.01]">
                             {/* Anchor Slot/Bar for Lanyard */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 md:w-64 lg:w-80 h-2 bg-gradient-to-r from-transparent via-foreground/20 to-transparent blur-[2px] rounded-full z-30 mt-[-1px]" />
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 md:w-32 lg:w-40 h-[3px] bg-gradient-to-r from-transparent via-foreground/40 to-transparent rounded-full z-30" />
@@ -519,17 +520,11 @@ export default function ContactPage() {
                             <DeferredMount fallback={<div className="w-full h-full flex items-center justify-center opacity-50"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
                                 <div className="w-full h-full pointer-events-auto flex items-center justify-center">
                                     {!isLowPowerMode ? (
-                                        <ErrorBoundary fallback={<div className="w-full h-full flex items-center justify-center opacity-50">Interactive Card Unavailable</div>}>
+                                        <ErrorBoundary fallback={<ProfileIDCard />}>
                                             <Lanyard position={[0, 0, 13]} fov={20} gravity={[0, -40, 0]} isLowPowerMode={isLowPowerMode} />
                                         </ErrorBoundary>
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center p-8">
-                                            <div className="relative w-full max-w-sm aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 bg-primary/5">
-                                                <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 italic font-serif">
-                                                    Archive ID // Static
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <ProfileIDCard />
                                     )}
                                 </div>
                             </DeferredMount>

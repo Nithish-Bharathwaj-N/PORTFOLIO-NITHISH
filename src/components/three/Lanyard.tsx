@@ -19,6 +19,7 @@ import { useTheme } from 'next-themes';
 
 import { usePerformance } from '@/hooks/usePerformance';
 import { portfolioData } from '@/data/portfolio';
+import { ProfileIDCard } from '@/components/ui/ProfileIDCard';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -56,41 +57,7 @@ export function Lanyard({
     }, []);
 
     if (isLowPowerMode) {
-        return (
-            <div className="w-full h-full flex items-center justify-center p-8">
-                <div className="relative group transition-all duration-500 hover:scale-105">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-blue-500/10 to-purple-500/20 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative w-64 aspect-[1.5/2.3] bg-[#0a0a12]/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col items-center justify-center text-center p-6">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-blue-500 to-purple-500" />
-                        <div className="relative w-32 h-32 mb-6 rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl">
-                            <img
-                                src={portfolioData.personal.avatar}
-                                alt={portfolioData.personal.name}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <h3 className="text-xl font-bold text-white tracking-tight">
-                                {portfolioData.personal.name}
-                            </h3>
-                            <p className="text-sm text-zinc-400 font-medium">
-                                {portfolioData.personal.title}
-                            </p>
-                        </div>
-                        <div className="mt-8 pt-6 border-t border-white/5 w-full">
-                            <div className="flex justify-center gap-4">
-                                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                </div>
-                                <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 flex items-center">
-                                    Archive Link Active
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+        return <ProfileIDCard />;
     }
 
     return (
