@@ -107,8 +107,8 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                         </motion.p>
                     </div>
 
-                    {/* Immersive Zoom Parallax Component — desktop only (needs 3D scroll perspective) */}
-                    {!isMobile && (
+                    {/* Desktop: full 3D ZoomParallax | Mobile: simple photo grid */}
+                    {!isMobile ? (
                         <div className="w-full">
                             <ZoomParallax images={images}>
                                 <Link 
@@ -119,6 +119,29 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </Link>
                             </ZoomParallax>
+                        </div>
+                    ) : (
+                        <div className="w-full px-4 pb-4">
+                            <div className="grid grid-cols-2 gap-2 mb-4">
+                                {images.slice(0, 4).map((img, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: i * 0.07 }}
+                                        className="relative aspect-square rounded-xl overflow-hidden"
+                                    >
+                                        <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <Link
+                                href="/gallery"
+                                className="flex items-center justify-center gap-2 w-full py-3 rounded-xl border border-border/50 text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground hover:border-foreground transition-colors"
+                            >
+                                View Full Gallery <ArrowUpRight className="w-3.5 h-3.5" />
+                            </Link>
                         </div>
                     )}
                 </>
