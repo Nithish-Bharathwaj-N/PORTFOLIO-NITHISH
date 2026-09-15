@@ -54,31 +54,18 @@ export const SplineScene: FC<SplineSceneProps> = ({ scene, className }) => {
         return () => observer.disconnect();
     }, [isLowPowerMode]);
 
-    // Fallback timer just in case onLoad fails
+    // Fallback timer just in case onLoad fails or takes longer
     useEffect(() => {
-        if (isLowPowerMode) return;
         const timeoutId = setTimeout(() => {
             if (isMounted.current && !isSceneLoaded) {
                 setIsSceneLoaded(true);
             }
-        }, 8000);
+        }, 5000);
         return () => clearTimeout(timeoutId);
-    }, [isLowPowerMode, isSceneLoaded]);
-
-    if (isLowPowerMode) {
-        return (
-            <div className={`relative w-full h-full bg-background overflow-hidden ${className}`}>
-                <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-64 h-64 bg-primary/10 blur-[100px] rounded-full animate-pulse-slow" />
-                </div>
-            </div>
-        );
-    }
+    }, [isSceneLoaded]);
 
     return (
         <div ref={containerRef} className={`relative w-full h-full overflow-hidden ${className || ''}`}>
-
             {/* Global style to hide the react-spline watermark (not in shadow DOM) */}
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -93,18 +80,24 @@ export const SplineScene: FC<SplineSceneProps> = ({ scene, className }) => {
                 }
             `}} />
 
-            <div className="w-full h-full pt-20 relative">
+            <div className="w-full h-full relative flex items-center justify-center">
 
-                {/* Custom Cinematic Loading State */}
+                {/* Custom Cinematic Cyber Orb Fallback / Loading State */}
                 {!isSceneLoaded && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-transparent">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+                        <div className="relative w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/30 via-cyan-500/20 to-purple-500/30 blur-3xl animate-pulse" />
+                            <div className="w-32 h-32 rounded-full border border-primary/40 bg-primary/5 backdrop-blur-md flex items-center justify-center animate-spin-slow shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+                                <div className="w-20 h-20 rounded-full border border-dashed border-cyan-400/60" />
+                            </div>
+                        </div>
                     </div>
                 )}
 
                 <div
                     className="w-full h-full transition-opacity duration-1000"
                     style={{
-                        opacity: isSceneLoaded ? 1 : 0,
+                        opacity: isSceneLoaded ? 1 : 0.8,
                         visibility: isVisible ? 'visible' : 'hidden'
                     }}
                 >
@@ -114,10 +107,13 @@ export const SplineScene: FC<SplineSceneProps> = ({ scene, className }) => {
                             splineApp.current = app;
                             if (isMounted.current) setIsSceneLoaded(true);
                         }}
+                        onError={() => {
+                            if (isMounted.current) setIsSceneLoaded(true);
+                        }}
                         style={{
                             width: '100%',
                             height: '100%',
-                            transform: 'scale(1.2)',
+                            transform: 'scale(1.1)',
                             transformOrigin: 'center center'
                         }}
                     />

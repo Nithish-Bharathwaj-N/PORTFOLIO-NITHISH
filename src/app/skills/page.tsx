@@ -301,11 +301,11 @@ export default function SkillsPage() {
             <DeferredMount>
                 <HorizontalScrollCarousel />
                 <HardSkills />
-                <section className="pt-12 pb-48 px-8 relative overflow-hidden bg-background">
+                <section className="pt-8 sm:pt-12 pb-16 sm:pb-24 md:pb-48 px-4 sm:px-8 relative overflow-hidden bg-background">
                     <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
                     </div>
 
-                    <div className="max-w-7xl mx-auto relative z-10 w-full mt-12 md:mt-16">
+                    <div className="max-w-7xl mx-auto relative z-10 w-full mt-8 md:mt-16">
                         <div className="relative w-full flex flex-col justify-center items-center mb-0">
                             <ArchedTechIconsInteractive
                                 key="arched-tech-icons-interactive"
@@ -317,7 +317,7 @@ export default function SkillsPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ margin: "-100px", once: true }}
                                 transition={{ duration: 0.6 }}
-                                className="text-center space-y-4 max-w-3xl mx-auto px-4 relative z-10 pointer-events-auto -mt-[30px] sm:-mt-[50px] md:-mt-[70px]"
+                                className="text-center space-y-4 max-w-3xl mx-auto px-4 relative z-10 pointer-events-auto mt-2 sm:-mt-[40px] md:-mt-[70px]"
                             >
                                 <motion.span
                                     initial={{ opacity: 0, x: -20 }}

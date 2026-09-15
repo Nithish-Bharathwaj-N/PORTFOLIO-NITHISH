@@ -35,40 +35,71 @@ export const HorizontalScrollCarousel = () => {
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-68%"]);
 
   return (
-    <section
-      ref={targetRef}
-      className="relative h-[350vh] bg-background"
-    >
-      <div className="sticky top-0 flex flex-col h-screen overflow-hidden pb-8 md:pb-12">
-
-        {/* Title Section */}
-        <div className="w-full px-6 md:px-24 pt-6 md:pt-8 lg:pt-12 z-20 flex-shrink-0">
+    <>
+      {/* Mobile Version: Clean touch horizontal scroll without vertical height hijack */}
+      <section className="block md:hidden py-12 px-4 bg-background relative z-10">
+        <div className="w-full px-2 mb-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/40 leading-[0.9] pb-2">
+            <h2 className="text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/50 leading-tight">
               Strategic Directives
             </h2>
-            <div className="w-20 h-1.5 bg-primary mt-4 mb-4 rounded-full opacity-80"></div>
-            <p className="text-muted-foreground text-base md:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed">
-              Interpersonal capabilities engineered for high-impact leadership and systemic problem solving in complex environments.
+            <div className="w-12 h-1 bg-primary mt-3 mb-3 rounded-full opacity-80" />
+            <p className="text-muted-foreground text-sm font-medium leading-relaxed">
+              Interpersonal capabilities engineered for high-impact leadership and systemic problem solving.
             </p>
           </motion.div>
         </div>
 
-        {/* Carousel Items */}
-        <div className="flex-1 flex items-center w-full relative mt-4 lg:mt-6">
-          <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-6 md:px-24 absolute w-max">
-            {allCards.map((card) => {
-              return <Card card={card} key={card.id} />;
-            })}
-          </motion.div>
+        {/* Horizontal Touch Scroll Row */}
+        <div className="flex gap-4 overflow-x-auto pb-4 pt-2 px-1 snap-x snap-mandatory scrollbar-none scroll-smooth">
+          {allCards.map((card) => (
+            <div key={card.id} className="snap-center shrink-0">
+              <Card card={card} />
+            </div>
+          ))}
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Desktop Version: Sticky horizontal scroll pinned to scroll progress */}
+      <section
+        ref={targetRef}
+        className="hidden md:block relative h-[250vh] bg-background"
+      >
+        <div className="sticky top-0 flex flex-col h-screen overflow-hidden pb-8 md:pb-12">
+          {/* Title Section */}
+          <div className="w-full px-6 md:px-24 pt-6 md:pt-8 lg:pt-12 z-20 flex-shrink-0">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-foreground to-foreground/40 leading-[0.9] pb-2">
+                Strategic Directives
+              </h2>
+              <div className="w-20 h-1.5 bg-primary mt-4 mb-4 rounded-full opacity-80"></div>
+              <p className="text-muted-foreground text-base md:text-lg lg:text-xl font-medium max-w-2xl leading-relaxed">
+                Interpersonal capabilities engineered for high-impact leadership and systemic problem solving in complex environments.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Carousel Items */}
+          <div className="flex-1 flex items-center w-full relative mt-4 lg:mt-6">
+            <motion.div style={{ x }} className="flex gap-6 md:gap-8 px-6 md:px-24 absolute w-max">
+              {allCards.map((card) => {
+                return <Card card={card} key={card.id} />;
+              })}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 
