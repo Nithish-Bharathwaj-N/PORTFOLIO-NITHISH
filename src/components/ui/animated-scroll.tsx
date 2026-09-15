@@ -7,6 +7,8 @@ import { HoverScrambleText } from '@/components/ui/hover-scramble-text';
 import { ChevronDown } from 'lucide-react';
 import Loader from './Loader';
 
+import { useIsMobile } from '@/hooks/useIsMobile';
+
 const pages = [
     {
         leftBgImage: null,
@@ -53,8 +55,69 @@ const pages = [
 ];
 
 export default function ScrollAdventure() {
+    const isMobile = useIsMobile();
     const [currentPage, setCurrentPage] = useState(1);
     const containerRef = useRef<HTMLDivElement>(null);
+
+    if (isMobile) {
+        return (
+            <div className="w-full bg-background px-4 py-12 flex flex-col gap-8 relative z-20">
+                <div className="flex flex-col gap-2 text-center items-center">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary/80 font-bold">
+                        Core Competencies
+                    </span>
+                    <h3 className="text-3xl font-black uppercase tracking-tight text-foreground">
+                        Specialized Engineering
+                    </h3>
+                </div>
+
+                <div className="flex flex-col gap-6 w-full max-w-xl mx-auto">
+                    {pages.map((page, i) => {
+                        if ('isBridge' in page) return null;
+                        const content = page.leftContent || page.rightContent;
+                        if (!content) return null;
+
+                        return (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-40px" }}
+                                transition={{ delay: i * 0.1, duration: 0.6 }}
+                                className="p-6 rounded-2xl border border-neutral-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-xl flex flex-col gap-4"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <span className="text-xs font-mono font-bold text-primary">
+                                        0{i + 1}
+                                    </span>
+                                    <div className="h-px bg-neutral-200 dark:bg-zinc-800 flex-1 mx-4" />
+                                </div>
+
+                                <h4 className="text-xl font-black tracking-tight text-foreground uppercase">
+                                    {content.heading}
+                                </h4>
+
+                                <p className="text-xs text-muted-foreground leading-relaxed font-medium">
+                                    {content.description}
+                                </p>
+
+                                <div className="flex flex-wrap gap-1.5 pt-2">
+                                    {content.skills.map((skill, sIdx) => (
+                                        <span
+                                            key={sIdx}
+                                            className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800 text-foreground/80 font-semibold"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
 
     const { scrollYProgress } = useScroll({
         target: containerRef,

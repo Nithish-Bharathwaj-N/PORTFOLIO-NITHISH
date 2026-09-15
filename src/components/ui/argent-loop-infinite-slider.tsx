@@ -5,6 +5,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import MagneticEffect from "@/components/ui/MagneticEffect";
 
+import { useIsMobile } from "@/hooks/useIsMobile";
+
 interface ProjectData {
   title: string;
   image: string;
@@ -58,7 +60,89 @@ const PROJECT_DATA: ProjectData[] = [
 ];
 
 export function ArgentLoopInfiniteSlider() {
+  const isMobile = useIsMobile();
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  if (isMobile) {
+    return (
+      <div className="w-full bg-background px-4 py-12 flex flex-col gap-8 relative z-20">
+        <div className="flex flex-col gap-2">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary/80 font-bold">
+            Selected Work
+          </span>
+          <h3 className="text-3xl font-black uppercase tracking-tight text-foreground">
+            Featured Projects
+          </h3>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            High-impact systems in cybersecurity, 3D WebGL, healthcare, and applied AI.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6 w-full max-w-xl mx-auto">
+          {PROJECT_DATA.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.08, duration: 0.6 }}
+              className="group relative flex flex-col gap-4 p-4 rounded-2xl border border-neutral-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-xl overflow-hidden"
+            >
+              {/* Image */}
+              <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden bg-neutral-900">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md text-[10px] font-mono text-white font-bold tracking-wider">
+                  {(i + 1).toString().padStart(2, "0")}
+                </div>
+                <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-md text-[10px] font-bold text-foreground">
+                  {project.year}
+                </div>
+              </div>
+
+              {/* Text info */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-mono uppercase text-primary font-semibold">
+                    {project.category}
+                  </span>
+                </div>
+                <h4 className="text-xl font-bold text-foreground tracking-tight">
+                  {project.title}
+                </h4>
+                <p className="text-xs text-muted-foreground leading-relaxed font-medium">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Action Link */}
+              <Link
+                href={`/projects/${project.slug}`}
+                className="mt-1 inline-flex items-center gap-2 text-xs font-bold text-foreground hover:text-primary transition-colors self-start"
+              >
+                <span>Explore Case Study</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* View All Projects Button */}
+        <div className="flex items-center justify-center pt-2">
+          <Link
+            href="/projects"
+            className="flex items-center gap-3 px-6 py-3.5 rounded-full bg-foreground text-background font-bold text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
+          >
+            <span>View All Projects</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
+    );
+  }
   
   const { scrollYProgress } = useScroll({
     target: containerRef,

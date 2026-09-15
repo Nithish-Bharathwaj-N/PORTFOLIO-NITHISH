@@ -618,9 +618,8 @@ export default function AboutSection() {
                 <div className="bg-background dark:bg-black transition-colors duration-500 pointer-events-auto relative">
 
                     <ScrollHijackSection />
-                    {/* Desktop-only full-bleed animations — hidden on mobile to prevent blank space */}
-                    {!isMobile && <ScrollAdventure />}
-                    {!isMobile && <ArgentLoopInfiniteSlider />}
+                    <ScrollAdventure />
+                    <ArgentLoopInfiniteSlider />
                     {/* On desktop the slider leaves dead space so we pull up with -mt-[50vh]; on mobile just normal flow */}
                     <div className={`flex flex-col items-center w-full bg-background relative z-20 pt-8 md:pt-32 pb-16 md:pb-32 ${isMobile ? '' : '-mt-[50vh]'}`}>
                         <motion.div
