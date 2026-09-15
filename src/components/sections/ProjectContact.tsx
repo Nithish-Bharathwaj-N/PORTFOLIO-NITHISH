@@ -116,7 +116,7 @@ const BlockInTextCard = ({
                 <p className="mb-4 text-base md:text-lg font-mono text-muted-foreground uppercase tracking-wider">{tag}</p>
             </div>
 
-            <div className="max-w-2xl text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] text-foreground font-medium tracking-tight">
+            <div className="max-w-2xl text-2xl sm:text-4xl lg:text-5xl leading-[1.2] lg:leading-[1.15] text-foreground font-medium tracking-tight pr-6 sm:pr-0">
                 {text}
             </div>
 

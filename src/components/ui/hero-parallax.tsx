@@ -44,27 +44,27 @@ export const HeroParallax = ({
 
   const rotateZRaw = useTransform(scrollYProgress, [0, 0.2], [isLowPowerMode ? 0 : 5, 0]);
   const rotateZ = useSpring(rotateZRaw, rotateSpringConfig);
-  const translateY = useTransform(scrollYProgress, [0, 0.2], [isLowPowerMode ? -100 : -500, isLowPowerMode ? 100 : 500]);
+  const translateY = useTransform(scrollYProgress, [0, 0.2], [isLowPowerMode ? 20 : 100, isLowPowerMode ? 100 : 500]);
   return (
     <div
       ref={ref}
       className={cn(
-        "pt-10 pb-20 sm:pb-40 overflow-hidden antialiased relative flex flex-col self-auto",
+        "pt-4 pb-12 sm:pb-24 overflow-hidden antialiased relative flex flex-col self-auto",
         isLowPowerMode
-          ? "h-[100vh] sm:h-[120vh]"
+          ? "h-auto min-h-[80vh] sm:min-h-[100vh]"
           : "h-[180vh] sm:h-[200vh] lg:h-[250vh] [perspective:2000px] [transform-style:preserve-3d]"
       )}
     >
       <Header />
       <motion.div
         style={{
-          translateY,
+          translateY: isLowPowerMode ? 0 : translateY,
           opacity,
           backfaceVisibility: 'hidden',
         }}
-        className=""
+        className="mt-6 md:mt-12"
       >
-        <motion.div className={cn("flex flex-row-reverse space-x-reverse space-x-20 mb-20", isLowPowerMode && "mb-10 space-x-10")}>
+        <motion.div className={cn("flex flex-row-reverse space-x-reverse space-x-6 sm:space-x-20 mb-8 sm:mb-20 overflow-x-auto no-scrollbar px-4 sm:px-0", isLowPowerMode && "mb-6 space-x-6")}>
           {firstRow.map((product) => (
             <ProductCard
               product={product}
@@ -74,7 +74,7 @@ export const HeroParallax = ({
             />
           ))}
         </motion.div>
-        <motion.div className={cn("flex flex-row mb-20 space-x-20", isLowPowerMode && "mb-10 space-x-10")}>
+        <motion.div className={cn("flex flex-row mb-8 sm:mb-20 space-x-6 sm:space-x-20 overflow-x-auto no-scrollbar px-4 sm:px-0", isLowPowerMode && "mb-6 space-x-6")}>
           {secondRow.map((product) => (
             <ProductCard
               product={product}
@@ -89,36 +89,34 @@ export const HeroParallax = ({
   );
 };
 
-import { Mouse } from "lucide-react";
-
 export const Header = () => {
   const t = useTranslations('projectHeader');
   return (
-    <div className="max-w-7xl relative mx-auto pt-32 md:pt-48 px-4 w-full left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
+    <div className="max-w-7xl relative mx-auto pt-28 sm:pt-36 md:pt-44 px-4 w-full left-0 top-0 z-20">
+      <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold dark:text-white tracking-tight">
         {t('title')}
       </h1>
       <p
-        className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200"
+        className="max-w-2xl text-sm sm:text-base md:text-xl mt-4 sm:mt-6 text-muted-foreground dark:text-neutral-300 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: t.raw('subtitle') }}
       />
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Positioned in normal flow below text */}
       <motion.div
-        className="absolute left-4 md:left-4 -bottom-32 md:-bottom-48 flex flex-col items-center gap-2"
+        className="flex items-center gap-3 mt-6 sm:mt-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
       >
-        <div className="w-[1px] h-10 md:h-16 bg-gradient-to-b from-transparent via-neutral-400 to-transparent relative overflow-hidden">
+        <div className="w-[1px] h-6 sm:h-10 bg-gradient-to-b from-transparent via-neutral-400 to-transparent relative overflow-hidden">
           <motion.div
             className="absolute top-0 w-full h-1/2 bg-white blur-[1px]"
-            animate={{ y: [0, 40, 0] }}
+            animate={{ y: [0, 24, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </div>
-        <span className="text-[9px] uppercase tracking-[0.3em] text-neutral-500 font-medium">
-          Scroll
+        <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500 font-mono font-semibold">
+          Scroll Archive
         </span>
       </motion.div>
     </div>
