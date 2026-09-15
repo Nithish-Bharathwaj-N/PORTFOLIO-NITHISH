@@ -5,14 +5,13 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Menu, X, Rocket, Briefcase, BookOpen, Send, Code2, Trophy, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Moon, Sun, Globe, ChevronDown, Focus } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
 import CardNav from '@/components/ui/CardNav';
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 import { usePreloadState } from '@/components/ui/arc-preloader-hero';
-import { MobileDock } from '@/components/layout/MobileDock';
 
 function Clock() {
     const [time, setTime] = useState<string>('');
@@ -42,6 +41,8 @@ function Clock() {
     );
 }
 
+// Sub-links for the "About" dropdown
+// Sub-links for the "About" dropdown
 const useNavItems = () => {
     const t = useTranslations('navigation.menu');
     return [
@@ -61,7 +62,7 @@ const useNavItems = () => {
 export function Navbar() {
     const t = useTranslations('navigation');
     const navItems = useNavItems();
-    const { resolvedTheme } = useTheme();
+    const { theme, setTheme, resolvedTheme } = useTheme();
     const pathname = usePathname();
     const { scrollY } = useScroll();
 
@@ -70,13 +71,17 @@ export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mounted, setMounted] = useState(false);
+    const [currentLocale, setCurrentLocale] = useState('en');
     
+    // Consume preload state directly from context
     const { isPreloading: isPreloadActive } = usePreloadState();
 
     const isDark = resolvedTheme === 'dark';
 
     useEffect(() => {
         setMounted(true);
+        const locale = document.cookie.split('; ').find(row => row.startsWith('locale='))?.split('=')[1] || 'en';
+        setCurrentLocale(locale);
     }, []);
 
     // Lock body scroll when menu is open
@@ -97,7 +102,7 @@ export function Navbar() {
     }, [pathname]);
 
     useMotionValueEvent(scrollY, 'change', (latest) => {
-        if (isMenuOpen) return;
+        if (isMenuOpen) return; // Don't hide navbar when menu is open
 
         const direction = latest > lastScrollY ? 'down' : 'up';
         setIsScrolled(latest > 50);
@@ -115,6 +120,13 @@ export function Navbar() {
         setIsMenuOpen((prev) => !prev);
     }, []);
 
+    const toggleLocale = useCallback(() => {
+        const newLocale = currentLocale === 'en' ? 'id' : 'en';
+        document.cookie = `locale=${newLocale};path=/;max-age=31536000`;
+        setCurrentLocale(newLocale);
+        window.location.reload();
+    }, [currentLocale]);
+
     const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, []);
@@ -127,6 +139,7 @@ export function Navbar() {
         closeMenu();
     }, [pathname, closeMenu]);
 
+    // Animation variants
     const navVariants = {
         visible: { y: 0, opacity: 1 },
         hidden: { y: -100, opacity: 0 }
@@ -154,88 +167,23 @@ export function Navbar() {
                         )}
                         layout
                     >
-                        {/* Clock / Home Link */}
+                        {/* Make the Clock a Link to Home */}
                         <Link href="/" className="relative group min-w-[120px]" onClick={handleHomeClick}>
                             <Clock />
                         </Link>
 
-                        {/* Direct High-Visibility Desktop Links */}
-                        <div className="hidden lg:flex items-center gap-1.5 md:gap-2">
+                        {/* Desktop Navigation with CardNav */}
+                        <div className="hidden lg:flex items-center gap-4 md:gap-5">
+                            {/* HOME */}
                             <Link
                                 href="/"
                                 onClick={handleHomeClick}
                                 className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname === '/' ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                    'relative px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full group',
+                                    pathname === '/' ? 'text-foreground bg-muted' : 'text-muted-foreground hover:text-foreground'
                                 )}
                             >
-                                <span>{t('home')}</span>
-                            </Link>
-
-                            <Link
-                                href="/projects"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname.startsWith('/projects') ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname.startsWith('/projects') && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>Projects</span>
-                            </Link>
-
-                            <Link
-                                href="/experience"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname.startsWith('/experience') ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname.startsWith('/experience') && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>Experience</span>
-                            </Link>
-
-                            <Link
-                                href="/blog"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname.startsWith('/blog') ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname.startsWith('/blog') && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>Blog</span>
-                            </Link>
-
-                            <Link
-                                href="/skills"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname.startsWith('/skills') ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname.startsWith('/skills') && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>Skills</span>
-                            </Link>
-
-                            <Link
-                                href="/achievements"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname.startsWith('/achievements') ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname.startsWith('/achievements') && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>Achievements</span>
-                            </Link>
-
-                            <Link
-                                href="/contact"
-                                className={cn(
-                                    'relative px-4 py-2 text-xs md:text-sm font-bold transition-all duration-300 rounded-full flex items-center gap-1.5',
-                                    pathname === '/contact' ? 'text-foreground bg-muted shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                )}
-                            >
-                                {pathname === '/contact' && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                <span>{t('contact')}</span>
+                                <span className="relative z-10">{t('home')}</span>
                             </Link>
 
                             <CardNav
@@ -244,6 +192,18 @@ export function Navbar() {
                                 pathname={pathname}
                             />
 
+                            {/* CONTACT (Direct Link) */}
+                            <Link
+                                href="/contact"
+                                className={cn(
+                                    'relative px-5 py-2 text-sm font-bold transition-all duration-300 rounded-full group',
+                                    pathname === '/contact' ? 'text-foreground bg-muted' : 'text-muted-foreground hover:text-foreground'
+                                )}
+                            >
+                                <span className="relative z-10">{t('contact')}</span>
+                            </Link>
+
+                            {/* Theme Toggler placed right near Contact */}
                             {mounted && (
                                 <AnimatedThemeToggler className="ml-1" />
                             )}
@@ -251,6 +211,7 @@ export function Navbar() {
 
                         {/* Controls */}
                         <div className="flex items-center gap-2 md:gap-3">
+                            {/* Mobile Theme Toggler */}
                             <div className="lg:hidden">
                                 {mounted && (
                                     <AnimatedThemeToggler />
@@ -279,102 +240,93 @@ export function Navbar() {
                         </div>
                     </motion.div>
                 </div>
-            </motion.nav>
+            </motion.nav >
 
-            {/* Floating Mobile Dock */}
-            <MobileDock onToggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
-
-            {/* Mobile Menu Bento Grid Overlay */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
-                {isMenuOpen && (
-                    <motion.div
-                        variants={menuVariants}
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                        transition={{ duration: 0.3 }}
-                        className="fixed inset-0 z-[90] lg:hidden"
-                    >
+                {
+                    isMenuOpen && (
                         <motion.div
-                            className="absolute inset-0 bg-background/95 backdrop-blur-2xl"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        />
+                            variants={menuVariants}
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            transition={{ duration: 0.3 }}
+                            className="fixed inset-0 z-[90] lg:hidden"
+                        >
+                            <motion.div
+                                className="absolute inset-0 bg-background"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            />
 
-                        <div className="relative flex flex-col items-center justify-between h-full overflow-y-auto py-20 px-4">
-                            <div className="w-full max-w-sm flex flex-col items-center">
-                                <span className="text-[10px] font-mono font-black uppercase tracking-[0.3em] text-primary mb-4">
-                                    DIRECT DIRECTORY
-                                </span>
-
-                                {/* Bento Grid of Primary Hubs */}
-                                <div className="grid grid-cols-2 gap-3 w-full my-4">
-                                    {[
-                                        { label: 'Projects', href: '/projects', icon: Rocket, desc: 'Builds & Architectures', color: 'from-sky-500/20 to-blue-600/10 border-sky-500/30' },
-                                        { label: 'Experience', href: '/experience', icon: Briefcase, desc: 'Work & Leadership', color: 'from-purple-500/20 to-indigo-600/10 border-purple-500/30' },
-                                        { label: 'Blog', href: '/blog', icon: BookOpen, desc: 'Cyber & AI Insights', color: 'from-amber-500/20 to-orange-600/10 border-amber-500/30' },
-                                        { label: 'Skills', href: '/skills', icon: Code2, desc: 'Tech Stack & Core', color: 'from-emerald-500/20 to-teal-600/10 border-emerald-500/30' },
-                                        { label: 'Achievements', href: '/achievements', icon: Trophy, desc: 'Milestones & Awards', color: 'from-pink-500/20 to-rose-600/10 border-pink-500/30' },
-                                        { label: 'Contact', href: '/contact', icon: Send, desc: "Let's Connect", color: 'from-cyan-500/20 to-blue-600/10 border-cyan-500/30' },
-                                    ].map((item) => {
-                                        const Icon = item.icon;
-                                        const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(`${item.href}/`));
-
-                                        return (
-                                            <Link
-                                                key={item.label}
-                                                href={item.href}
-                                                onClick={closeMenu}
-                                                className={cn(
-                                                    "flex flex-col justify-between p-4 rounded-2xl border bg-gradient-to-br transition-all duration-300 active:scale-95",
-                                                    item.color,
-                                                    isActive ? "ring-2 ring-emerald-400 shadow-lg" : "hover:border-white/40"
-                                                )}
-                                            >
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <div className="p-2 rounded-xl bg-foreground/10 backdrop-blur-md">
-                                                        <Icon className="w-5 h-5 text-foreground" />
-                                                    </div>
-                                                    {isActive && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,1)] animate-pulse" />}
-                                                </div>
-                                                <div>
-                                                    <h4 className="text-base font-black text-foreground leading-tight">{item.label}</h4>
-                                                    <p className="text-[10px] text-muted-foreground font-medium mt-0.5 leading-tight">{item.desc}</p>
-                                                </div>
-                                            </Link>
-                                        );
-                                    })}
-                                </div>
-
-                                <div className="flex items-center justify-center gap-4 mt-6 w-full pt-4 border-t border-foreground/10">
+                            <div className="relative flex flex-col items-center justify-center h-full overflow-y-auto py-20">
+                                <nav className="flex flex-col items-center gap-6">
+                                    {/* Mobile Home */}
                                     <Link
-                                        href="/gallery"
-                                        onClick={closeMenu}
-                                        className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground uppercase tracking-wider"
+                                        href="/"
+                                        onClick={handleHomeClick}
+                                        className="text-3xl font-black text-muted-foreground hover:text-foreground transition-colors"
                                     >
-                                        Gallery <ArrowUpRight className="w-3.5 h-3.5" />
+                                        {t('home')}
                                     </Link>
-                                    <span className="text-foreground/20">•</span>
-                                    <Link
-                                        href="/resume"
-                                        onClick={closeMenu}
-                                        className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground uppercase tracking-wider"
-                                    >
-                                        Resume <ArrowUpRight className="w-3.5 h-3.5" />
-                                    </Link>
-                                </div>
-                            </div>
 
-                            <div className="mt-8">
-                                {mounted && (
-                                    <AnimatedThemeToggler />
-                                )}
+                                    <Link
+                                        href="/contact"
+                                        onClick={closeMenu}
+                                        className="text-3xl font-black text-muted-foreground hover:text-foreground transition-colors"
+                                    >
+                                        {t('contact')}
+                                    </Link>
+
+                                    {/* Mobile Links grouped by Categories */}
+                                    {navItems.map((category) => (
+                                        <div key={category.label} className="flex flex-col items-center gap-4 py-4 border-b border-white/5 w-full last:border-0 text-center">
+                                            <span className="text-[10px] font-black font-mono text-primary tracking-[0.3em] uppercase opacity-50">
+                                                {category.label}
+                                            </span>
+                                            {category.links.map((link) => (
+                                                <Link
+                                                    key={link.label}
+                                                    href={link.href}
+                                                    onClick={closeMenu}
+                                                    className={cn(
+                                                        'text-2xl font-bold transition-all hover:scale-110 active:scale-95 duration-200',
+                                                        pathname === link.href ? 'text-foreground' : 'text-muted-foreground/60 hover:text-foreground'
+                                                    )}
+                                                >
+                                                    {link.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    ))}
+                                </nav>
+
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 20 }}
+                                    transition={{ delay: 0.5 }}
+                                    className="flex items-center gap-4 mt-12"
+                                >
+                                    <button
+                                        onClick={toggleLocale}
+                                        className="px-6 py-3 rounded-full glass-card text-sm font-medium hover:bg-muted/50 transition-colors"
+                                    >
+                                        {currentLocale === 'en' ? 'English' : 'Indonesia'}
+                                    </button>
+                                    {mounted && (
+                                        <AnimatedThemeToggler
+                                            className="px-6 py-6 glass-card text-sm font-medium hover:bg-muted/50 flex items-center gap-2"
+                                        />
+                                    )}
+                                </motion.div>
                             </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        </motion.div >
+                    )
+                }
+            </AnimatePresence >
         </>
     );
 }
