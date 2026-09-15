@@ -604,3 +604,35 @@ html, body, * {
 .bg-book-gradient { background-image: var(--ds-book-gradient); }
 .book-rotate { transition: transform 0.5s ease-out; transform: rotateY(0deg); transform-style: preserve-3d; }
 .book-rotate:hover { transform: rotateY(-25deg); }
+
+/* ── Global Mobile Overflow Guard ── */
+@media (max-width: 767px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+
+  /* Prevent any element from blowing past the viewport */
+  * {
+    max-width: 100vw;
+  }
+
+  /* Headings: ensure very large clamp text doesn't create horizontal scroll */
+  h1, h2, h3, h4 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Timeline horizontal scrollers: allow internal horizontal scroll on the timeline track */
+  [data-timeline-track] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduce excessive animation effects that hurt performance on mobile */
+  .animate-arc-spin,
+  .animate-arc-spin-reverse {
+    animation-duration: 80s;
+  }
+}
+

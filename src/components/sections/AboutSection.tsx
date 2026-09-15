@@ -456,7 +456,7 @@ const AuditFunnel = () => {
                 >
                     <motion.h4
                         style={{ scale, willChange: "transform" }}
-                        className="text-4xl md:text-6xl text-5xl md:text-6xl lg:text-[7rem] font-black tracking-[-0.05em] text-white max-w-7xl tracking-tighter leading-[0.9] lg:px-6 uppercase text-center"
+                        className="text-4xl sm:text-5xl md:text-6xl lg:text-[7rem] font-black tracking-tighter text-white max-w-7xl leading-[0.9] lg:px-6 uppercase text-center"
                     >
                         {t('architecting')} <br></br>
                         <motion.span
@@ -494,22 +494,19 @@ const AuditFunnel = () => {
 
 
 const ScrollHijackSection = () => {
+    const isMobile = useIsMobile();
     const sectionRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: sectionRef });
     const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.5 });
     const [isComp2Visible, setIsComp2Visible] = React.useState(false);
     const [showBorder, setShowBorder] = React.useState(true);
 
-    // Hooks moved to top level to avoid React Hook Rules violations
     const borderOpacity = useTransform(smoothProgress, [0.1, 0.15], [1, 0]);
     const xShift = useTransform(smoothProgress, [0, 0.1, 0.4, 1], ["0vw", "0vw", "-100vw", "-100vw"]);
 
     useMotionValueEvent(smoothProgress, "change", (v: any) => {
-        // Hard toggle for the decorative border to ensure it's GONE
         if (v >= 0.20 && showBorder) setShowBorder(false);
         if (v < 0.15 && !showBorder) setShowBorder(true);
-
-        // Trigger precisely as the second panel begins to enter the viewport
         if (v >= 0.30 && !isComp2Visible) setIsComp2Visible(true);
         if (v < 0.25 && isComp2Visible) setIsComp2Visible(false);
     });
@@ -518,16 +515,26 @@ const ScrollHijackSection = () => {
         target: sectionRef,
         offset: ["end end", "end start"]
     });
-
-    // Apply a spring physics wrapper to make the scale/fade exit incredibly buttery smooth
     const exitProgress = useSpring(exitProgressRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
-
-
     const exitScale = useTransform(exitProgress, [0, 1], [1, 0.85]);
-    const exitOpacity = useTransform(exitProgress, [0, 1], [1, 0]); // Changed to 1 to ensure full fade out
+    const exitOpacity = useTransform(exitProgress, [0, 1], [1, 0]);
     const exitBorderRadius = useTransform(exitProgress, [0, 1], ["0px", "40px"]);
 
+    // ── Mobile: skip sticky scroll hijack, render stacked panels ──
+    if (isMobile) {
+        return (
+            <div className="flex flex-col w-full">
+                <div className="w-full overflow-hidden">
+                    <CoreEngineeringPanel scrollYProgress={smoothProgress} />
+                </div>
+                <div className="w-full overflow-hidden">
+                    <IdentitySequence isVisible={true} scrollYProgress={smoothProgress} />
+                </div>
+            </div>
+        );
+    }
+
+    // ── Desktop: original sticky scroll hijack ──
     return (
         <div ref={sectionRef} className="relative h-[600vh]">
             <div className="sticky top-0 h-screen w-full overflow-hidden overflow-x-clip z-10">
@@ -535,7 +542,6 @@ const ScrollHijackSection = () => {
                     style={{ scale: exitScale, opacity: exitOpacity, borderRadius: exitBorderRadius }}
                     className="w-full h-full relative origin-center"
                 >
-                    {/* Decorative curved edges with hard unmount for guaranteed removal */}
                     <AnimatePresence>
                         {showBorder && (
                             <motion.div
@@ -552,10 +558,7 @@ const ScrollHijackSection = () => {
                     </AnimatePresence>
                     <motion.div
                         className="flex h-full"
-                        style={{
-                            width: "200vw",
-                            x: xShift
-                        }}
+                        style={{ width: "200vw", x: xShift }}
                     >
                         <div className="h-full w-screen flex-shrink-0">
                             <CoreEngineeringPanel scrollYProgress={smoothProgress} />
@@ -571,13 +574,13 @@ const ScrollHijackSection = () => {
 };
 
 export default function AboutSection() {
+    const isMobile = useIsMobile();
     const containerRef = useRef<HTMLElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
     });
 
-    // REALIGNED TIMING: Parent is ~900vh long. The first 100vh delay = ~11% (0.11) of total scroll.
     const scale = useTransform(scrollYProgress, [0, 0.12], [1, 0.92]);
     const opacity = useTransform(scrollYProgress, [0.03, 0.12], [1, 0]);
     const yLeadIn = useTransform(scrollYProgress, [0, 0.12], [0, -80]);
@@ -590,19 +593,27 @@ export default function AboutSection() {
             ref={containerRef}
             className="relative bg-background text-foreground dark:bg-black dark:text-white transition-colors duration-500"
         >
-            {/* 1. STICKY PLANE - Lead-in */}
-            <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none">
-                <motion.div
-                    style={{ scale, opacity, y: yLeadIn }}
-                    className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
-                    ref={leadInTriggerRef}
-                >
-                    <AboutLeadIn />
-                </motion.div>
-            </div>
+            {/* 1. Lead-in — sticky on desktop, static on mobile */}
+            {isMobile ? (
+                <div className="w-full flex items-center justify-center py-10 overflow-hidden">
+                    <div className="relative px-4 w-full max-w-[1700px] mx-auto">
+                        <AboutLeadIn />
+                    </div>
+                </div>
+            ) : (
+                <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none">
+                    <motion.div
+                        style={{ scale, opacity, y: yLeadIn }}
+                        className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
+                        ref={leadInTriggerRef}
+                    >
+                        <AboutLeadIn />
+                    </motion.div>
+                </div>
+            )}
 
             {/* 2. OVERLAY LAYER - Hijack Zone & Footer */}
-            <div className="relative pointer-events-none mt-[20vh] md:mt-[20vh]">
+            <div className="relative pointer-events-none mt-0 md:mt-[20vh]">
                 {/* Content wrapper with background - rounded corners removed to allow animated border to control the shape */}
                 <div className="bg-background dark:bg-black transition-colors duration-500 pointer-events-auto relative">
 
@@ -628,7 +639,7 @@ export default function AboutSection() {
                                     content: member.id === 'view-more' ? (
                                         <Link
                                             href={member.social?.website || '/experience'}
-                                            className="relative flex items-center h-[100px] md:h-[140px] w-[200px] md:w-[250px] z-30"
+                                            className="relative flex items-center h-[100px] md:h-[140px] w-[min(85vw,250px)] z-30"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="p-4 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(var(--primary),0.3)]">
@@ -640,7 +651,7 @@ export default function AboutSection() {
                                             </div>
                                         </Link>
                                     ) : (
-                                        <div className="flex flex-col gap-4 w-[320px] md:w-[400px] border border-neutral-200 dark:border-neutral-800 p-6 rounded-2xl bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-xl mt-4">
+                                        <div className="flex flex-col gap-4 w-[min(85vw,400px)] border border-neutral-200 dark:border-neutral-800 p-5 rounded-2xl bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-xl mt-4">
                                             <div className="flex flex-col gap-2">
                                                 <div className="flex flex-row items-center justify-between">
                                                     <h4 className="text-lg font-bold text-neutral-900 dark:text-white leading-tight">

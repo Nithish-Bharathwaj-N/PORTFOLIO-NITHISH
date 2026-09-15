@@ -7,6 +7,7 @@ import { Book } from "@/components/ui/book";
 import { portfolioData } from "@/data/portfolio";
 import Link from "next/link";
 import { ArrowUpRight, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CATEGORY_COLORS: Record<string, string> = {
     '3D & AI Engineering': '#0099FF',         // Electric Blue
@@ -22,13 +23,15 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 
 export default function StatsSection({ scrollYProgress, showOnly }: { scrollYProgress?: any, showOnly?: 'top' | 'bottom' }) {
+    const isMobile = useIsMobile();
     const [images, setImages] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState(0);
 
     const blogs = portfolioData.blogs.slice(0, 6);
-    const visibleCount = 3;
+    // Show 1 book on mobile, 3 on desktop
+    const visibleCount = isMobile ? 1 : 3;
 
     useEffect(() => {
         const galleryImages = [
@@ -172,7 +175,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                         </div>
 
                         <div className="overflow-visible w-full lg:max-w-[1400px] mx-auto px-4 md:px-12">
-                            <div className="flex gap-8 md:gap-24 justify-center pt-12 pb-12 md:pb-32 min-h-[600px] items-start relative">
+                            <div className="flex gap-6 md:gap-24 justify-center pt-12 pb-12 md:pb-32 min-h-[400px] md:min-h-[600px] items-start relative">
                                 <AnimatePresence mode="popLayout" initial={false}>
                                     {getVisibleBlogs().map((blog, index) => (
                                         <motion.div
