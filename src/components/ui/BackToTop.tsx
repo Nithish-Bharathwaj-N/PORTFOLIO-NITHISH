@@ -86,7 +86,7 @@ export function BackToTop() {
                     ref={ref}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
-                    className="fixed bottom-6 right-6 z-[100] w-32 h-32 flex items-center justify-center pointer-events-auto hide-on-modal transition-all duration-300"
+                    className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-[90] w-14 h-14 sm:w-32 sm:h-32 flex items-center justify-center pointer-events-auto hide-on-modal transition-all duration-300"
                 >
                     <motion.button
                         initial={{ opacity: 0, scale: 0.5 }}
@@ -95,9 +95,9 @@ export function BackToTop() {
                         transition={{ duration: 0.2 }}
                         onClick={scrollToTop}
                         style={{ x: mouseX, y: mouseY }}
-                        className="relative h-14 w-14 rounded-full bg-foreground text-background shadow-2xl flex items-center justify-center border border-background/20 backdrop-blur-md cursor-pointer group"
+                        className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-foreground text-background shadow-2xl flex items-center justify-center border border-background/20 backdrop-blur-md cursor-pointer group"
                     >
-                        <ArrowUp className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
+                        <ArrowUp className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" />
 
                         {/* Glow Effect */}
                         <div className="absolute inset-0 rounded-full bg-foreground/10 blur-xl -z-10 group-hover:blur-2xl transition-all" />

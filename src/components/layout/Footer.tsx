@@ -178,21 +178,21 @@ export function Footer() {
                         'relative z-20 mt-auto dark:bg-black',
                 isExpanded && 'opacity-0 pointer-events-none'
             )}>
-                <div className={`max-w-[1600px] mx-auto relative z-10 px-6 md:px-12 lg:px-24 py-6 md:py-8 pointer-events-auto ${isBlog || isGallery ? '!bg-transparent' : ''}`}>
+                <div className={`max-w-[1600px] mx-auto relative z-10 px-3 sm:px-6 md:px-12 lg:px-24 py-4 md:py-8 pointer-events-auto ${isBlog || isGallery ? '!bg-transparent' : ''}`}>
                     <div className={`
-                        px-6 md:px-8 py-4 md:py-6 transition-all duration-300
+                        px-4 sm:px-6 md:px-8 py-3.5 sm:py-4 md:py-6 transition-all duration-300
                         ${isBlog || isGallery
-                            ? 'bg-card dark:bg-black/40 dark:backdrop-blur-xl border-2 border-foreground/10 dark:border-white/5 rounded-[2rem] shadow-xl dark:shadow-black/20'
-                            : 'glass-card'
+                            ? 'bg-card dark:bg-black/40 dark:backdrop-blur-xl border-2 border-foreground/10 dark:border-white/5 rounded-2xl sm:rounded-[2rem] shadow-xl dark:shadow-black/20'
+                            : 'glass-card rounded-2xl sm:rounded-[2rem]'
                         }
                     `}>
-                        <div className="flex items-center justify-between gap-4">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
                             {/* Left Side - Animated Copyright */}
-                            <div className="flex items-center gap-1.5 md:gap-2 pl-2 md:pl-4 z-10 overflow-hidden h-6">
-                                <span className={`text-xs md:text-sm font-bold uppercase tracking-widest ${isBlog ? 'text-muted-foreground' : 'text-gradient'}`}>
+                            <div className="flex items-center gap-1.5 md:gap-2 z-10 overflow-hidden h-6 min-w-0 max-w-full sm:max-w-[320px] justify-center sm:justify-start">
+                                <span className={`text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider shrink-0 ${isBlog ? 'text-muted-foreground' : 'text-gradient'}`}>
                                     © {currentYear}
                                 </span>
-                                <div className="relative w-[280px] h-full flex items-center">
+                                <div className="relative min-w-0 flex-1 h-full flex items-center overflow-hidden">
                                     <AnimatePresence mode="popLayout">
                                         {mounted && (
                                             <motion.span
@@ -201,7 +201,7 @@ export function Footer() {
                                                 animate={{ y: 0, opacity: 1 }}
                                                 exit={{ y: -20, opacity: 0 }}
                                                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                                                className={`absolute left-0 text-xs md:text-sm font-bold uppercase tracking-widest whitespace-nowrap ${isBlog ? 'text-muted-foreground' : 'text-gradient'}`}
+                                                className={`text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider whitespace-nowrap truncate ${isBlog ? 'text-muted-foreground' : 'text-gradient'}`}
                                             >
                                                 {copyrightIndex === 0
                                                     ? `${portfolioData.personal.name}.`
@@ -213,8 +213,8 @@ export function Footer() {
                             </div>
 
                             {/* Right Side - Socials & More Button */}
-                            <div className="flex items-center justify-end gap-4 md:gap-8 z-10 ml-auto">
-                                <div className="flex items-center gap-1.5 sm:gap-2">
+                            <div className="flex items-center justify-between sm:justify-end gap-3 md:gap-8 z-10 w-full sm:w-auto">
+                                <div className="flex items-center gap-1 sm:gap-2">
                                     {/* Social Icons */}
                                     {previewSocials.map((social: SocialLink) => {
                                         const Icon = socialIcons[social.icon];
@@ -255,7 +255,7 @@ export function Footer() {
                                 <motion.button
                                     onClick={toggleExpand}
                                     className={`
-                                            flex items-center gap-2 px-3 md:px-5 py-2 md:py-2.5 rounded-full transition-all text-xs font-black uppercase tracking-[0.2em]
+                                            flex items-center gap-1.5 sm:gap-2 px-3.5 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full transition-all text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] shrink-0
                                             ${isBlog
                                             ? 'bg-muted/50 border-2 border-foreground/10 text-foreground hover:bg-muted hover:border-foreground/20'
                                             : 'bg-muted hover:bg-muted/80 text-foreground'
@@ -264,12 +264,12 @@ export function Footer() {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    <span className="hidden sm:inline">{t('more')}</span>
+                                    <span>{t('more')}</span>
                                     <motion.span
                                         animate={{ rotate: isExpanded ? 180 : 0 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        <ChevronUp className="w-4 h-4" />
+                                        <ChevronUp className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                                     </motion.span>
                                 </motion.button>
                             </div>
@@ -310,11 +310,11 @@ export function Footer() {
                                 <Marquee />
                             </div>
 
-                            <div className="flex-1 flex flex-col px-[8vw] pt-[4vh] pb-0 justify-between relative">
+                            <div className="flex-1 flex flex-col px-[5vw] sm:px-[8vw] pt-[4vh] pb-0 justify-between relative overflow-y-auto sm:overflow-hidden">
                                 <div className="flex-1 flex flex-col justify-center max-w-[1600px] w-full mx-auto relative">
 
                                     {/* Close Button - Size-Locked with clamp */}
-                                    <div className="absolute top-0 right-[-2vw] z-[10001]">
+                                    <div className="absolute top-0 right-0 sm:right-[-2vw] z-[10001]">
                                         <motion.button
                                             onClick={closeExpanded}
                                             className="relative p-[clamp(12px,1.2vw,20px)] flex items-center justify-center"
@@ -335,8 +335,8 @@ export function Footer() {
                                         </motion.button>
                                     </div>
 
-                                    {/* Main Grid - Forced 4-column layout regardless of zoom/screen */}
-                                    <div className="w-full grid grid-cols-4 gap-x-[5vw] gap-y-[4vh]">
+                                    {/* Main Grid - Responsive 2-column on mobile, 4-column on desktop */}
+                                    <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-x-[5vw] gap-y-[3vh] md:gap-y-[4vh]">
                                         <FooterColumn title={t('links')}>
                                             <FooterLink href="/">{tNav('home')}</FooterLink>
                                             <FooterLink href="/resume">{tNav('resume')}</FooterLink>
@@ -382,21 +382,21 @@ export function Footer() {
                                         </FooterColumn>
 
                                         <FooterColumn title={t('localTime')}>
-                                            <p className="text-zinc-900 dark:text-white text-[1.2vw] min-text-[14px] font-medium tracking-tight">
+                                            <p className="text-zinc-900 dark:text-white text-[14px] sm:text-[1.2vw] font-medium tracking-tight">
                                                 {localTime}
                                             </p>
                                             <a
                                                 href="https://www.google.com/maps/place/Chennai,+Tamil+Nadu,+India"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-zinc-900 dark:text-white text-[1.2vw] min-text-[14px] font-medium tracking-tight hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors inline-block"
+                                                className="text-zinc-900 dark:text-white text-[14px] sm:text-[1.2vw] font-medium tracking-tight hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors inline-block"
                                             >
                                                 Chennai, Tamil Nadu, India
                                             </a>
                                         </FooterColumn>
 
                                         <FooterColumn title={t('version')}>
-                                            <p className="text-zinc-900 dark:text-white text-[1.2vw] min-text-[14px] font-medium tracking-tight">
+                                            <p className="text-zinc-900 dark:text-white text-[14px] sm:text-[1.2vw] font-medium tracking-tight">
                                                 {t('versionEdition')}
                                             </p>
                                         </FooterColumn>
