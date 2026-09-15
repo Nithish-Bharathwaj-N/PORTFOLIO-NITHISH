@@ -618,10 +618,11 @@ export default function AboutSection() {
                 <div className="bg-background dark:bg-black transition-colors duration-500 pointer-events-auto relative">
 
                     <ScrollHijackSection />
-                    <ScrollAdventure />
-                    <ArgentLoopInfiniteSlider />
-                    {/* Seamless solid background section overlapping the slider's dead space */}
-                    <div className="-mt-[50vh] flex flex-col items-center w-full bg-background relative z-20 pt-12 md:pt-32 pb-32">
+                    {/* Desktop-only full-bleed animations — hidden on mobile to prevent blank space */}
+                    {!isMobile && <ScrollAdventure />}
+                    {!isMobile && <ArgentLoopInfiniteSlider />}
+                    {/* On desktop the slider leaves dead space so we pull up with -mt-[50vh]; on mobile just normal flow */}
+                    <div className={`flex flex-col items-center w-full bg-background relative z-20 pt-8 md:pt-32 pb-16 md:pb-32 ${isMobile ? '' : '-mt-[50vh]'}`}>
                         <motion.div
                             initial={{ opacity: 0, scale: 0.98, filter: "blur(10px)" }}
                             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}

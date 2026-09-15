@@ -107,18 +107,20 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                         </motion.p>
                     </div>
 
-                    {/* Immersive Zoom Parallax Component */}
-                    <div className="w-full">
-                        <ZoomParallax images={images}>
-                            <Link 
-                                href="/gallery" 
-                                className="group flex items-center gap-3 px-6 py-3.5 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-xl border border-border/10"
-                            >
-                                View Gallery
-                                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </Link>
-                        </ZoomParallax>
-                    </div>
+                    {/* Immersive Zoom Parallax Component — desktop only (needs 3D scroll perspective) */}
+                    {!isMobile && (
+                        <div className="w-full">
+                            <ZoomParallax images={images}>
+                                <Link 
+                                    href="/gallery" 
+                                    className="group flex items-center gap-3 px-6 py-3.5 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-xs hover:scale-105 active:scale-95 transition-all shadow-xl border border-border/10"
+                                >
+                                    View Gallery
+                                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                </Link>
+                            </ZoomParallax>
+                        </div>
+                    )}
                 </>
             )}
 
@@ -175,7 +177,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                         </div>
 
                         <div className="overflow-visible w-full lg:max-w-[1400px] mx-auto px-4 md:px-12">
-                            <div className="flex gap-6 md:gap-24 justify-center pt-12 pb-12 md:pb-32 min-h-[400px] md:min-h-[600px] items-start relative">
+                            <div className="flex gap-6 md:gap-24 justify-center pt-12 pb-12 md:pb-32 min-h-[320px] md:min-h-[600px] items-start relative">
                                 <AnimatePresence mode="popLayout" initial={false}>
                                     {getVisibleBlogs().map((blog, index) => (
                                         <motion.div
