@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import CardNav from '@/components/ui/CardNav';
 import { AnimatedThemeToggler } from '@/components/ui/animated-theme-toggler';
 import { usePreloadState } from '@/components/ui/arc-preloader-hero';
+import { MobileDock } from '@/components/layout/MobileDock';
 
 function Clock() {
     const [time, setTime] = useState<string>('');
@@ -136,13 +137,6 @@ export function Navbar() {
         open: { opacity: 1 }
     };
 
-    const mobileQuickLinks = [
-        { label: 'Projects', href: '/projects' },
-        { label: 'Experience', href: '/experience' },
-        { label: 'Blog', href: '/blog' },
-        { label: 'Contact', href: '/contact' },
-    ];
-
     return (
         <>
             <motion.nav
@@ -152,41 +146,20 @@ export function Navbar() {
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
                 className="fixed top-0 left-0 right-0 z-[100]"
             >
-                <div className="max-w-[1600px] mx-auto px-3 sm:px-6 md:px-12 lg:px-24 py-3 md:py-6">
+                <div className="max-w-[1600px] mx-auto px-4 md:px-12 lg:px-24 py-4 md:py-6">
                     <motion.div
                         className={cn(
-                            'flex items-center justify-between transition-all duration-500 rounded-full gap-2',
-                            isScrolled ? 'glass-strong px-4 sm:px-6 py-2.5 sm:py-3' : 'py-2'
+                            'flex items-center justify-between transition-all duration-500 rounded-full',
+                            isScrolled ? 'glass-strong px-6 py-3' : 'py-2'
                         )}
                         layout
                     >
                         {/* Clock / Home Link */}
-                        <Link href="/" className="relative group shrink-0" onClick={handleHomeClick}>
+                        <Link href="/" className="relative group min-w-[120px]" onClick={handleHomeClick}>
                             <Clock />
                         </Link>
 
-                        {/* Mobile Direct Header Pills (Inside top bar, no bottom overlay) */}
-                        <div className="flex lg:hidden items-center overflow-x-auto gap-1 max-w-[50vw] sm:max-w-[60vw] py-1 no-scrollbar shrink">
-                            {mobileQuickLinks.map((link) => {
-                                const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(`${link.href}/`));
-                                return (
-                                    <Link
-                                        key={link.label}
-                                        href={link.href}
-                                        className={cn(
-                                            "px-2.5 py-1 rounded-full text-[11px] font-bold tracking-tight whitespace-nowrap transition-all shrink-0",
-                                            isActive
-                                                ? "bg-foreground text-background shadow-sm"
-                                                : "text-muted-foreground hover:text-foreground bg-muted/40"
-                                        )}
-                                    >
-                                        {link.label}
-                                    </Link>
-                                );
-                            })}
-                        </div>
-
-                        {/* Direct Desktop Header Links */}
+                        {/* Direct High-Visibility Desktop Links */}
                         <div className="hidden lg:flex items-center gap-1.5 md:gap-2">
                             <Link
                                 href="/"
@@ -276,8 +249,8 @@ export function Navbar() {
                             )}
                         </div>
 
-                        {/* Right Controls */}
-                        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                        {/* Controls */}
+                        <div className="flex items-center gap-2 md:gap-3">
                             <div className="lg:hidden">
                                 {mounted && (
                                     <AnimatedThemeToggler />
@@ -308,7 +281,10 @@ export function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Mobile Full Overlay Menu (2x3 Bento Cards) */}
+            {/* Floating Mobile Dock */}
+            <MobileDock onToggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+
+            {/* Mobile Menu Bento Grid Overlay */}
             <AnimatePresence>
                 {isMenuOpen && (
                     <motion.div
@@ -332,7 +308,7 @@ export function Navbar() {
                                     DIRECT DIRECTORY
                                 </span>
 
-                                {/* 2x3 Bento Grid */}
+                                {/* Bento Grid of Primary Hubs */}
                                 <div className="grid grid-cols-2 gap-3 w-full my-4">
                                     {[
                                         { label: 'Projects', href: '/projects', icon: Rocket, desc: 'Builds & Architectures', color: 'from-sky-500/20 to-blue-600/10 border-sky-500/30' },
