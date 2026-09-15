@@ -178,14 +178,14 @@ const AboutLeadIn = () => {
                 initial="hidden"
                 whileInView="show"
                 whileHover="hover"
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.05 }}
                 variants={{
-                    hidden: { opacity: 0, y: 80, scale: 0.96 },
+                    hidden: { opacity: 0, y: 40, scale: 0.96 },
                     show: { 
                         opacity: 1, 
                         y: 0, 
                         scale: 1, 
-                        transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
+                        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
                     }
                 }}
                 className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-12 lg:p-16 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"

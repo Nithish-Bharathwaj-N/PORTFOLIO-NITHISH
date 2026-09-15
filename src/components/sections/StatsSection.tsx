@@ -238,7 +238,7 @@ export default function StatsSection({ scrollYProgress, showOnly }: { scrollYPro
                                                     width={{ sm: 160, md: 220, lg: 260 }}
                                                 />
 
-                                                <div className="mt-8 space-y-3 opacity-0 group-hover/book:opacity-100 transition-all duration-500 translate-y-4 group-hover/book:translate-y-0">
+                                                <div className="mt-8 space-y-3 opacity-100 md:opacity-0 md:group-hover/book:opacity-100 transition-all duration-500 md:translate-y-4 md:group-hover/book:translate-y-0">
                                                     <div className="flex items-center gap-2">
                                                         <span className="text-[10px] font-black uppercase tracking-[0.2em] px-2 py-0.5 rounded bg-muted/20 border border-border/50 text-foreground/60">
                                                             {blog.category.replace(/-/g, ' ')}

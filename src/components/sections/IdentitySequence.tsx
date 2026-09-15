@@ -11,6 +11,7 @@ import { BrandScroller, BrandScrollerReverse } from "@/components/ui/brand-scrol
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import MagneticEffect from "@/components/ui/MagneticEffect";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const BlurInUpText = ({ text, animate }: { text: string; animate: boolean }) => {
     const words = text.split(" ");
@@ -55,27 +56,39 @@ interface IdentitySequenceProps {
 
 export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenceProps) => {
     const t = useTranslations("about");
+    const isMobile = useIsMobile();
     const [isHovered, setIsHovered] = React.useState(false);
     const [isTextAnimated, setIsTextAnimated] = React.useState(false);
 
     // Map the parent's scroll progress (0.4 to 0.85) to local progress (0 to 1).
-    // This leaves 0.85 to 1.0 (approx 90vh) as a "pause" where the user can just read the Tech Stack before it scrolls away.
     const localProgress = useTransform(scrollYProgress, [0.4, 0.85], [0, 1]);
 
     // 1. Card Transformation (Entrance & Scaling)
-    const cardScale = useTransform(localProgress, [0, 0.4], [0.8, 1], { ease: easeInOut });
-    const cardY = useTransform(localProgress, [0, 0.4], ["60vh", "0vh"], { ease: easeInOut });
-    const cardBorderRadius = useTransform(localProgress, [0.1, 0.4], ["60px", "0px"], { ease: easeInOut });
+    const cardScaleTransform = useTransform(localProgress, [0, 0.4], [0.8, 1], { ease: easeInOut });
+    const cardYTransform = useTransform(localProgress, [0, 0.4], ["60vh", "0vh"], { ease: easeInOut });
+    const cardBorderRadiusTransform = useTransform(localProgress, [0.1, 0.4], ["60px", "0px"], { ease: easeInOut });
 
     // 2. Internal Content Scroll
-    const contentY = useTransform(localProgress, [0.35, 1], ["0%", "-70%"], { ease: easeInOut });
-    const imageParallaxY = useTransform(localProgress, [0.35, 1], ["-10%", "10%"], { ease: easeInOut });
+    const contentYTransform = useTransform(localProgress, [0.35, 1], ["0%", "-70%"], { ease: easeInOut });
+    const imageParallaxYTransform = useTransform(localProgress, [0.35, 1], ["-10%", "10%"], { ease: easeInOut });
 
     // 3. Elements specific animations
-    const phase0Opacity = useTransform(localProgress, [0, 0.15], [1, 0]);
-    const cardContentOpacity = useTransform(localProgress, [0.1, 0.3], [0, 1]);
-    const photoScale = useTransform(localProgress, [0.3, 0.8], [1.15, 1], { ease: easeInOut });
-    const textOpacity = useTransform(localProgress, [0.85, 1], [0, 1]);
+    const phase0OpacityTransform = useTransform(localProgress, [0, 0.15], [1, 0]);
+    const cardContentOpacityTransform = useTransform(localProgress, [0.1, 0.3], [0, 1]);
+    const photoScaleTransform = useTransform(localProgress, [0.3, 0.8], [1.15, 1], { ease: easeInOut });
+    const textOpacityTransform = useTransform(localProgress, [0.85, 1], [0, 1]);
+
+    // Static overrides on mobile to avoid scroll-hijack hiding content
+    const cardScale = isMobile ? 1 : cardScaleTransform;
+    const cardY = isMobile ? "0vh" : cardYTransform;
+    const cardBorderRadius = isMobile ? "0px" : cardBorderRadiusTransform;
+    const contentY = isMobile ? "0%" : contentYTransform;
+    const imageParallaxY = isMobile ? "0%" : imageParallaxYTransform;
+    const phase0Opacity = isMobile ? 0 : phase0OpacityTransform;
+    const cardContentOpacity = isMobile ? 1 : cardContentOpacityTransform;
+    const photoScale = isMobile ? 1 : photoScaleTransform;
+    const textOpacity = isMobile ? 1 : textOpacityTransform;
+    const shouldAnimateText = isMobile || isTextAnimated;
 
     useMotionValueEvent(localProgress, "change", (latest) => {
         if (latest > 0.85 && !isTextAnimated) {
@@ -127,59 +140,64 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
     ]);
 
     return (
-        <div className="relative w-screen h-full flex flex-col items-center justify-center overflow-hidden overflow-x-clip bg-background dark:bg-black">
-            {/* Phase 0: The Lead-in UI (Visible before card scales) */}
-            <motion.div
-                style={{ opacity: phase0Opacity }}
-                className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none -translate-y-12"
-            >
-                {/* Center Unified Action - Magnetic Group */}
-                <div className="mb-16 pointer-events-auto">
-                    <MagneticEffect>
-                        <div className="group flex items-center gap-2 cursor-pointer">
-                            <div className="relative px-10 py-5 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip transition-all duration-500 shadow-lg group-hover:shadow-[0_0_30px_rgba(193,228,74,0.3)]">
-                                <div className="relative z-10 h-7 overflow-hidden overflow-x-clip">
-                                    <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-                                        <span className="text-white dark:text-black group-hover:text-black font-bold text-xl leading-7 transition-colors duration-500">
-                                            {t("leadIn.aboutMe")}
-                                        </span>
-                                        <span className="text-black font-bold text-xl leading-7 transition-colors duration-500">
-                                            {t("leadIn.aboutMe")}
-                                        </span>
+        <div className={cn(
+            "relative w-full flex flex-col items-center justify-center bg-background dark:bg-black",
+            !isMobile && "w-screen h-full overflow-hidden overflow-x-clip"
+        )}>
+            {/* Phase 0: The Lead-in UI (Visible before card scales on desktop) */}
+            {!isMobile && (
+                <motion.div
+                    style={{ opacity: phase0Opacity }}
+                    className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none -translate-y-12"
+                >
+                    {/* Center Unified Action - Magnetic Group */}
+                    <div className="mb-16 pointer-events-auto">
+                        <MagneticEffect>
+                            <div className="group flex items-center gap-2 cursor-pointer">
+                                <div className="relative px-10 py-5 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip transition-all duration-500 shadow-lg group-hover:shadow-[0_0_30px_rgba(193,228,74,0.3)]">
+                                    <div className="relative z-10 h-7 overflow-hidden overflow-x-clip">
+                                        <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
+                                            <span className="text-white dark:text-black group-hover:text-black font-bold text-xl leading-7 transition-colors duration-500">
+                                                {t("leadIn.aboutMe")}
+                                            </span>
+                                            <span className="text-black font-bold text-xl leading-7 transition-colors duration-500">
+                                                {t("leadIn.aboutMe")}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="relative w-16 h-16 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip flex items-center justify-center transition-all duration-500 shadow-lg">
-                                <div className="relative z-10 h-8 overflow-hidden overflow-x-clip">
-                                    <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
-                                        <ArrowUpRight className="w-8 h-8 text-white dark:text-black group-hover:text-black transition-colors duration-500" />
-                                        <ArrowUpRight className="w-8 h-8 text-black transition-colors duration-500" />
+                                <div className="relative w-16 h-16 rounded-full bg-black dark:bg-white group-hover:bg-[#c1e44a] dark:group-hover:bg-[#c1e44a] overflow-hidden overflow-x-clip flex items-center justify-center transition-all duration-500 shadow-lg">
+                                    <div className="relative z-10 h-8 overflow-hidden overflow-x-clip">
+                                        <div className="flex flex-col transition-transform duration-500 ease-out group-hover:-translate-y-1/2">
+                                            <ArrowUpRight className="w-8 h-8 text-white dark:text-black group-hover:text-black transition-colors duration-500" />
+                                            <ArrowUpRight className="w-8 h-8 text-black transition-colors duration-500" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </MagneticEffect>
+                    </div>
+
+                    {/* Unified Bottom Labels Layer */}
+                    <div className="w-full max-w-[1200px] flex items-center justify-between px-12">
+                        <div className="flex items-center gap-3 text-zinc-500 dark:text-white/60 text-sm font-medium tracking-tight">
+                            <motion.span
+                                animate={{ y: [0, 5, 0] }}
+                                transition={{ duration: 1.5, repeat: Infinity }}
+                                className="w-4 h-4 flex items-center justify-center"
+                            >
+                                ↓
+                            </motion.span>
+                            <span>{t("leadIn.scroll")}</span>
                         </div>
-                    </MagneticEffect>
-                </div>
 
-                {/* Unified Bottom Labels Layer */}
-                <div className="w-full max-w-[1200px] flex items-center justify-between px-12">
-                    <div className="flex items-center gap-3 text-zinc-500 dark:text-white/60 text-sm font-medium tracking-tight">
-                        <motion.span
-                            animate={{ y: [0, 5, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                            className="w-4 h-4 flex items-center justify-center"
-                        >
-                            ↓
-                        </motion.span>
-                        <span>{t("leadIn.scroll")}</span>
+                        <div className="text-zinc-500 dark:text-white/60 text-sm font-medium tracking-tight">
+                            {t("leadIn.shortStory")}
+                        </div>
                     </div>
-
-                    <div className="text-zinc-500 dark:text-white/60 text-sm font-medium tracking-tight">
-                        {t("leadIn.shortStory")}
-                    </div>
-                </div>
-            </motion.div>
+                </motion.div>
+            )}
 
             {/* The Main Card Container */}
             <motion.div
@@ -187,10 +205,13 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     scale: cardScale,
                     y: cardY,
                     borderRadius: cardBorderRadius,
-                    backgroundColor: cardBgValue,
-                    willChange: "transform, background-color",
+                    backgroundColor: isMobile ? undefined : cardBgValue,
+                    willChange: isMobile ? undefined : "transform, background-color",
                 }}
-                className="relative w-full h-full flex flex-col overflow-hidden overflow-x-clip origin-bottom z-10"
+                className={cn(
+                    "relative w-full flex flex-col z-10",
+                    !isMobile && "h-full overflow-hidden overflow-x-clip origin-bottom"
+                )}
             >
                 {/* Unified Scrolling Content Wrapper */}
                 <motion.div
@@ -198,27 +219,36 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     className="relative w-full flex flex-col items-center"
                 >
                     {/* Phase 1: Marquee Header (Top of the long card) */}
-                    <div className="w-full h-[45vh] md:h-[55vh] flex items-center justify-center flex-shrink-0">
+                    <div className={cn(
+                        "w-full flex items-center justify-center flex-shrink-0",
+                        isMobile ? "py-8" : "h-[45vh] md:h-[55vh]"
+                    )}>
                         <motion.div style={{ opacity: cardContentOpacity }} className="w-full">
                             <InfiniteMarquee
                                 items={marqueeItems}
                                 speed={18}
                                 className="w-full"
-                                itemClassName="py-12"
+                                itemClassName={isMobile ? "py-6" : "py-12"}
                             />
                         </motion.div>
                     </div>
 
                     {/* Phase 2: The Large Portrait (The "Explore" area) */}
-                    <div className="relative w-full h-[100vh] flex flex-col items-center flex-shrink-0 px-4 md:px-10 lg:px-20">
-                        {/* Sizing wrapper - not clipped */}
+                    <div className={cn(
+                        "relative w-full flex flex-col items-center flex-shrink-0",
+                        isMobile ? "h-[50vh] min-h-[340px] px-4" : "h-[100vh] px-4 md:px-10 lg:px-20"
+                    )}>
+                        {/* Sizing wrapper */}
                         <div
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
                             className="relative w-full h-full max-w-[1500px] group/photo cursor-pointer"
                         >
-                            {/* Image area - THIS is what clips. Vault frame is OUTSIDE this. */}
-                            <div className="absolute inset-0 overflow-hidden overflow-x-clip">
+                            {/* Image area */}
+                            <div className={cn(
+                                "absolute inset-0 overflow-hidden overflow-x-clip",
+                                isMobile && "rounded-2xl border border-neutral-200 dark:border-zinc-800"
+                            )}>
                                 <motion.div
                                     style={{
                                         scale: photoScale,
@@ -241,7 +271,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                                     alt="Profile"
                                                     fill
                                                     className="object-cover object-top grayscale-0"
-                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+                                                    sizes="(max-width: 768px) 100vw, 100vw"
                                                     priority
                                                 />
                                             </motion.div>
@@ -250,29 +280,28 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 </motion.div>
                             </div>
 
-                            {/* Vault frame - OUTSIDE overflow-hidden overflow-x-clip, extends 1px beyond clip edge to cover it */}
-                            <div className="absolute inset-0 pointer-events-none z-20">
-                                {/* Top bar: -top-px + h-[52px] covers the clip edge by 1px */}
-                                <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -top-px left-0 w-full h-[52px]" />
-                                <motion.div style={{ background: vaultGradientDown }} className="absolute top-[50px] left-0 w-full h-32" />
-                                
-                                {/* Bottom bar: -bottom-px + h-[52px] covers the clip edge by 1px */}
-                                <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -bottom-px left-0 w-full h-[52px]" />
-                                <motion.div style={{ background: vaultGradientUp }} className="absolute bottom-[50px] left-0 w-full h-32" />
-                            </div>
+                            {/* Vault frame - Desktop only */}
+                            {!isMobile && (
+                                <div className="absolute inset-0 pointer-events-none z-20">
+                                    <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -top-px left-0 w-full h-[52px]" />
+                                    <motion.div style={{ background: vaultGradientDown }} className="absolute top-[50px] left-0 w-full h-32" />
+                                    <motion.div style={{ backgroundColor: cardBgValue }} className="absolute -bottom-px left-0 w-full h-[52px]" />
+                                    <motion.div style={{ background: vaultGradientUp }} className="absolute bottom-[50px] left-0 w-full h-32" />
+                                </div>
+                            )}
                         </div>
                     </div>
 
                     {/* Phase 3: Final Layout Text */}
                     <motion.div
                         style={{ opacity: textOpacity }}
-                        className="w-full max-w-[1700px] mx-auto px-8 md:px-16 lg:px-24 pt-24 pb-8 md:pt-32 md:pb-12 flex-shrink-0"
+                        className="w-full max-w-[1700px] mx-auto px-5 md:px-16 lg:px-24 pt-10 pb-6 md:pt-32 md:pb-12 flex-shrink-0"
                     >
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+                        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
                             {/* Header Left */}
                             <div className="md:col-span-7">
                                 <h3
-                                    className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug text-black dark:text-white"
+                                    className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug text-black dark:text-white"
                                     dangerouslySetInnerHTML={{ __html: t.raw("profile.title") }}
                                 />
                             </div>
@@ -282,7 +311,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                                 <p className="text-[13px] md:text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
                                     <BlurInUpText 
                                         text={`${t("profile.narrative")} ${t("profile.narrative2")}`} 
-                                        animate={isTextAnimated} 
+                                        animate={shouldAnimateText} 
                                     />
                                 </p>
                             </div>
@@ -292,10 +321,10 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                     {/* Phase 4: Tech Stack & Tools Scrollers */}
                     <motion.div
                         style={{ opacity: textOpacity }}
-                        className="w-full max-w-[1700px] mx-auto py-8 md:py-20 flex flex-col gap-8 flex-shrink-0"
+                        className="w-full max-w-[1700px] mx-auto py-6 md:py-20 flex flex-col gap-6 md:gap-8 flex-shrink-0"
                     >
-                        <div className="px-8 md:px-16 lg:px-24 mb-6">
-                            <h4 className="text-lg md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">
+                        <div className="px-5 md:px-16 lg:px-24 mb-2 md:mb-6">
+                            <h4 className="text-base md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">
                                 Tech Stack & Ecosystem
                             </h4>
                         </div>
