@@ -208,34 +208,39 @@ export function Navbar() {
 
                             {/* Ultra-Impressive Pulsing Cyber Menu Button */}
                             <motion.button
-                                whileHover={{ scale: 1.06 }}
-                                whileTap={{ scale: 0.94 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={toggleMenu}
                                 className={cn(
-                                    "relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full transition-all duration-500 group overflow-hidden border shadow-xl cursor-pointer lg:hidden",
+                                    "relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-500 group overflow-hidden border shadow-lg cursor-pointer lg:hidden shrink-0",
                                     isMenuOpen
-                                        ? "bg-zinc-950 border-purple-500/80 shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white"
-                                        : "bg-zinc-950/90 border-emerald-500/50 shadow-[0_0_20px_rgba(52,211,153,0.3)] text-white hover:border-emerald-400"
+                                        ? "bg-zinc-950 border-purple-500/80 shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white"
+                                        : "bg-zinc-950/90 border-emerald-500/50 shadow-[0_0_15px_rgba(52,211,153,0.3)] text-white hover:border-emerald-400"
                                 )}
                                 aria-label="Toggle menu"
                             >
                                 {/* Subtle Glowing Radar Ring Animation */}
-                                <span className="relative flex h-2.5 w-2.5 shrink-0">
+                                <span className="relative flex h-2 w-2 shrink-0">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,1)]"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,1)]"></span>
                                 </span>
 
-                                {/* Cycling Morphing Label */}
+                                {/* Compact Mobile Label / Animated Larger Label for Tablet+ */}
                                 <AnimatePresence mode="wait">
                                     <motion.span
-                                        key={labelIndex}
-                                        initial={{ y: 6, opacity: 0 }}
-                                        animate={{ y: 0, opacity: 1 }}
-                                        exit={{ y: -6, opacity: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-emerald-400 select-none whitespace-nowrap"
+                                        key={isMenuOpen ? "close" : labelIndex}
+                                        initial={{ opacity: 0, y: 4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="text-[10px] sm:text-xs font-mono font-extrabold uppercase tracking-wider text-emerald-400 select-none whitespace-nowrap"
                                     >
-                                        {isMenuOpen ? "CLOSE" : menuLabels[labelIndex]}
+                                        {isMenuOpen ? "CLOSE" : (
+                                            <>
+                                                <span className="sm:hidden">MENU</span>
+                                                <span className="hidden sm:inline">{menuLabels[labelIndex]}</span>
+                                            </>
+                                        )}
                                     </motion.span>
                                 </AnimatePresence>
 
@@ -246,9 +251,9 @@ export function Navbar() {
                                         animate={{ rotate: 0, opacity: 1 }}
                                         exit={{ rotate: 90, opacity: 0 }}
                                         transition={{ duration: 0.2 }}
-                                        className="ml-0.5"
+                                        className="shrink-0"
                                     >
-                                        {isMenuOpen ? <X className="w-4 h-4 text-white" /> : <Menu className="w-4 h-4 text-white" />}
+                                        {isMenuOpen ? <X className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" /> : <Menu className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />}
                                     </motion.div>
                                 </AnimatePresence>
                             </motion.button>
