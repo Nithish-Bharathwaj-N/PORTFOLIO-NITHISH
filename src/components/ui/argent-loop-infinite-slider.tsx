@@ -1,5 +1,5 @@
 import * as React from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { ArrowRight, ChevronDown, Github, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -98,6 +98,16 @@ export function ArgentLoopInfiniteSlider() {
   const buttonOpacity = useTransform(smoothProgress, [projectArea, projectArea + 0.05], [0, 1]);
   const finalContainerY = useTransform(smoothProgress, [projectArea, projectArea + 0.05], ["0px", "-250px"]);
   const imageY = useTransform(smoothProgress, [0, 1], ["-12%", "12%"]);
+  
+  const buttonPointerEvents = useTransform(smoothProgress, (v) => (v > projectArea ? "auto" : "none"));
+  const overlayOpacity = useTransform(smoothProgress, [0, 0.05, projectArea, projectArea + 0.05], [0, 1, 1, 0]);
+  const progressWidth = useTransform(smoothProgress, [0, projectArea], ["0%", "100%"]);
+
+  const [pageText, setPageText] = React.useState(`1 / ${PROJECT_DATA.length}`);
+  useMotionValueEvent(smoothProgress, "change", (latest: number) => {
+    const idx = Math.min(Math.floor(latest / projectStep), PROJECT_DATA.length - 1);
+    setPageText(`${idx + 1} / ${PROJECT_DATA.length}`);
+  });
 
   if (isMobile) {
     return (
@@ -432,7 +442,7 @@ export function ArgentLoopInfiniteSlider() {
               <motion.div 
                 style={{ 
                   opacity: buttonOpacity,
-                  pointerEvents: useTransform(smoothProgress, (v) => v > projectArea ? "auto" : "none")
+                  pointerEvents: buttonPointerEvents
                 }}
               >
                 <div className="flex items-center gap-4 pointer-events-auto">
@@ -465,24 +475,22 @@ export function ArgentLoopInfiniteSlider() {
         </div>
 
         <motion.div 
-          style={{ opacity: useTransform(smoothProgress, [0, 0.05, projectArea, projectArea + 0.05], [0, 1, 1, 0]) }}
+          style={{ opacity: overlayOpacity }}
           className="slide-overlay"
         >
            <span className="text-foreground/40 font-mono text-[10px] tracking-[0.5em] uppercase">Page</span>
            <div className="slide-line bg-foreground/10">
               <motion.div 
                 className="slide-progress bg-foreground" 
-                style={{ width: useTransform(smoothProgress, [0, projectArea], ["0%", "100%"]) }} 
+                style={{ width: progressWidth }} 
               />
            </div>
            <motion.span className="text-foreground font-mono text-[11px] tabular-nums font-bold">
-              {useTransform(smoothProgress, (v) => {
-               const idx = Math.min(Math.floor(v / projectStep), PROJECT_DATA.length - 1);
-               return `${idx + 1} / ${PROJECT_DATA.length}`;
-             })}
+              {pageText}
            </motion.span>
         </motion.div>
       </div>
     </div>
   );
 }
+

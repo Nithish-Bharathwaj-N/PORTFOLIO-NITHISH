@@ -108,18 +108,28 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
         ["#18181b", "#000000"]
     );
 
-    const { resolvedTheme } = useTheme();
-    const cardBgValue = resolvedTheme === 'dark' ? cardBgDark : cardBg;
-
-    // Dynamic vault frame gradients that always match the card's transitioning background
-    const vaultGradientDown = useTransform(cardBgValue, (color: string) => {
+    const vaultGradientDownDark = useTransform(cardBgDark, (color: string) => {
         const hex = color.replace('#', '');
         return `linear-gradient(to bottom, #${hex}, #${hex}00)`;
     });
-    const vaultGradientUp = useTransform(cardBgValue, (color: string) => {
+    const vaultGradientDownLight = useTransform(cardBg, (color: string) => {
+        const hex = color.replace('#', '');
+        return `linear-gradient(to bottom, #${hex}, #${hex}00)`;
+    });
+    const vaultGradientUpDark = useTransform(cardBgDark, (color: string) => {
         const hex = color.replace('#', '');
         return `linear-gradient(to top, #${hex}, #${hex}00)`;
     });
+    const vaultGradientUpLight = useTransform(cardBg, (color: string) => {
+        const hex = color.replace('#', '');
+        return `linear-gradient(to top, #${hex}, #${hex}00)`;
+    });
+
+    const { resolvedTheme } = useTheme();
+    const cardBgValue = resolvedTheme === 'dark' ? cardBgDark : cardBg;
+    const vaultGradientDown = resolvedTheme === 'dark' ? vaultGradientDownDark : vaultGradientDownLight;
+    const vaultGradientUp = resolvedTheme === 'dark' ? vaultGradientUpDark : vaultGradientUpLight;
+
 
     const marqueeWords = [
         "CYBERSECURITY ENGINEER",
