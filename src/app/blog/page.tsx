@@ -142,11 +142,11 @@ function BlogContent() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, type: "spring", stiffness: 400, damping: 20 }}
-                        className="text-4xl md:text-6xl lg:text-[5.5rem] font-black text-foreground leading-tight tracking-[-0.04em] uppercase cursor-pointer group"
+                        className="text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-black text-foreground leading-tight tracking-[-0.04em] uppercase cursor-pointer group"
                     >
                         <span className="relative inline-block">
                             <span>FEATURE &</span>{' '}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-foreground/20">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70">
                                 DOCS
                             </span>
                             {/* Animated underline on hover */}
@@ -184,8 +184,8 @@ function BlogContent() {
 
                 <div className="container mx-auto relative z-10">
                     {/* Filters & Search - Modern Minimalist Editorial */}
-                    <div className="flex flex-col md:flex-row gap-10 mb-16 items-end justify-between border-b border-foreground/5 pb-8">
-                        <div className="flex flex-wrap gap-x-12 gap-y-6">
+                    <div className="flex flex-col md:flex-row gap-8 md:gap-10 mb-16 items-start md:items-end justify-between border-b border-foreground/5 pb-8">
+                        <div className="flex overflow-x-auto gap-6 sm:gap-10 md:gap-12 pb-3 w-full md:w-auto shrink-0 no-scrollbar">
                             {categories.map((cat) => {
                                 const count = cat === 'all'
                                     ? portfolioData.blogs.length
@@ -196,7 +196,7 @@ function BlogContent() {
                                         key={cat}
                                         onClick={() => setSelectedCategory(cat)}
                                         className={cn(
-                                            "group relative py-2 text-[15px] font-bold uppercase tracking-[0.2em] transition-all duration-500 flex items-start",
+                                            "group relative py-2 text-xs sm:text-[15px] font-bold uppercase tracking-[0.2em] transition-all duration-500 flex items-start shrink-0 whitespace-nowrap",
                                             selectedCategory === cat
                                                 ? "text-primary opacity-100"
                                                 : "text-muted-foreground/40 hover:text-foreground hover:opacity-100"
@@ -218,7 +218,7 @@ function BlogContent() {
                                         {/* Dynamic Count Indicator */}
                                         <span
                                             className={cn(
-                                                "ml-1 text-[13px] transition-all duration-300 font-bold",
+                                                "ml-1 text.xs sm:text-[13px] transition-all duration-300 font-bold",
                                                 selectedCategory === cat
                                                     ? "text-primary opacity-100 translate-y-0"
                                                     : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 text-foreground/60"
@@ -231,8 +231,8 @@ function BlogContent() {
                             })}
                         </div>
 
-                        <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto">
-                            <div className="flex items-center gap-3">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 md:gap-6 w-full md:w-auto">
+                            <div className="flex items-center justify-between sm:justify-start gap-3">
                                 {/* View Mode Toggle */}
                                 <div className="flex bg-foreground/5 p-1 rounded-xl border border-foreground/10">
                                     <button
@@ -296,7 +296,7 @@ function BlogContent() {
                                 </div>
                             </div>
 
-                            <div className="relative flex-1 md:w-80 group">
+                            <div className="relative w-full sm:w-64 md:w-80 group">
                                 <input
                                     type="text"
                                     placeholder="SEARCH ARCHIVE"

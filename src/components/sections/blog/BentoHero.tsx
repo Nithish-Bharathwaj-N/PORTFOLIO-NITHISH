@@ -80,7 +80,7 @@ export function FeatCard({ title, description, children, className = "", innerCl
 function FeaturedVisual({ posts, currentSlide, isLowPowerMode }: any) {
   const currentPost = posts[currentSlide];
   return (
-    <div className="relative w-full h-full group flex flex-col justify-end p-6 lg:p-8 overflow-hidden rounded-[14px]">
+    <div className="relative w-full h-full group flex flex-col justify-end p-4 sm:p-6 lg:p-8 overflow-hidden rounded-[14px]">
       <div className="absolute inset-0 bg-muted" />
       <AnimatePresence initial={false}>
         <motion.div
@@ -110,7 +110,7 @@ function FeaturedVisual({ posts, currentSlide, isLowPowerMode }: any) {
           exit={isLowPowerMode ? { opacity: 0 } : { opacity: 0, y: -20 }}
           className="relative z-10 max-w-2xl"
         >
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-3 sm:mb-4">
             <span className="px-2.5 py-0.5 bg-foreground text-background text-[9px] font-black uppercase tracking-widest rounded-full">
               Featured
             </span>
@@ -118,7 +118,7 @@ function FeaturedVisual({ posts, currentSlide, isLowPowerMode }: any) {
               {currentPost.category.replace(/-/g, ' ')}
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-4 leading-tight tracking-tight drop-shadow-md">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-foreground mb-3 sm:mb-4 leading-tight tracking-tight drop-shadow-md">
             <Link href={`/blog/${currentPost.slug}`} className="hover:text-primary transition-colors line-clamp-2">
               {currentPost.title}
             </Link>
@@ -592,14 +592,14 @@ export const BentoHero = ({ isLowPowerMode }: { isLowPowerMode?: boolean }) => {
       description: "Our latest architectural blueprints and engineering reflections.",
       visual: <FeaturedVisual posts={featuredPosts} currentSlide={currentSlide} isLowPowerMode={isLowPowerMode} />,
       colSpan: "lg:col-span-2",
-      height: "h-[480px]",
+      height: "h-[400px] sm:h-[480px]",
     },
     {
       title: "The Gallery",
       description: "Curated milestones of the engineering journey.",
       visual: (
         <div className="p-2 w-full h-full pb-0 rounded-[14px] overflow-visible relative flex items-center justify-center">
-          <div className="scale-[1.4] transform-gpu origin-center w-full h-full flex items-center justify-center">
+          <div className="scale-90 sm:scale-100 lg:scale-[1.2] transform-gpu origin-center w-full h-full flex items-center justify-center">
             <AnimatedFolder
               title="The Gallery"
               className="w-full h-full"
@@ -619,7 +619,7 @@ export const BentoHero = ({ isLowPowerMode }: { isLowPowerMode?: boolean }) => {
         </div>
       ),
       colSpan: "lg:col-span-1",
-      height: "h-[480px]",
+      height: "h-[360px] sm:h-[440px] lg:h-[480px]",
       className: "!overflow-visible hover:z-50",
       innerClassName: "!overflow-visible hover:z-50"
     },
@@ -628,7 +628,7 @@ export const BentoHero = ({ isLowPowerMode }: { isLowPowerMode?: boolean }) => {
       description: "Articles published across various engineering categories.",
       visual: <StatsVisual categoryStats={categoryStats} />,
       colSpan: "lg:col-span-1",
-      height: "h-[420px]",
+      height: "h-[380px] sm:h-[420px]",
     },
     {
       title: "Activity Feed",

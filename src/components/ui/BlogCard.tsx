@@ -45,16 +45,23 @@ export function BlogCard({ post, index, isHovered, isLowPowerMode }: BlogCardPro
 
                 {/* Permanent Gradient Overlay for Legibility */}
                 <div className={cn(
-                    "absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-700",
-                    isHovered ? "opacity-95" : "opacity-70"
+                    "absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30 transition-opacity duration-700",
+                    isHovered ? "opacity-95" : "opacity-85"
                 )} />
 
                 {/* Integrated Content Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-                    {/* Title (Always visible, clean, first in order) */}
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 md:p-8 pr-10 sm:pr-6 md:pr-8">
+                    {/* Category Badge for Mobile / Always Visible */}
+                    <div className="mb-2 flex items-center gap-2">
+                        <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] text-white bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-sm border border-white/20">
+                            {t.has(`categories.${post.category}`) ? t(`categories.${post.category}`) : post.category}
+                        </span>
+                    </div>
+
+                    {/* Title */}
                     <h3 className={cn(
-                        "text-2xl lg:text-3xl font-black text-white transition-all leading-[1.1] tracking-tighter drop-shadow-lg",
-                        isHovered ? "translate-y-0" : "translate-y-2"
+                        "text-lg sm:text-2xl lg:text-3xl font-black text-white transition-all leading-[1.15] tracking-tight drop-shadow-lg line-clamp-3",
+                        isHovered ? "translate-y-0" : "translate-y-1 sm:translate-y-2"
                     )}>
                         {post.title}
                     </h3>
@@ -62,15 +69,12 @@ export function BlogCard({ post, index, isHovered, isLowPowerMode }: BlogCardPro
                     {/* The Reveal Section (Appears BELOW the title) */}
                     <div className={cn(
                         "transition-all duration-700 ease-in-out overflow-hidden space-y-4",
-                        isHovered ? "max-h-[200px] opacity-100 mt-4" : "max-h-0 opacity-0 mt-0"
+                        isHovered ? "max-h-[200px] opacity-100 mt-3" : "max-h-0 opacity-0 mt-0"
                     )}>
-                        <p className="text-xs text-white/80 line-clamp-3 leading-relaxed font-medium">
+                        <p className="text-xs text-white/80 line-clamp-2 sm:line-clamp-3 leading-relaxed font-medium">
                             {post.excerpt}
                         </p>
-                        <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white bg-white/10 backdrop-blur-md px-3 py-1 rounded-none border border-white/10">
-                                {t.has(`categories.${post.category}`) ? t(`categories.${post.category}`) : post.category}
-                            </span>
+                        <div className="flex items-center justify-between border-t border-white/10 pt-3">
                             <span className="text-[10px] font-bold text-white/60 uppercase tracking-widest">
                                 {new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}
                             </span>
