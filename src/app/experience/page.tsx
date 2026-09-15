@@ -430,7 +430,7 @@ export default function ExperiencePage() {
                     initial={{ opacity: 0, y: isLowPowerMode ? 0 : 60 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                    className="w-full relative z-10 pt-20 mb-20 -mt-10 md:-mt-20 overflow-hidden"
+                    className="w-full relative z-10 pt-6 sm:pt-16 mb-10 sm:mb-20 mt-0 md:-mt-20 overflow-hidden"
                 >
                     <ExperienceMarquee />
                 </motion.div>

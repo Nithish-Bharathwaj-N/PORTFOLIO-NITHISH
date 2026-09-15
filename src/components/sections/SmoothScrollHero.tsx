@@ -1,4 +1,5 @@
-// ReactLenis removed - using global provider
+'use client';
+
 import {
     motion,
     useMotionTemplate,
@@ -7,25 +8,71 @@ import {
     useSpring,
     MotionValue,
 } from "framer-motion";
-import { useRef } from "react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { usePerformance } from "@/hooks/usePerformance";
 
 export const SmoothScrollHero = () => {
     const { isLowPowerMode } = usePerformance();
+
     return (
         <div className="bg-background text-zinc-900 dark:text-zinc-50 relative z-0">
-            <Hero isLowPowerMode={isLowPowerMode} />
+            {/* Mobile Layout: Responsive, zero empty scroll void */}
+            <div className="block md:hidden pt-28 pb-8 px-4 w-full relative z-10">
+                <div className="relative w-full max-w-lg mx-auto bg-white/50 dark:bg-black/40 backdrop-blur-2xl p-6 sm:p-10 rounded-3xl border border-black/10 dark:border-white/10 flex flex-col items-center text-center shadow-xl">
+                    <div className="absolute inset-0 bg-primary/5 rounded-3xl pointer-events-none" />
+                    
+                    <h1 className="text-4xl sm:text-6xl font-black text-foreground dark:text-white tracking-tight leading-none uppercase mb-4">
+                        EXPERIENCE
+                    </h1>
+
+                    <p className="text-xs sm:text-sm font-semibold text-foreground/60 dark:text-white/60 tracking-wider uppercase leading-relaxed max-w-sm">
+                        Merging technical precision with creative vision. A curated timeline of my professional journey, from foundational code to AI solutions.
+                    </p>
+                </div>
+
+                {/* Mobile Preview Grid of Key Projects */}
+                <div className="grid grid-cols-2 gap-3 mt-6 max-w-lg mx-auto">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-md group">
+                        <Image src="/images/subaero-preview.jpg" alt="SubAERO 3D Engine" fill className="object-cover group-hover:scale-105 transition-transform" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                            <span className="text-[10px] font-mono font-bold text-white uppercase">SubAERO 3D</span>
+                        </div>
+                    </div>
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-md group">
+                        <Image src="/images/timeline-securox.png" alt="Securox Cyber Platform" fill className="object-cover group-hover:scale-105 transition-transform" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                            <span className="text-[10px] font-mono font-bold text-white uppercase">Securox Platform</span>
+                        </div>
+                    </div>
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-md group">
+                        <Image src="/images/timeline-aws-internship.png" alt="AWS GenAI Internship" fill className="object-cover group-hover:scale-105 transition-transform" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                            <span className="text-[10px] font-mono font-bold text-white uppercase">AWS GenAI</span>
+                        </div>
+                    </div>
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-md group">
+                        <Image src="/images/timeline-cit-college.png" alt="Chennai Institute of Technology" fill className="object-cover group-hover:scale-105 transition-transform" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                            <span className="text-[10px] font-mono font-bold text-white uppercase">CIT Campus</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Desktop Layout: Pinned parallax scroll */}
+            <div className="hidden md:block">
+                <Hero isLowPowerMode={isLowPowerMode} />
+            </div>
         </div>
     );
 };
 
-const SECTION_HEIGHT = 1500;
+const SECTION_HEIGHT = 1000;
 
 const Hero = ({ isLowPowerMode }: { isLowPowerMode: boolean }) => {
     const { scrollY } = useScroll();
 
-    // Simplify physics for low power mode
     const smoothScrollY = useSpring(scrollY, isLowPowerMode ? {
         stiffness: 50,
         damping: 30
@@ -42,44 +89,25 @@ const Hero = ({ isLowPowerMode }: { isLowPowerMode: boolean }) => {
         >
             <CenterImage scrollY={smoothScrollY} />
 
-            {!isLowPowerMode && <ParallaxImages scrollY={smoothScrollY} />}
+            <ParallaxImages scrollY={smoothScrollY} />
 
-            <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-transparent to-background z-20 pointer-events-none" />
-
-            <motion.div
-                className="fixed bottom-6 left-1/2 -translate-x-[65%] z-50 hidden md:flex flex-col items-center gap-2 cursor-pointer pointer-events-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 1 }}
-                onClick={() => {
-                    document.getElementById("launch-schedule")?.scrollIntoView({
-                        behavior: "smooth",
-                    });
-                }}
-            >
-            </motion.div>
+            <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-background z-20 pointer-events-none" />
         </div>
     );
 };
 
 const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
-    // Animation: Scale from 50% to 100%
-    const scale = useTransform(scrollY, [0, SECTION_HEIGHT], [0.5, 1]);
+    const scale = useTransform(scrollY, [0, SECTION_HEIGHT], [0.6, 1]);
     const borderRadius = useTransform(scrollY, [0, SECTION_HEIGHT], [24, 0]);
-    // Fade out LATER, ensuring it stays as a backdrop for the Timeline entry
     const opacity = useTransform(
         scrollY,
-        [SECTION_HEIGHT + 1000, SECTION_HEIGHT + 1600],
+        [SECTION_HEIGHT + 400, SECTION_HEIGHT + 900],
         [1, 0]
     );
 
-    // Text specific animations
-    const textOpacity = useTransform(scrollY, [0, 200], [1, 0]);
-    const textScale = useTransform(scrollY, [0, 200], [1, 1.1]);
-    const textY = useTransform(scrollY, [0, 200], [0, 50]);
-
-    const subtitleOpacity = useTransform(scrollY, [0, 150], [1, 0]);
-    const subtitleY = useTransform(scrollY, [0, 150], [0, 20]);
+    const textOpacity = useTransform(scrollY, [0, 250], [1, 0]);
+    const textScale = useTransform(scrollY, [0, 250], [1, 1.05]);
+    const textY = useTransform(scrollY, [0, 250], [0, 40]);
 
     return (
         <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden z-0">
@@ -88,8 +116,7 @@ const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     scale,
                     borderRadius,
                     opacity,
-                    backgroundImage:
-                        "url('/images/nithish-about.jpg')",
+                    backgroundImage: "url('/images/nithish-about.jpg')",
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
@@ -99,7 +126,7 @@ const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                 <div className="absolute inset-0 bg-black/60" />
             </motion.div>
 
-            {/* Title Overlay - 'READ DETAIL' Style Glassmorphism */}
+            {/* Title Overlay */}
             <div className="absolute inset-0 flex items-center justify-center z-10 px-4">
                 <motion.div
                     initial={{ opacity: 0 }}
@@ -109,22 +136,17 @@ const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                         opacity: textOpacity,
                         scale: textScale,
                         y: textY,
-                        maskImage: 'radial-gradient(ellipse 90% 85% at center, black 65%, transparent 100%)',
-                        WebkitMaskImage: 'radial-gradient(ellipse 90% 85% at center, black 65%, transparent 100%)',
                     }}
-                    className="relative group bg-white/50 dark:bg-black/40 backdrop-blur-[80px] px-[clamp(24px,8vw,128px)] py-[clamp(60px,15vh,240px)] rounded-[clamp(2rem,6vw,4rem)] flex flex-col items-center justify-center w-[92vw] max-w-[1600px]"
+                    className="relative group bg-white/50 dark:bg-black/40 backdrop-blur-[80px] px-12 py-20 md:py-28 rounded-3xl flex flex-col items-center justify-center w-[90vw] max-w-[1400px] border border-white/10 shadow-2xl"
                 >
-                    {/* Ambient Glow */}
-                    <div className="absolute inset-0 bg-primary/2 rounded-[clamp(2rem,6vw,4rem)] pointer-events-none" />
+                    <div className="absolute inset-0 bg-primary/5 rounded-3xl pointer-events-none" />
 
-                    <h1 className="text-[clamp(3.5rem,15vw,15rem)] font-black text-foreground dark:text-white tracking-[-0.06em] leading-[0.8] uppercase text-center mb-[clamp(24px,4vh,48px)] -ml-2">
+                    <h1 className="text-6xl sm:text-8xl md:text-[9rem] lg:text-[11rem] font-black text-foreground dark:text-white tracking-tight leading-[0.88] uppercase text-center mb-6">
                         EXPERIENCE
                     </h1>
 
-                    <p className="w-full max-w-4xl text-center text-[clamp(10px,1.2vw,14px)] font-bold text-foreground/50 dark:text-white/50 tracking-[clamp(0.1em,0.4em,0.4em)] leading-relaxed md:leading-[2.2] uppercase">
-                        Merging technical precision with creative vision.
-                        <br className="hidden md:block" />
-                        A curated timeline of my professional journey, from foundational code to AI solutions.
+                    <p className="w-full max-w-3xl text-center text-xs sm:text-sm md:text-base font-bold text-foreground/70 dark:text-white/70 tracking-[0.25em] leading-relaxed uppercase">
+                        Merging technical precision with creative vision. A curated timeline of my professional journey, from foundational code to AI solutions.
                     </p>
                 </motion.div>
             </div>
@@ -135,20 +157,14 @@ const CenterImage = ({ scrollY }: { scrollY: MotionValue<number> }) => {
 const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
     return (
         <div className="mx-auto max-w-7xl px-4 absolute inset-0 z-20 pointer-events-none grid grid-cols-12 gap-4 h-full items-end pb-[10vh]">
-            {/* 
-               STRATEGY: 
-               start={positive} -> Starts BELOW current view.
-               end={negative} -> Moves UP past the view.
-            */}
-
             {/* 1. Left Small - SubAERO 3D Digital Twin */}
             <div className="col-span-3 col-start-2">
                 <ParallaxImg
                     scrollY={scrollY}
                     src="/images/subaero-preview.jpg"
                     alt="SubAERO 3D Engine Twin"
-                    start={800}
-                    end={-1500}
+                    start={600}
+                    end={-1000}
                     className="w-full shadow-2xl rounded-2xl border border-white/10 aspect-[4/3] object-cover"
                 />
             </div>
@@ -159,8 +175,8 @@ const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     scrollY={scrollY}
                     src="/images/timeline-securox.png"
                     alt="Securox Cyber Risk Intelligence"
-                    start={1000}
-                    end={-1500}
+                    start={700}
+                    end={-1000}
                     className="w-full shadow-2xl rounded-2xl border border-white/10 aspect-square object-cover"
                 />
             </div>
@@ -171,8 +187,8 @@ const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     scrollY={scrollY}
                     src="/images/timeline-aws-internship.png"
                     alt="AWS GenAI Virtual Internship"
-                    start={900}
-                    end={-1800}
+                    start={650}
+                    end={-1200}
                     className="w-full shadow-2xl rounded-2xl border border-white/10 aspect-video object-cover"
                 />
             </div>
@@ -183,8 +199,8 @@ const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     scrollY={scrollY}
                     src="/images/voyage-preview.jpg"
                     alt="Voyage AI Travel Planner"
-                    start={1200}
-                    end={-2000}
+                    start={800}
+                    end={-1400}
                     className="w-full shadow-2xl rounded-2xl border border-white/10 aspect-[3/4] object-cover"
                 />
             </div>
@@ -195,8 +211,8 @@ const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
                     scrollY={scrollY}
                     src="/images/timeline-cit-college.png"
                     alt="Chennai Institute of Technology"
-                    start={1100}
-                    end={-2000}
+                    start={750}
+                    end={-1400}
                     className="w-full shadow-2xl rounded-2xl border border-white/10 aspect-video object-cover"
                 />
             </div>
@@ -205,15 +221,9 @@ const ParallaxImages = ({ scrollY }: { scrollY: MotionValue<number> }) => {
 };
 
 const ParallaxImg = ({ className, alt, src, start, end, scrollY }: { className?: string, alt: string, src: string, start: number, end: number, scrollY: MotionValue<number> }) => {
-    const opacity = useTransform(scrollY, [0, SECTION_HEIGHT * 1.2], [1, 0]);
-
-    // Scale slightly as they rise
-    const scale = useTransform(scrollY, [0, SECTION_HEIGHT], [1, 1.2]);
-
-    // Map global scroll to strictly strictly UPWARD movement
+    const opacity = useTransform(scrollY, [0, SECTION_HEIGHT * 1.1], [1, 0]);
+    const scale = useTransform(scrollY, [0, SECTION_HEIGHT], [1, 1.1]);
     const y = useTransform(scrollY, [0, SECTION_HEIGHT], [start, end]);
-
-    // Smooth transform
     const transform = useMotionTemplate`translateY(${y}px) scale(${scale})`;
 
     return (
