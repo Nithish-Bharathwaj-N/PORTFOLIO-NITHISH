@@ -5,7 +5,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Menu, X, Moon, Sun, Globe, ChevronDown, Focus } from 'lucide-react';
+import { Menu, X, Rocket, Briefcase, BookOpen, Send, Code2, Trophy, Sparkles, ArrowUpRight } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 
@@ -41,8 +41,6 @@ function Clock() {
     );
 }
 
-// Sub-links for the "About" dropdown
-// Sub-links for the "About" dropdown
 const useNavItems = () => {
     const t = useTranslations('navigation.menu');
     return [
@@ -62,7 +60,7 @@ const useNavItems = () => {
 export function Navbar() {
     const t = useTranslations('navigation');
     const navItems = useNavItems();
-    const { theme, setTheme, resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const pathname = usePathname();
     const { scrollY } = useScroll();
 
@@ -71,18 +69,20 @@ export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mounted, setMounted] = useState(false);
-    const [currentLocale, setCurrentLocale] = useState('en');
+    const [labelIndex, setLabelIndex] = useState(0);
     
-    // Consume preload state directly from context
     const { isPreloading: isPreloadActive } = usePreloadState();
-
     const isDark = resolvedTheme === 'dark';
+
+    const menuLabels = ["EXPLORE MATRIX", "PROJECTS & HUBS", "NAVIGATE ALL"];
 
     useEffect(() => {
         setMounted(true);
-        const locale = document.cookie.split('; ').find(row => row.startsWith('locale='))?.split('=')[1] || 'en';
-        setCurrentLocale(locale);
-    }, []);
+        const interval = setInterval(() => {
+            setLabelIndex((prev) => (prev + 1) % menuLabels.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [menuLabels.length]);
 
     // Lock body scroll when menu is open
     useEffect(() => {
@@ -102,7 +102,7 @@ export function Navbar() {
     }, [pathname]);
 
     useMotionValueEvent(scrollY, 'change', (latest) => {
-        if (isMenuOpen) return; // Don't hide navbar when menu is open
+        if (isMenuOpen) return;
 
         const direction = latest > lastScrollY ? 'down' : 'up';
         setIsScrolled(latest > 50);
@@ -120,13 +120,6 @@ export function Navbar() {
         setIsMenuOpen((prev) => !prev);
     }, []);
 
-    const toggleLocale = useCallback(() => {
-        const newLocale = currentLocale === 'en' ? 'id' : 'en';
-        document.cookie = `locale=${newLocale};path=/;max-age=31536000`;
-        setCurrentLocale(newLocale);
-        window.location.reload();
-    }, [currentLocale]);
-
     const closeMenu = useCallback(() => {
         setIsMenuOpen(false);
     }, []);
@@ -139,7 +132,6 @@ export function Navbar() {
         closeMenu();
     }, [pathname, closeMenu]);
 
-    // Animation variants
     const navVariants = {
         visible: { y: 0, opacity: 1 },
         hidden: { y: -100, opacity: 0 }
@@ -167,14 +159,13 @@ export function Navbar() {
                         )}
                         layout
                     >
-                        {/* Make the Clock a Link to Home */}
+                        {/* Clock / Home Link */}
                         <Link href="/" className="relative group min-w-[120px]" onClick={handleHomeClick}>
                             <Clock />
                         </Link>
 
                         {/* Desktop Navigation with CardNav */}
                         <div className="hidden lg:flex items-center gap-4 md:gap-5">
-                            {/* HOME */}
                             <Link
                                 href="/"
                                 onClick={handleHomeClick}
@@ -192,7 +183,6 @@ export function Navbar() {
                                 pathname={pathname}
                             />
 
-                            {/* CONTACT (Direct Link) */}
                             <Link
                                 href="/contact"
                                 className={cn(
@@ -203,28 +193,52 @@ export function Navbar() {
                                 <span className="relative z-10">{t('contact')}</span>
                             </Link>
 
-                            {/* Theme Toggler placed right near Contact */}
                             {mounted && (
                                 <AnimatedThemeToggler className="ml-1" />
                             )}
                         </div>
 
-                        {/* Controls */}
+                        {/* Controls - Impressive Eye-Catching Menu Trigger */}
                         <div className="flex items-center gap-2 md:gap-3">
-                            {/* Mobile Theme Toggler */}
                             <div className="lg:hidden">
                                 {mounted && (
                                     <AnimatedThemeToggler />
                                 )}
                             </div>
 
+                            {/* Ultra-Impressive Pulsing Cyber Menu Button */}
                             <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                                whileHover={{ scale: 1.06 }}
+                                whileTap={{ scale: 0.94 }}
                                 onClick={toggleMenu}
-                                className="p-2 md:p-2.5 rounded-full bg-muted/80 hover:bg-muted transition-colors lg:hidden"
+                                className={cn(
+                                    "relative flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full transition-all duration-500 group overflow-hidden border shadow-xl cursor-pointer lg:hidden",
+                                    isMenuOpen
+                                        ? "bg-zinc-950 border-purple-500/80 shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white"
+                                        : "bg-zinc-950/90 border-emerald-500/50 shadow-[0_0_20px_rgba(52,211,153,0.3)] text-white hover:border-emerald-400"
+                                )}
                                 aria-label="Toggle menu"
                             >
+                                {/* Subtle Glowing Radar Ring Animation */}
+                                <span className="relative flex h-2.5 w-2.5 shrink-0">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,1)]"></span>
+                                </span>
+
+                                {/* Cycling Morphing Label */}
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={labelIndex}
+                                        initial={{ y: 6, opacity: 0 }}
+                                        animate={{ y: 0, opacity: 1 }}
+                                        exit={{ y: -6, opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-emerald-400 select-none whitespace-nowrap"
+                                    >
+                                        {isMenuOpen ? "CLOSE" : menuLabels[labelIndex]}
+                                    </motion.span>
+                                </AnimatePresence>
+
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.div
                                         key={isMenuOpen ? 'close' : 'menu'}
@@ -232,101 +246,105 @@ export function Navbar() {
                                         animate={{ rotate: 0, opacity: 1 }}
                                         exit={{ rotate: 90, opacity: 0 }}
                                         transition={{ duration: 0.2 }}
+                                        className="ml-0.5"
                                     >
-                                        {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                                        {isMenuOpen ? <X className="w-4 h-4 text-white" /> : <Menu className="w-4 h-4 text-white" />}
                                     </motion.div>
                                 </AnimatePresence>
                             </motion.button>
                         </div>
                     </motion.div>
                 </div>
-            </motion.nav >
+            </motion.nav>
 
-            {/* Mobile Menu Overlay */}
+            {/* Impressive Full-Screen Bento Grid Navigation Overlay */}
             <AnimatePresence>
-                {
-                    isMenuOpen && (
+                {isMenuOpen && (
+                    <motion.div
+                        variants={menuVariants}
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        transition={{ duration: 0.3 }}
+                        className="fixed inset-0 z-[90] lg:hidden"
+                    >
                         <motion.div
-                            variants={menuVariants}
-                            initial="closed"
-                            animate="open"
-                            exit="closed"
-                            transition={{ duration: 0.3 }}
-                            className="fixed inset-0 z-[90] lg:hidden"
-                        >
-                            <motion.div
-                                className="absolute inset-0 bg-background"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                            />
+                            className="absolute inset-0 bg-background/95 backdrop-blur-2xl"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        />
 
-                            <div className="relative flex flex-col items-center justify-center h-full overflow-y-auto py-20">
-                                <nav className="flex flex-col items-center gap-6">
-                                    {/* Mobile Home */}
-                                    <Link
-                                        href="/"
-                                        onClick={handleHomeClick}
-                                        className="text-3xl font-black text-muted-foreground hover:text-foreground transition-colors"
-                                    >
-                                        {t('home')}
-                                    </Link>
+                        <div className="relative flex flex-col items-center justify-between h-full overflow-y-auto py-20 px-4">
+                            <div className="w-full max-w-sm flex flex-col items-center my-auto">
+                                <div className="flex items-center gap-2 mb-4">
+                                    <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+                                    <span className="text-[10px] font-mono font-black uppercase tracking-[0.3em] text-primary">
+                                        SYSTEM HUBS DIRECTORY
+                                    </span>
+                                </div>
 
+                                {/* 2x3 Bento Card Grid */}
+                                <div className="grid grid-cols-2 gap-3.5 w-full my-2">
+                                    {[
+                                        { label: 'Projects', href: '/projects', icon: Rocket, desc: 'Builds & Architectures', color: 'from-sky-500/20 to-blue-600/10 border-sky-500/40 shadow-sky-500/10' },
+                                        { label: 'Experience', href: '/experience', icon: Briefcase, desc: 'Work & Leadership', color: 'from-purple-500/20 to-indigo-600/10 border-purple-500/40 shadow-purple-500/10' },
+                                        { label: 'Blog', href: '/blog', icon: BookOpen, desc: 'Cyber & AI Insights', color: 'from-amber-500/20 to-orange-600/10 border-amber-500/40 shadow-amber-500/10' },
+                                        { label: 'Skills', href: '/skills', icon: Code2, desc: 'Tech Stack & Tools', color: 'from-emerald-500/20 to-teal-600/10 border-emerald-500/40 shadow-emerald-500/10' },
+                                        { label: 'Achievements', href: '/achievements', icon: Trophy, desc: 'Milestones & Awards', color: 'from-pink-500/20 to-rose-600/10 border-pink-500/40 shadow-pink-500/10' },
+                                        { label: 'Contact', href: '/contact', icon: Send, desc: "Let's Connect", color: 'from-cyan-500/20 to-blue-600/10 border-cyan-500/40 shadow-cyan-500/10' },
+                                    ].map((item) => {
+                                        const Icon = item.icon;
+                                        const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(`${item.href}/`));
+
+                                        return (
+                                            <Link
+                                                key={item.label}
+                                                href={item.href}
+                                                onClick={closeMenu}
+                                                className={cn(
+                                                    "flex flex-col justify-between p-4 rounded-2xl border bg-gradient-to-br transition-all duration-300 active:scale-95 shadow-lg",
+                                                    item.color,
+                                                    isActive ? "ring-2 ring-emerald-400 shadow-emerald-400/20" : "hover:border-white/50"
+                                                )}
+                                            >
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <div className="p-2 rounded-xl bg-foreground/10 backdrop-blur-md">
+                                                        <Icon className="w-5 h-5 text-foreground" />
+                                                    </div>
+                                                    {isActive && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,1)] animate-pulse" />}
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-base font-black text-foreground leading-tight">{item.label}</h4>
+                                                    <p className="text-[10px] text-muted-foreground font-medium mt-0.5 leading-tight">{item.desc}</p>
+                                                </div>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+
+                                <div className="flex items-center justify-center gap-6 mt-6 w-full pt-4 border-t border-foreground/10">
                                     <Link
-                                        href="/contact"
+                                        href="/gallery"
                                         onClick={closeMenu}
-                                        className="text-3xl font-black text-muted-foreground hover:text-foreground transition-colors"
+                                        className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground uppercase tracking-wider transition-colors"
                                     >
-                                        {t('contact')}
+                                        Gallery <ArrowUpRight className="w-3.5 h-3.5" />
                                     </Link>
-
-                                    {/* Mobile Links grouped by Categories */}
-                                    {navItems.map((category) => (
-                                        <div key={category.label} className="flex flex-col items-center gap-4 py-4 border-b border-white/5 w-full last:border-0 text-center">
-                                            <span className="text-[10px] font-black font-mono text-primary tracking-[0.3em] uppercase opacity-50">
-                                                {category.label}
-                                            </span>
-                                            {category.links.map((link) => (
-                                                <Link
-                                                    key={link.label}
-                                                    href={link.href}
-                                                    onClick={closeMenu}
-                                                    className={cn(
-                                                        'text-2xl font-bold transition-all hover:scale-110 active:scale-95 duration-200',
-                                                        pathname === link.href ? 'text-foreground' : 'text-muted-foreground/60 hover:text-foreground'
-                                                    )}
-                                                >
-                                                    {link.label}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    ))}
-                                </nav>
-
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 20 }}
-                                    transition={{ delay: 0.5 }}
-                                    className="flex items-center gap-4 mt-12"
-                                >
-                                    <button
-                                        onClick={toggleLocale}
-                                        className="px-6 py-3 rounded-full glass-card text-sm font-medium hover:bg-muted/50 transition-colors"
+                                    <span className="text-foreground/20">•</span>
+                                    <Link
+                                        href="/resume"
+                                        onClick={closeMenu}
+                                        className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground hover:text-foreground uppercase tracking-wider transition-colors"
                                     >
-                                        {currentLocale === 'en' ? 'English' : 'Indonesia'}
-                                    </button>
-                                    {mounted && (
-                                        <AnimatedThemeToggler
-                                            className="px-6 py-6 glass-card text-sm font-medium hover:bg-muted/50 flex items-center gap-2"
-                                        />
-                                    )}
-                                </motion.div>
+                                        Resume <ArrowUpRight className="w-3.5 h-3.5" />
+                                    </Link>
+                                </div>
                             </div>
-                        </motion.div >
-                    )
-                }
-            </AnimatePresence >
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     );
 }
