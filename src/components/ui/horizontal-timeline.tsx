@@ -135,6 +135,7 @@ export const HorizontalTimeline = ({ data }: { data: TimelineEntry[] }) => {
   }, [data]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (typeof window === "undefined") return;
     const blueLineTip = latest * window.innerWidth;
 
     let current = -1;
