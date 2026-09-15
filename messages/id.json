@@ -1,0 +1,507 @@
+{
+    "navigation": {
+        "home": "Beranda",
+        "about": "Tentang",
+        "projects": "Proyek",
+        "experience": "Pengalaman",
+        "skills": "Keahlian",
+        "achievements": "Pencapaian",
+        "blog": "Blog",
+        "gallery": "Galeri",
+        "contact": "Kontak",
+        "resume": "Resume",
+        "tools": "Peralatan",
+        "menu": {
+            "achievements": "Pencapaian",
+            "achievementsDesc": "Sertifikasi, penghargaan, dan pencapaian",
+            "skills": "Keahlian",
+            "skillsDesc": "Teknologi dan alat yang saya gunakan",
+            "experience": "Pengalaman",
+            "experienceDesc": "Perjalanan profesional dan pertumbuhan saya",
+            "projects": "Proyek",
+            "projectsDesc": "Pameran semua karya saya",
+            "blog": "Blog",
+            "blogDesc": "Pemikiran dan eksplorasi teknis",
+            "gallery": "Galeri",
+            "galleryDesc": "Arsip visual media dan proyek"
+        },
+        "shortcuts": {
+            "volume1": "Volume I: Identitas",
+            "volume2": "Volume II: Urutan Profesional",
+            "volume3": "Volume III: Matriks Kompetensi",
+            "volume4": "Volume IV: Output Kreatif",
+            "preview": "Mode Pratinjau",
+            "idRef": "ID_REF"
+        }
+    },
+    "hero": {
+        "greeting": "Selamat datang di ruang digital saya",
+        "subtitle": "Full Stack Developer • AI Engineer • Data Scientist",
+        "cta": {
+            "primary": "Jelajahi Proyek",
+            "secondary": "Hubungi Saya",
+            "exploreMore": "Jelajahi Lebih Lanjut"
+        },
+        "badge": "Terbuka untuk peluang",
+        "scroll": "Gulir ke Bawah",
+        "role": "Software Engineer",
+        "description": "Membangun sistem cerdas di persimpangan <span class='text-primary font-semibold'>AI</span>, <span class='text-secondary font-semibold'>Rekayasa</span>, dan <span class='text-accent font-semibold'>Arsitektur Skalabel</span>."
+    },
+    "about": {
+        "title": "Tentang Saya",
+        "subtitle": "Tech Explorer & Problem Solver",
+        "description": "Seorang tech explorer yang bersemangat dengan spesialisasi dalam Full Stack Development, Artificial Intelligence, dan Data Science. Saat ini sedang mendalami AI Agents dan teknologi Blockchain.",
+        "stats": {
+            "experience": "Tahun Belajar",
+            "projects": "Proyek Selesai",
+            "certifications": "Sertifikasi",
+            "competitions": "Kompetisi"
+        },
+        "identity": "Tautan Identitas Dibuat",
+        "architecting": "Merancang",
+        "digitalReality": "Realitas Digital",
+        "leadIn": {
+            "label": "APA YANG SAYA LAKUKAN",
+            "tagline": "FOKUS INTI",
+            "headlineAI": "AI Terapan.",
+            "headlineData": "Data Skalabel.",
+            "headlineSoftware": "Rekayasa Perangkat Lunak Tangguh",
+            "thesis": "Saya membangun sistem cerdas dan <span class='text-primary italic font-serif-elegant font-normal'>infrastruktur data</span> yang membuatnya handal dalam skala besar.",
+            "scope": "Berfokus pada model prediktif, pemrosesan data yang dioptimalkan, dan pipeline RAG yang dirancang untuk lingkungan produksi dan performa terukur.",
+            "bridging": "Menghubungkan lab dan sistem langsung.",
+            "integration": "Selain model, saya merancang ekosistem full-stack: backend yang aman, arsitektur data yang kuat, dan pipeline yang skalabel.",
+            "signature": "Azril",
+            "role": "AI, Data & Software Engineer",
+            "aboutMe": "Tentang Saya",
+            "scroll": "Scroll untuk Jelajah",
+            "shortStory": "Cerita Singkat Saya"
+        },
+        "coreEngineering": {
+            "label": "Rekayasa Inti",
+            "title": "<span class='text-primary italic font-serif font-light lowercase'>stack</span> yang Terbukti. <br /> <span class='italic font-serif font-light text-foreground'>hasil</span> yang Terukur.",
+            "p1": "Saya mengembangkan sistem AI terapan menggunakan TensorFlow, Scikit-learn, dan LangChain, menyusun alur kerja dan mengekspos model sebagai layanan melalui Flask dan FastAPI.",
+            "p2": "Diintegrasikan ke dalam aplikasi full-stack dengan Next.js, Express.js, dan Spring Boot, didukung oleh PostgreSQL dan Prisma ORM.",
+            "p3": "Semua proyek menggunakan kontrol versi yang disiplin, kontainerisasi Docker, dan dibangun untuk penerapan produksi yang stabil.",
+            "gpa": "IPK Akademik",
+            "projects": "Proyek yang Dibangun",
+            "years": "Tahun Pengalaman"
+        },
+        "emergingResearch": {
+            "label": "Fase Eksplorasi",
+            "title": "RISET YANG MUNCUL <span class='italic font-serif font-light text-primary lowercase'>&</span> EKSPANSI",
+            "agentic": {
+                "title": "SISTEM AI AGENTIK",
+                "desc": "Menjelajahi agen otonom, orkestrasi multi-agen, dan kerangka kerja penalaran — memperluas fondasi AI terapan saya ke dalam sistem pengambilan keputusan mandiri."
+            },
+            "web3": {
+                "title": "WEB3 & BLOCKCHAIN",
+                "desc": "Membangun aplikasi terdesentralisasi dengan Solidity dan Hardhat. Saat ini sedang mengerjakan pengembangan smart contract melalui proyek-proyek seperti Web3 Guestbook DApp di Ethereum."
+            }
+        },
+        "profile": {
+            "title": "Membangun <br class='hidden lg:block' /> Sistem Skalabel <br /> Tempat <span class='text-primary italic font-serif font-light lowercase'>Kecerdasan</span> <br /> Bertemu Rekayasa.",
+            "narrativeLabel": "Narasi Inti",
+            "narrative": "Sebagai mahasiswa Teknologi Informasi yang berfokus pada Kecerdasan Buatan dan Rekayasa Perangkat Lunak, saya membangun sistem yang menjembatani fondasi riset dengan implementasi siap produksi.",
+            "narrative2": "Pekerjaan saya memadukan pemikiran algoritmik, rekayasa backend, dan arsitektur yang skalabel untuk menghadirkan solusi yang cerdas, andal, dan siap digunakan di dunia nyata.",
+            "pillars": {
+                "reliable": {
+                    "title": "Robust by Design",
+                    "desc": "Direkayasa untuk keandalan di bawah skala dan tekanan operasional."
+                },
+                "optimized": {
+                    "title": "Siap Produksi",
+                    "desc": "Dari prototipe hingga deployment dengan disiplin rekayasa."
+                },
+                "maintainable": {
+                    "title": "Dirancang untuk Evolusi",
+                    "desc": "Didesain untuk tumbuh, beradaptasi, dan mempertahankan pengembangan sistem jangka panjang."
+                },
+                "evolvable": {
+                    "title": "Kecerdasan Berbasis Data",
+                    "desc": "Keputusan didukung oleh model, metrik, dan performa yang terukur."
+                }
+            }
+        },
+        "closing": {
+            "experience": {
+                "label": "LATAR BELAKANG",
+                "title1": "PENGALAMAN",
+                "title2": "UTAMA",
+                "viewMore": "Semua Pengalaman"
+            },
+            "projects": {
+                "label": "PORTOFOLIO",
+                "title1": "PROYEK",
+                "title2": "UNGGULAN",
+                "viewMore": "Semua Proyek"
+            },
+            "experiencesList": [
+                {
+                    "company": "Dicoding Academy",
+                    "role": "PENGULAS KODE MACHINE LEARNING",
+                    "desc": "Evaluasi teknis dan penjaminan kualitas pengajuan proyek ML. Memvalidasi kebenaran logis, efisiensi, dan menegakkan praktik terbaik industri bagi peserta."
+                },
+                {
+                    "company": "Advanced Software Engineering Laboratory",
+                    "role": "MAGANG ANALIS SISTEM",
+                    "desc": "Menerjemahkan persyaratan kompleks ke dalam dokumentasi SRS dan merancang arsitektur sistem menggunakan diagram UML. Rekayasa kolaboratif yang berfokus pada desain perangkat lunak yang kuat."
+                },
+                {
+                    "company": "Cyber Physical System Laboratory",
+                    "role": "ASISTEN PENELITI (KONTRAK)",
+                    "desc": "Mengembangkan produk riset berbasis AI dan merancang materi pembelajaran untuk Deep Learning and Computer Vision. Berkontribusi dalam inisiatif riset kolaboratif dalam sistem cerdas."
+                },
+                {
+                    "company": "Pusat Riset HUMIC Engineering",
+                    "role": "MAGANG PENGEMBANG AI",
+                    "desc": "Membangun model deteksi serangan berbasis Transformer untuk aplikasi keamanan siber. Mengelola dataset skala besar melalui pipeline ML penuh — dari prapemprosesan hingga optimasi hiperparameter."
+                },
+                {
+                    "company": "Cyber Physical System Laboratory",
+                    "role": "MAGANG PENELITI COMPUTER VISION",
+                    "desc": "Pengembangan model cerdas end-to-end menggunakan arsitektur Deep Learning terkini. Menerapkan algoritma ML untuk aplikasi AIoT dunia nyata termasuk sistem estimasi pose manusia."
+                }
+            ],
+            "projectsList": [
+                {
+                    "title": "Creative Portfolio Website",
+                    "desc": "Portofolio modern dan beranimasi dengan elemen 3D, interaksi simulasi fisika, dan efek warp berbasis shader. Direkayasa untuk performa tinggi dan pengalaman pengguna yang imersif."
+                },
+                {
+                    "title": "SNBTIn - Platform Persiapan SNBT 2025",
+                    "desc": "Platform EdTech terkemuka di Indonesia untuk persiapan ujian. Menampilkan ekosistem pembelajaran komprehensif dengan video interaktif, latihan soal, dan analitik real-time."
+                },
+                {
+                    "title": "TerraFlow Platform",
+                    "desc": "Solusi IoT perusahaan untuk pertanian presisi. Node sensor ESP32 berkomunikasi langsung dengan Firebase melalui backend Go (Gin), dengan dashboard Next.js untuk monitoring real-time dan kontrol aktuator."
+                },
+                {
+                    "title": "DocsInsight Engine",
+                    "desc": "Platform RAG privat untuk analisis dokumen cerdas. Didukung oleh LLM lokal melalui Ollama, dengan orkestrasi LangChain dan ChromaDB vector search — sepenuhnya self-hosted untuk privasi data."
+                },
+                {
+                    "title": "Manajemen Dental POLABDC",
+                    "desc": "SaaS klinik gigi bertenaga AI dengan prediksi penyakit, manajemen antrean real-time, dan arsitektur Monorepo yang menghubungkan Next.js, Express.js, dan microservice AI Python."
+                }
+            ],
+            "discoverMore": "Temukan Lebih Lanjut"
+        }
+    },
+    "projects": {
+        "title": "Proyek",
+        "subtitle": "Showcase karya kreatif dan teknis saya",
+        "search": "Cari proyek...",
+        "viewAll": "Lihat Semua Proyek",
+        "viewProject": "Lihat Proyek",
+        "liveDemo": "Demo Langsung",
+        "sourceCode": "Kode Sumber",
+        "techStack": "Tech Stack",
+        "tools": "Tools yang Digunakan",
+        "highlights": "Highlights",
+        "challenges": "Tantangan",
+        "filters": {
+            "all": "Semua",
+            "ongoing": "Sedang Berjalan",
+            "completed": "Selesai"
+        },
+        "sections": {
+            "missionBrief": "Misi Singkat",
+            "keyFeatures": "Fitur Utama",
+            "engineeringChronicles": "Kronik Rekayasa",
+            "visualGallery": "Galeri Visual",
+            "installation": "Instruksi Instalasi",
+            "projectAccess": "Akses Proyek",
+            "technologies": "Teknologi",
+            "contents": "Daftar Isi",
+            "moreProjects": "Proyek Lainnya",
+            "backToProjects": "Kembali ke Proyek",
+            "viewMore": "Lihat Lebih Banyak",
+            "viewLess": "Tampilkan Lebih Sedikit",
+            "solution": "Solusi",
+            "liveDemo": "Demo Langsung",
+            "sourceCode": "Kode Sumber"
+        },
+        "status": {
+            "ongoing": "Pengembangan Aktif",
+            "completed": "Proyek Selesai"
+        },
+        "metadata": {
+            "role": "Peran",
+            "timeline": "Waktu",
+            "team": "Tim",
+            "techStack": "Teknologi",
+            "roleValue": "Pengembang Full Stack",
+            "teamValue": "Individu",
+            "techStackValue": "{count} Teknologi"
+        }
+    },
+    "experience": {
+        "title": "Pengalaman",
+        "subtitle": "Perjalanan profesional dan perkembangan saya",
+        "showDetail": "Tampilkan Detail",
+        "hideDetail": "Sembunyikan Detail",
+        "tasks": "TUGAS",
+        "learned": "APA YANG SAYA PELAJARI",
+        "impact": "DAMPAK",
+        "present": "Sekarang",
+        "responsibilities": "Tanggung Jawab",
+        "skills": "Keahlian yang Digunakan",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tahun",
+        "years": "tahun",
+        "type": {
+            "full-time": "Penuh Waktu",
+            "part-time": "Paruh Waktu",
+            "internship": "Magang",
+            "freelance": "Freelance",
+            "contract": "Kontrak",
+            "apprenticeship": "Apprenticeship",
+            "volunteer": "Sukarelawan"
+        },
+        "filters": {
+            "all": "Semua",
+            "latest": "Terbaru",
+            "oldest": "Terlama",
+            "ongoing": "Sedang Berjalan"
+        },
+        "education": {
+            "title": "Pendidikan"
+        }
+    },
+    "expertise": {
+        "title": "Kapabilitas Inti",
+        "subtitle": "Spesialisasi dalam teknologi mutakhir yang mendukung pengalaman digital modern",
+        "dragHint": "Geser atau gulir untuk menjelajah"
+    },
+    "skills": {
+        "title": "Keahlian & Tools",
+        "subtitle": "Teknologi dan tools yang saya gunakan",
+        "hard": "Keahlian Teknis",
+        "soft": "Soft Skills",
+        "tools": "Tools & Software",
+        "level": {
+            "beginner": "Pemula",
+            "intermediate": "Menengah",
+            "advanced": "Mahir",
+            "expert": "Ahli"
+        }
+    },
+    "achievements": {
+        "title": "Pencapaian",
+        "subtitle": "Sertifikasi, penghargaan, dan milestone",
+        "viewCredential": "Lihat Kredensial",
+        "category": {
+            "certification": "Sertifikasi",
+            "award": "Penghargaan",
+            "publication": "Publikasi"
+        }
+    },
+    "contact": {
+        "title": "Hubungi Saya",
+        "subtitle": "Mari membangun sesuatu yang luar biasa bersama",
+        "form": {
+            "name": "Nama Anda",
+            "email": "Email Anda",
+            "subject": "Subjek",
+            "message": "Pesan Anda",
+            "messagePlaceholder": "Ceritakan tentang proyek Anda...",
+            "send": "Kirim Pesan",
+            "submit": "KIRIM PESAN",
+            "sending": "MENGIRIM...",
+            "sent": "TERKIRIM!",
+            "success": "Pesan berhasil dikirim!",
+            "error": "Terjadi kesalahan. Silakan coba lagi."
+        },
+        "social": {
+            "title": "Terhubung di Media Sosial"
+        },
+        "faq": {
+            "title": "Pertanyaan yang Sering Diajukan"
+        },
+        "info": {
+            "email": "Email",
+            "phone": "Telepon",
+            "location": "Lokasi",
+            "availability": "Terbuka untuk kesempatan"
+        },
+        "hero": {
+            "title": "MARI BICARA",
+            "subtitle": "Punya ide? Mari bangun sesuatu yang luar biasa bersama.",
+            "ticker": {
+                "build": "Mari Bangun Sesuatu yang Luar Biasa · ",
+                "freelance": "Tersedia untuk Freelance · "
+            }
+        },
+        "faqData": [
+            {
+                "q": "Apa bidang keahlian utama Anda?",
+                "a": "Sebagai mahasiswa Teknologi Informasi di Telkom University dan Asisten Peneliti di Laboratorium Cyber Physical System, saya berspesialisasi dalam persimpangan Kecerdasan Buatan (Computer Vision & Deep Learning), Full-stack Development (Next.js & Node.js), dan teknologi Blockchain/Web3 yang sedang berkembang."
+            },
+            {
+                "q": "Apakah Anda tersedia untuk kolaborasi riset atau freelance?",
+                "a": "Tentu saja. Saat ini saya aktif dalam riset AI di CPS Lab dan Pusat Riset HUMIC, tetapi saya selalu terbuka untuk proyek freelance inovatif, magang, atau kolaborasi teknis yang menjembatani inovasi dengan eksekusi strategis."
+            },
+            {
+                "q": "Apa tech stack tipikal Anda untuk produksi?",
+                "a": "Untuk proyek AI, saya menggunakan Python dengan TensorFlow, PyTorch, dan YOLO. Untuk aplikasi web, andalan saya adalah stack T3: Next.js, TypeScript, dan Tailwind CSS, sering kali diintegrasikan dengan Agen AI atau Smart Contracts jika sesuai."
+            },
+            {
+                "q": "Apakah Anda memiliki pengalaman dengan proyek enterprise atau lab?",
+                "a": "Ya, saya pernah menjabat sebagai System Analyst dan Pengembang AI di berbagai lingkungan berbasis riset. Saya telah merancang mulai dari platform AIoT dan sistem deteksi serangan hingga modul praktikum siswa untuk audiens global."
+            },
+            {
+                "q": "Bagaimana cara memulai kemitraan atau proyek?",
+                "a": "Cara paling efisien adalah menggunakan formulir kontak di atas atau menghubungi langsung melalui email di azril4974@gmail.com. Saya biasanya dapat merespons dalam waktu 24 jam untuk mendiskusikan bagaimana keterampilan teknis saya dapat memberikan nilai tambah bagi inisiatif Anda."
+            }
+        ]
+    },
+    "stats": {
+        "systemStatus": "Status Sistem: Analitik Aktif",
+        "portfolio": "Engineering Metrics",
+        "totalPulse": "Total Denyut",
+        "peakActivity": "Aktivitas Puncak",
+        "dailyAverage": "Rata-rata Harian",
+        "currentSprint": "Sprint Saat Ini",
+        "engageFlow": "Alur Keterlibatan",
+        "weeklyEffort": "Upaya Coding Mingguan",
+        "processSpeed": "Kecepatan Proses",
+        "avgPerf": "Performa Rata-rata",
+        "latency": "LATENSI: 14MS",
+        "system": "SISTEM: DARWIN_X64_STABIL",
+        "scanning": "MEMINDAI_SUMBER_DAYA_LANGSUNG",
+        "engineering": "REKAYASA",
+        "metrics": "METRIK",
+        "analyticsSub": "ANALITIK / INFRASTRUKTUR / DATA PERFORMA",
+        "statusOnline": "STATUS: ONLINE",
+        "loadStable": "BEBAN_SISTEM: STABIL"
+    },
+    "projectHeader": {
+        "title": "Merancang Realitas Digital",
+        "subtitle": "Pameran kurasi inovasi teknis dan rekayasa kreatif. Menjelajahi batas-batas <span class='font-bold text-foreground'>Kecerdasan Buatan</span>, Blockchain, Data, dan pengalaman Web Imersif."
+    },
+    "footer": {
+        "copyright": "Hak cipta dilindungi.",
+        "madeWith": "Dibuat dengan",
+        "more": "Lainnya",
+        "marquee": [
+            "Terbuka untuk Peluang",
+            "Pengembangan Frontend",
+            "Arsitektur Backend",
+            "Desain UI/UX",
+            "Coding Kreatif",
+            "Optimasi Sistem"
+        ],
+        "cta": {
+            "title": "Mari Bekerja",
+            "titleHighlight": "Bersama",
+            "subtitle": "Punya proyek? Mari bangun sesuatu yang luar biasa yang memecahkan masalah nyata."
+        },
+        "links": "TAUTAN",
+        "socials": "SOSIAL",
+        "localTime": "WAKTU LOKAL",
+        "version": "VERSI",
+        "versionEdition": "2026 © Edition"
+    },
+    "ctaSection": {
+        "title": "Mari Membangun Sesuatu yang",
+        "together": "Bersama",
+        "subtitle": "Terbuka untuk kolaborasi strategis dalam pengembangan sistem berbasis AI dan rekayasa full stack yang skalabel. Mari kita transformasikan ide ambisius menjadi solusi siap produksi.",
+        "start": "Hire Me",
+        "work": "View My Resume",
+        "words": {
+            "amazing": "Luar Biasa",
+            "innovative": "Inovatif",
+            "intelligent": "Cerdas",
+            "creative": "Kreatif"
+        },
+        "ribbon1": "Next.js • React • Python • PyTorch • Pandas • TypeScript • Node.js • Scikit-Learn • TensorFlow • SQL",
+        "ribbon2": "Software Engineer • AI Engineer • Data Scientist • Data Analyst • Machine Learning Engineer • Backend Developer • Full Stack Engineer • NLP Engineer • Data Engineer • Web Developer"
+    },
+    "common": {
+        "loading": "Memuat...",
+        "error": "Terjadi kesalahan",
+        "notFound": "Halaman tidak ditemukan",
+        "backHome": "Kembali ke Beranda",
+        "viewMore": "Lihat Selengkapnya",
+        "readMore": "Baca Selengkapnya",
+        "close": "Tutup",
+        "download": "Unduh",
+        "share": "Bagikan",
+        "scrollAudit": "Gulir untuk Menjelajah"
+    },
+    "technical": {
+        "github": {
+            "title": "Kontribusi GitHub",
+            "description": "Aktivitas GitHub saya selama setahun terakhir.",
+            "total": "Total",
+            "thisWeek": "Minggu Ini",
+            "best": "Terbaik",
+            "average": "Rata-rata",
+            "less": "Sedikit",
+            "more": "Banyak"
+        },
+        "wakatime": {
+            "title": "Statistik WakaTime",
+            "description": "Aktivitas coding selama 7 hari terakhir.",
+            "lastUpdate": "Pembaruan Terakhir",
+            "startDate": "Tanggal Mulai",
+            "endDate": "Tanggal Selesai",
+            "dailyAverage": "Rata-rata Harian",
+            "totalWeek": "Total Minggu Ini",
+            "bestDay": "Hari Terbaik",
+            "totalSince": "Total Sejak Bergabung",
+            "topLanguages": "Bahasa Teratas"
+        }
+    },
+    "blog": {
+        "title": "Pemikiran & Eksplorasi",
+        "subtitle": "Menjembatani kesenjangan antara kompleksitas teknis dan implementasi praktis. Kumpulan wawasan tentang AI, Web3, dan Software Engineering.",
+        "sectionBadge": "Digital Archive",
+        "search": "Cari artikel...",
+        "readTime": "menit baca",
+        "readMore": "Baca Artikel",
+        "back": "Kembali ke Blog",
+        "noResults": "Tidak ada artikel ditemukan",
+        "categories": {
+            "applied-ai": "Applied AI",
+            "software-development": "Software Dev",
+            "about-me": "About Me",
+            "more": "More",
+            "3D & AI Engineering": "3D & AI Engineering",
+            "Competitive Programming": "Competitive Programming",
+            "Cybersecurity": "Cybersecurity",
+            "AI & Full-Stack": "AI & Full-Stack",
+            "Healthcare Tech": "Healthcare Tech",
+            "CTF & Hacking": "CTF & Hacking"
+        }
+    },
+    "gallery": {
+        "title": "Arsip Visual",
+        "subtitle": "Koleksi kurasi highlight proyek, dokumentasi teknis, dan eksplorasi visual kreatif.",
+        "filter": {
+            "all": "Semua Media",
+            "image": "Foto",
+            "video": "Video"
+        },
+        "viewMedia": "Lihat Media"
+    },
+    "chatbot": {
+        "title": "Asisten AI",
+        "subtitle": "Tanya saya tentang Azril",
+        "placeholder": "Ketik pesan...",
+        "greeting": "Halo! Saya asisten AI untuk **{name}**. 👋\n\nSaya bisa menjawab pertanyaan seputar:\n- Skill & keahlian teknis\n- Project dan karya\n- Pengalaman kerja\n- Pendidikan\n- Dan info lainnya!\n\nAda yang ingin kamu tanyakan?",
+        "suggestions": [
+            "Apa keahlian utama kamu?",
+            "Ceritakan project terbaik kamu",
+            "Apa pengalaman kerja kamu?",
+            "Skill AI apa yang kamu kuasai?"
+        ],
+        "error": "Terjadi kesalahan. Silakan coba lagi.",
+        "invalidResponse": "Respons tidak valid dari server.",
+        "unknownError": "Terjadi kesalahan yang tidak diketahui.",
+        "retry": "Coba lagi",
+        "inputHint": "Enter untuk kirim, Shift+Enter untuk baris baru",
+        "close": "Tutup chat"
+    }
+}

@@ -1,0 +1,507 @@
+{
+    "navigation": {
+        "home": "Home",
+        "about": "About",
+        "projects": "Projects",
+        "experience": "Experience",
+        "skills": "Skills",
+        "achievements": "Achievements",
+        "blog": "Blog",
+        "gallery": "Gallery",
+        "contact": "Contact",
+        "resume": "Resume",
+        "tools": "Tools",
+        "menu": {
+            "achievements": "Achievements",
+            "achievementsDesc": "Certifications, awards, and milestones",
+            "skills": "Skills",
+            "skillsDesc": "Technologies and tools I work with",
+            "experience": "Experience",
+            "experienceDesc": "My professional journey and growth",
+            "projects": "Projects",
+            "projectsDesc": "A showcase of all my work",
+            "blog": "Blog",
+            "blogDesc": "Thoughts and technical explorations",
+            "gallery": "Gallery",
+            "galleryDesc": "Visual archive of media and projects"
+        },
+        "shortcuts": {
+            "volume1": "Volume I: Identity",
+            "volume2": "Volume II: Professional Sequence",
+            "volume3": "Volume III: Competency Matrix",
+            "volume4": "Volume IV: Creative Output",
+            "preview": "Preview Mode",
+            "idRef": "ID_REF"
+        }
+    },
+    "hero": {
+        "greeting": "Welcome to my digital space",
+        "subtitle": "Cybersecurity Engineer • AI Engineer • Full-Stack Developer",
+        "cta": {
+            "primary": "Explore Projects",
+            "secondary": "Get in Touch",
+            "exploreMore": "Explore More"
+        },
+        "badge": "Top 8 Aerothon 2026 · Open for opportunities",
+        "scroll": "Scroll Down",
+        "role": "Software Engineer",
+        "description": "Building <span class='text-primary font-semibold'>Cybersecurity Platforms</span>, <span class='text-secondary font-semibold'>AI-Powered Applications</span>, and <span class='text-accent font-semibold'>Full-Stack Products</span> that protect, predict and scale."
+    },
+    "about": {
+        "title": "About Me",
+        "subtitle": "Cybersecurity • AI Engineering • Full-Stack Development",
+        "description": "B.E. CSE (Cyber Security) student at Chennai Institute of Technology. Top 8 Finalist in Aerothon 2026 (HAL & IIT Indore). 500+ LeetCode problems solved, rating 1771.",
+        "stats": {
+            "experience": "LeetCode Solved",
+            "projects": "Projects Built",
+            "certifications": "Certifications",
+            "competitions": "Hackathon Finals"
+        },
+        "identity": "Identity Link Established",
+        "architecting": "Architecting",
+        "digitalReality": "Digital Reality",
+        "leadIn": {
+            "label": "WHAT I DO",
+            "tagline": "CORE FOCUS",
+            "headlineAI": "Applied AI.",
+            "headlineData": "Cybersecurity.",
+            "headlineSoftware": "full-stack engineering",
+            "thesis": "I build systems that <span class='text-primary italic font-serif-elegant font-normal'>protect against threats</span>, predict outcomes with AI, and ship as production-grade full-stack products.",
+            "scope": "Specializing in cybersecurity engineering, AI-powered applications, and modern full-stack architectures designed to solve real-world problems at scale.",
+            "bridging": "Bridging cybersecurity with AI and software.",
+            "integration": "Beyond secure systems, I architect full-stack ecosystems: React/Next.js frontends, ML inference APIs, secure backends, and scalable CI/CD pipelines.",
+            "signature": "Nithish Bharathwaj N",
+            "role": "Cybersecurity Engineer • AI Engineer • Full-Stack Developer",
+            "aboutMe": "About Me",
+            "scroll": "Scroll to Explore",
+            "shortStory": "My Short Story"
+        },
+        "coreEngineering": {
+            "label": "Core Engineering",
+            "title": "Proven <span class='text-primary italic font-serif font-light lowercase'>stack.</span> <br /> Measurable <span class='italic font-serif font-light text-foreground'>results.</span>",
+            "p1": "I engineer cybersecurity platforms with real-time threat detection, attack surface analysis, and vulnerability assessment dashboards using TypeScript, React, and Linux toolchains.",
+            "p2": "I build AI-powered applications using LLMs, Scikit-Learn, and Python/FastAPI — trained and deployed ML regression models with 98.7–99.9% R² accuracy.",
+            "p3": "Full-stack products ship with React 19, Next.js, Node.js, Socket.IO, PostgreSQL, Docker, and CI/CD pipelines — production-ready from day one.",
+            "gpa": "LeetCode Rating",
+            "projects": "Projects Built",
+            "years": "Hackathon Finals"
+        },
+        "emergingResearch": {
+            "label": "Beyond Engineering",
+            "title": "COMPETITIVE PROGRAMMING <span class='italic font-serif font-light text-primary lowercase'>&</span> LEARNING",
+            "agentic": {
+                "title": "500+ LEETCODE PROBLEMS",
+                "desc": "Peak contest rating of 1771. Consistent 118-day coding streak. Focused on DSA, Dynamic Programming, Graph Theory and system design challenges."
+            },
+            "web3": {
+                "title": "CONTINUOUS LEARNING",
+                "desc": "AWS Generative AI certified, Cisco Cybersecurity certified, and continuously exploring new frontiers in threat intelligence, AI engineering, and full-stack architecture."
+            }
+        },
+        "profile": {
+            "title": "Building Cybersecurity Platforms, <br /> AI-Powered Applications and Full-Stack Products.",
+            "narrativeLabel": "Core Narrative",
+            "narrative": "As a B.E. CSE (Cyber Security) student at Chennai Institute of Technology, I focus on building systems that defend against cyber threats, leverage AI to predict and automate, and deliver exceptional full-stack user experiences.",
+            "narrative2": "My work spans cybersecurity intelligence (Securox), AI-powered travel planners (Voyage AI), healthcare queue systems (Queue Cure), financial dashboards (FinSight), and aerospace digital twins (SubAERO) — shipped and deployed.",
+            "pillars": {
+                "reliable": {
+                    "title": "Cybersecurity Engineering",
+                    "desc": "Threat monitoring, attack surface analysis, CTF-grade security tooling, and vulnerability assessment."
+                },
+                "optimized": {
+                    "title": "AI & ML Engineering",
+                    "desc": "LLM integration, prompt engineering, ML regression models, and production AI APIs."
+                },
+                "maintainable": {
+                    "title": "Full-Stack Development",
+                    "desc": "End-to-end React/Next.js frontends with Node.js/FastAPI backends at production scale."
+                },
+                "evolvable": {
+                    "title": "Competitive Programming",
+                    "desc": "500+ LeetCode solved, rating 1771 — strong DSA and algorithmic foundation."
+                }
+            }
+        },
+        "closing": {
+            "experience": {
+                "label": "BACKGROUND",
+                "title1": "KEY",
+                "title2": "EXPERIENCE",
+                "viewMore": "Full Experience"
+            },
+            "projects": {
+                "label": "PORTFOLIO",
+                "title1": "FLAGSHIP",
+                "title2": "PROJECTS",
+                "viewMore": "All Projects"
+            },
+            "experiencesList": [
+                {
+                    "company": "AWS Academy × AICTE × EduSkills",
+                    "role": "GENERATIVE AI VIRTUAL INTERN",
+                    "desc": "10-week intensive program on Generative AI architectures, AWS Cloud infrastructure, Foundation Models, LLMs, and Prompt Engineering."
+                },
+                {
+                    "company": "Chennai Institute of Technology",
+                    "role": "B.E. CSE (CYBER SECURITY) — CURRENT",
+                    "desc": "Specializing in cybersecurity, AI engineering, and full-stack development. Active in national hackathons and competitive programming."
+                }
+            ],
+            "projectsList": [
+                {
+                    "title": "SubAERO — Aerothon 2026 (Top 8)",
+                    "desc": "Real-time 3D Digital Twin for HAL Tejas turbojet engines. Three.js WebGL, aero-thermal physics, and ML-based RUL prediction (98.7–99.9% R²)."
+                },
+                {
+                    "title": "Voyage AI",
+                    "desc": "AI-powered travel planner using LLMs and Prompt Engineering for personalized itinerary generation, budget optimization, and destination recommendations."
+                },
+                {
+                    "title": "FinSight",
+                    "desc": "AI-driven financial analytics and modern banking dashboard with real-time transaction insights. Next.js, TypeScript, deployed on Vercel."
+                },
+                {
+                    "title": "Securox",
+                    "desc": "Autonomous cyber risk intelligence and attack surface monitoring platform. Real-time threat detection and vulnerability assessment."
+                },
+                {
+                    "title": "Queue Cure",
+                    "desc": "AI-powered smart hospital queue management with real-time Socket.IO token tracking, QR patient check-in, and ML wait-time estimation."
+                }
+            ],
+            "discoverMore": "Discover More"
+        }
+    },
+    "projects": {
+        "title": "Projects",
+        "subtitle": "A showcase of my creative and technical work",
+        "search": "Search projects...",
+        "viewAll": "View All Projects",
+        "viewProject": "View Project",
+        "liveDemo": "Live Demo",
+        "sourceCode": "Source Code",
+        "techStack": "Tech Stack",
+        "tools": "Tools Used",
+        "highlights": "Highlights",
+        "challenges": "Challenges",
+        "filters": {
+            "all": "All",
+            "ongoing": "Ongoing",
+            "completed": "Completed"
+        },
+        "sections": {
+            "missionBrief": "Mission Brief",
+            "keyFeatures": "Key Features",
+            "engineeringChronicles": "Engineering Chronicles",
+            "visualGallery": "Visual Gallery",
+            "installation": "Installation Instructions",
+            "projectAccess": "Project Access",
+            "technologies": "Technologies",
+            "contents": "Table of Contents",
+            "moreProjects": "More Projects",
+            "backToProjects": "Back to Projects",
+            "viewMore": "View More",
+            "viewLess": "Show Less",
+            "solution": "Solution",
+            "liveDemo": "Live Demo",
+            "sourceCode": "Source Code"
+        },
+        "status": {
+            "ongoing": "Active Development",
+            "completed": "Completed Project"
+        },
+        "metadata": {
+            "role": "Role",
+            "timeline": "Timeline",
+            "team": "Team",
+            "techStack": "Tech Stack",
+            "roleValue": "Full Stack Dev",
+            "teamValue": "Individual",
+            "techStackValue": "{count} Technologies"
+        }
+    },
+    "experience": {
+        "title": "Experience",
+        "subtitle": "My professional journey and growth",
+        "showDetail": "Show Detail",
+        "hideDetail": "Hide Detail",
+        "tasks": "TASKS",
+        "learned": "WHAT I LEARNED",
+        "impact": "IMPACT",
+        "present": "Present",
+        "responsibilities": "Responsibilities",
+        "skills": "Skills Used",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "type": {
+            "full-time": "Full-time",
+            "part-time": "Part-time",
+            "internship": "Internship",
+            "freelance": "Freelance",
+            "contract": "Contract",
+            "apprenticeship": "Apprenticeship",
+            "volunteer": "Volunteer"
+        },
+        "filters": {
+            "all": "All",
+            "latest": "Latest",
+            "oldest": "Oldest",
+            "ongoing": "Ongoing"
+        },
+        "education": {
+            "title": "Education"
+        }
+    },
+    "expertise": {
+        "title": "Core Capabilities",
+        "subtitle": "Specialized in cutting-edge technologies that power modern digital experiences",
+        "dragHint": "Drag or scroll to explore"
+    },
+    "skills": {
+        "title": "Skills & Tools",
+        "subtitle": "Technologies and tools I work with",
+        "hard": "Hard Skills",
+        "soft": "Soft Skills",
+        "technical": "Technical Proficiency",
+        "tools": "Tools & Software",
+        "pillars": "Core Pillars",
+        "achievements": "Verified Achievements",
+        "level": {
+            "beginner": "Beginner",
+            "intermediate": "Intermediate",
+            "advanced": "Advanced",
+            "expert": "Expert"
+        }
+    },
+    "achievements": {
+        "title": "Achievements",
+        "subtitle": "Certifications, awards, and milestones",
+        "search": "Search achievements...",
+        "viewCredential": "View Credential",
+        "category": {
+            "all": "All",
+            "certification": "Certification",
+            "award": "Award",
+            "publication": "Publication",
+            "competition": "Competition"
+        },
+        "sort": {
+            "newest": "Newest",
+            "oldest": "Oldest"
+        },
+        "stats": {
+            "total": "Total Achievements",
+            "awards": "Awards Won",
+            "certifications": "Certifications"
+        }
+    },
+    "contact": {
+        "title": "Get in Touch",
+        "subtitle": "Let's build something amazing together",
+        "form": {
+            "name": "Your Name",
+            "email": "Your Email",
+            "subject": "Subject",
+            "message": "Your Message",
+            "messagePlaceholder": "Your Message...",
+            "send": "Send Message",
+            "submit": "SEND MESSAGE",
+            "sending": "SENDING...",
+            "sent": "SENT!",
+            "success": "Message sent successfully!",
+            "error": "Something went wrong. Please try again."
+        },
+        "social": {
+            "title": "Connect on Social Media"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions"
+        },
+        "info": {
+            "email": "Email",
+            "phone": "Phone",
+            "location": "Location",
+            "availability": "Open for opportunities"
+        },
+        "hero": {
+            "title": "LET'S TALK",
+            "subtitle": "Have an idea? Let's build something extraordinary together.",
+            "ticker": {
+                "build": "Let's Build Something Amazing · ",
+                "freelance": "Available for Freelance · "
+            }
+        },
+        "faqData": [
+            {
+                "q": "What is your primary area of expertise?",
+                "a": "My three pillars are: Cybersecurity Engineering (threat intelligence, attack surface analysis, network security, CTFs), AI Engineering (LLMs, ML models, prompt engineering, FastAPI), and Full-Stack Development (React 19, Next.js, Node.js, PostgreSQL). I study B.E. CSE (Cyber Security) at Chennai Institute of Technology."
+            },
+            {
+                "q": "What cybersecurity projects have you built?",
+                "a": "Securox is my autonomous cyber risk intelligence platform with real-time attack surface monitoring, automated vulnerability assessment, and threat detection dashboards. I'm also Cisco Cybersecurity certified."
+            },
+            {
+                "q": "Are you available for freelance or collaboration projects?",
+                "a": "Yes! I'm open to full-time roles, internships, freelance contracts, and technical collaborations — especially in cybersecurity, AI-driven systems, and full-stack engineering."
+            },
+            {
+                "q": "What is your competitive programming profile?",
+                "a": "500+ LeetCode problems solved with a peak contest rating of 1771 and a 118-day continuous coding streak. Strong in Data Structures, Algorithms, Dynamic Programming, and Graph Theory."
+            },
+            {
+                "q": "How can we start a project or partnership?",
+                "a": "Reach out via the contact form or directly at nithishbharathwajn@gmail.com. I typically respond within 24 hours."
+            }
+        ]
+    },
+    "footer": {
+        "copyright": "All rights reserved.",
+        "madeWith": "Made with",
+        "more": "More",
+        "marquee": [
+            "Open to Opportunities",
+            "Frontend Development",
+            "Backend Architecture",
+            "UI/UX Design",
+            "Creative Coding",
+            "System Optimization"
+        ],
+        "cta": {
+            "title": "Let's Work",
+            "titleHighlight": "Together",
+            "subtitle": "Have a project in mind? Let's build something extraordinary that solves real problems."
+        },
+        "links": "LINKS",
+        "socials": "SOCIALS",
+        "localTime": "LOCAL TIME",
+        "version": "VERSION",
+        "versionEdition": "2026 © Edition"
+    },
+    "ctaSection": {
+        "title": "Let's Build Something",
+        "together": "Together",
+        "subtitle": "Open to strategic collaborations in Cybersecurity, AI-driven systems, and scalable Full-Stack Engineering. Let's transform ambitious ideas into production-ready solutions.",
+        "start": "Hire Me",
+        "work": "View My Resume",
+        "words": {
+            "amazing": "Amazing",
+            "innovative": "Innovative",
+            "intelligent": "Intelligent",
+            "creative": "Creative"
+        },
+        "ribbon1": "React 19 • Next.js • TypeScript • Python • FastAPI • Node.js • Scikit-Learn • Docker • PostgreSQL • Linux • Tailwind CSS",
+        "ribbon2": "Cybersecurity Engineer • AI Engineer • Full-Stack Developer • Competitive Programmer • Backend Engineer • ML Engineer • Security Researcher"
+    },
+    "stats": {
+        "systemStatus": "System Status: Analytics Active",
+        "portfolio": "Engineering Metrics",
+        "totalPulse": "Total Pulse",
+        "peakActivity": "Peak Activity",
+        "dailyAverage": "Daily Average",
+        "currentSprint": "Current Sprint",
+        "engageFlow": "Engage Flow",
+        "weeklyEffort": "Weekly Coding Effort",
+        "processSpeed": "Process Speed",
+        "avgPerf": "Average Performance",
+        "latency": "LATENCY: 14MS",
+        "system": "SYSTEM: DARWIN_X64_STABLE",
+        "scanning": "SCANNING_LIVE_RESOURCES",
+        "engineering": "ENGINEERING",
+        "metrics": "METRICS",
+        "analyticsSub": "ANALYTICS / INFRASTRUCTURE / PERFORMANCE DATA",
+        "statusOnline": "STATUS: ONLINE",
+        "loadStable": "SYSTEM_LOAD: STABLE"
+    },
+    "projectHeader": {
+        "title": "Architecting Digital Reality",
+        "subtitle": "A curated showcase of technical innovation and creative engineering. Exploring the frontiers of <span class='font-bold text-foreground'>Artificial Intelligence</span>, Blockchain, Data, and Immersive Web experiences."
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "notFound": "Page not found",
+        "backHome": "Back to Home",
+        "viewMore": "View More",
+        "readMore": "Read More",
+        "close": "Close",
+        "download": "Download",
+        "share": "Share",
+        "scrollAudit": "Scroll to explore"
+    },
+    "technical": {
+        "github": {
+            "title": "GitHub Contributions",
+            "description": "My GitHub activity over the last year.",
+            "total": "Total",
+            "thisWeek": "This Week",
+            "best": "Best",
+            "average": "Average",
+            "less": "Less",
+            "more": "More"
+        },
+        "wakatime": {
+            "title": "WakaTime Stats",
+            "description": "Coding activity over the last 7 days.",
+            "lastUpdate": "Last Updated",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "dailyAverage": "Daily Average",
+            "totalWeek": "Total This Week",
+            "bestDay": "Best Day",
+            "totalSince": "Total Since Joined",
+            "topLanguages": "Top Languages"
+        }
+    },
+    "blog": {
+        "title": "Thoughts & Explorations",
+        "subtitle": "Bridging the gap between technical complexity and practical implementation. A collection of insights on AI, Web3, and Software Engineering.",
+        "sectionBadge": "The Digital Archive",
+        "search": "Search articles...",
+        "readTime": "min read",
+        "readMore": "Read Post",
+        "back": "Back to Blog",
+        "noResults": "No articles found",
+        "categories": {
+            "applied-ai": "Applied AI",
+            "software-development": "Software Dev",
+            "about-me": "About Me",
+            "more": "More",
+            "3D & AI Engineering": "3D & AI Engineering",
+            "Competitive Programming": "Competitive Programming",
+            "Cybersecurity": "Cybersecurity",
+            "AI & Full-Stack": "AI & Full-Stack",
+            "Healthcare Tech": "Healthcare Tech",
+            "CTF & Hacking": "CTF & Hacking"
+        }
+    },
+    "gallery": {
+        "title": "Visual Archive",
+        "subtitle": "A curated collection of project highlights, technical documentation, and creative visual explorations.",
+        "filter": {
+            "all": "All Media",
+            "image": "Photos",
+            "video": "Videos"
+        },
+        "viewMedia": "View Media"
+    },
+    "chatbot": {
+        "title": "AI Assistant",
+        "subtitle": "Ask me about Nithish Bharathwaj N",
+        "placeholder": "Type a message...",
+        "greeting": "Hi! I'm an AI assistant for **{name}**. 👋\n\nI can answer questions about:\n- Skills & technical expertise\n- Projects and work\n- Experience\n- Education\n- And more!\n\nAnything you'd like to ask?",
+        "suggestions": [
+            "What are your main skills?",
+            "Tell me about your best project",
+            "What is your work experience?",
+            "What AI skills do you have?"
+        ],
+        "error": "An error occurred. Please try again.",
+        "invalidResponse": "Invalid response from server.",
+        "unknownError": "An unknown error occurred.",
+        "retry": "Try again",
+        "inputHint": "Enter to send, Shift+Enter for newline",
+        "close": "Close chat"
+    }
+}

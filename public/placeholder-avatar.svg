@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="100%" height="100%" fill="#18181b"/>
+  <rect x="20" y="20" width="560" height="560" fill="none" stroke="#27272a" stroke-width="2" rx="12"/>
+  <circle cx="300" cy="280" r="32" fill="none" stroke="#a1a1aa" stroke-width="3"/>
+  <text x="50%" y="340" dominant-baseline="middle" text-anchor="middle" fill="#a1a1aa" font-family="system-ui, sans-serif" font-size="20" font-weight="600">[ Avatar Image ]</text>
+</svg>

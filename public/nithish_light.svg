@@ -1,0 +1,11 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="60" fill="#0f172a"/>
+  <defs>
+    <linearGradient id="n_grad_light" x1="40" y1="40" x2="216" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <!-- Geometric Sharp 'N' Logo -->
+  <path d="M64 56 V200 H96 V115 L160 200 H192 V56 H160 V141 L96 56 Z" fill="url(#n_grad_light)"/>
+</svg>

@@ -1,0 +1,450 @@
+'use client';
+
+import { useState, useRef, useEffect, Suspense } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring, animate } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { portfolioData } from '@/data/portfolio';
+import { BlogCard } from '@/components/ui/BlogCard';
+import { BentoHero } from '@/components/sections/blog/BentoHero';
+import { MarqueeClosing } from '@/components/sections/blog/MarqueeClosing';
+import { Search, SortDesc, SortAsc, LayoutGrid, List } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+import { usePerformance } from '@/hooks/usePerformance';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import { DeferredMount } from '@/components/ui/DeferredMount';
+
+import FlowingMenu from '@/components/ui/flowing-menu';
+
+function BlogContent() {
+    const t = useTranslations('blog');
+    const searchParams = useSearchParams();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [sortBy, setSortBy] = useState<'latest' | 'oldest'>('latest');
+    const [isHoveringSort, setIsHoveringSort] = useState(false);
+    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+    const { isLowPowerMode } = usePerformance();
+    const POSTS_PER_PAGE = 9;
+
+    // Master Hover State for perfect synchronization
+    const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+    const mousePosRef = useRef({ x: 0, y: 0 });
+
+    // Framer Motion Values for high-performance tracking
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const cursorOpacity = useMotionValue(0);
+
+    // Spring configuration for smooth but extremely responsive movement
+    const springConfig = { stiffness: 1000, damping: 50, mass: 0.1 };
+    const springX = useSpring(mouseX, springConfig);
+    const springY = useSpring(mouseY, springConfig);
+
+    const gridRef = useRef<HTMLDivElement>(null);
+    const categories = ['all', 'applied-ai', 'software-development', 'about-me', 'more'];
+
+    const filteredPosts = portfolioData.blogs
+        .filter((post) => {
+            const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+
+            const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+        })
+        .sort((a, b) => {
+            if (sortBy === 'latest') {
+                return new Date(b.date).getTime() - new Date(a.date).getTime();
+            } else {
+                return new Date(a.date).getTime() - new Date(b.date).getTime();
+            }
+        });
+
+    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+    const paginatedPosts = filteredPosts.slice(
+        (currentPage - 1) * POSTS_PER_PAGE,
+        currentPage * POSTS_PER_PAGE
+    );
+
+    // Handle URL parameters for search
+    useEffect(() => {
+        const q = searchParams.get('q');
+        if (q) {
+            setSearchQuery(q);
+            // Optional: reset category if searching via URL tags
+            setSelectedCategory('all');
+        }
+    }, [searchParams]);
+
+    // Reset pagination when category or search changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedCategory, searchQuery]);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+        // Smooth scroll to grid top
+        gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Master Hover Controller: Synchronizes cursor and card expansion
+    useEffect(() => {
+        if (isLowPowerMode) return;
+
+        const updateHoverTarget = (x: number, y: number) => {
+            const element = document.elementFromPoint(x, y);
+            const card = element?.closest('[data-blog-id]');
+            const id = card?.getAttribute('data-blog-id') || null;
+            setHoveredCardId(id);
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            mouseX.set(e.clientX);
+            mouseY.set(e.clientY);
+            mousePosRef.current = { x: e.clientX, y: e.clientY };
+            updateHoverTarget(e.clientX, e.clientY);
+        };
+
+        const handleScroll = () => {
+            // Continually update the hover target as the page moves under the mouse
+            updateHoverTarget(mousePosRef.current.x, mousePosRef.current.y);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [isLowPowerMode, mouseX, mouseY]);
+
+    // Couple cursor visibility to the master hover state
+    useEffect(() => {
+        if (hoveredCardId) {
+            animate(cursorOpacity, 1, { duration: 0.3 });
+        } else {
+            animate(cursorOpacity, 0, { duration: 0.2 });
+        }
+    }, [hoveredCardId, cursorOpacity]);
+
+    return (
+        <main className="min-h-screen bg-background selection:bg-primary/30">
+            {/* HERO HEADER SECTION */}
+            <header className="relative z-10 w-full pt-28 md:pt-36 pb-12 flex flex-col items-center justify-center text-center">
+                <div className="max-w-5xl mx-auto px-4">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, type: "spring", stiffness: 400, damping: 20 }}
+                        className="text-4xl md:text-6xl lg:text-[5.5rem] font-black text-foreground leading-tight tracking-[-0.04em] uppercase cursor-pointer group"
+                    >
+                        <span className="relative inline-block">
+                            <span>FEATURE &</span>{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground to-foreground/20">
+                                DOCS
+                            </span>
+                            {/* Animated underline on hover */}
+                            <span className="absolute -bottom-1 left-0 w-full h-[4px] bg-foreground scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
+                        </span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="mt-6 text-[11px] md:text-sm font-medium text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed tracking-wide"
+                    >
+                        A dedicated space for documenting technical blueprints, architectural patterns, and engineering reflections. This archive serves as a living knowledge base where innovation meets practical execution.
+                    </motion.p>
+                </div>
+            </header>
+
+            {/* BENTO HERO */}
+            <div className="relative z-10 pb-16">
+                <DeferredMount>
+                    <BentoHero isLowPowerMode={isLowPowerMode} />
+                </DeferredMount>
+            </div>
+
+            {/* SECTION 2: Blog Cards Content */}
+            <div className="relative z-20 pt-12 pb-24 px-6 md:px-12 lg:px-24 bg-gradient-to-b from-background via-background/80 to-background dark:from-black dark:via-black dark:to-black">
+                {/* Background Effects */}
+                {!isLowPowerMode && (
+                    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+                        <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-primary/5 blur-[200px] rounded-full opacity-40 dark:opacity-0 -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-secondary/5 blur-[200px] rounded-full opacity-30 dark:opacity-0 translate-y-1/2 -translate-x-1/2" />
+                    </div>
+                )}
+
+                <div className="container mx-auto relative z-10">
+                    {/* Filters & Search - Modern Minimalist Editorial */}
+                    <div className="flex flex-col md:flex-row gap-10 mb-16 items-end justify-between border-b border-foreground/5 pb-8">
+                        <div className="flex flex-wrap gap-x-12 gap-y-6">
+                            {categories.map((cat) => {
+                                const count = cat === 'all'
+                                    ? portfolioData.blogs.length
+                                    : portfolioData.blogs.filter(b => b.category === cat).length;
+
+                                return (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setSelectedCategory(cat)}
+                                        className={cn(
+                                            "group relative py-2 text-[15px] font-bold uppercase tracking-[0.2em] transition-all duration-500 flex items-start",
+                                            selectedCategory === cat
+                                                ? "text-primary opacity-100"
+                                                : "text-muted-foreground/40 hover:text-foreground hover:opacity-100"
+                                        )}
+                                    >
+                                        <span className="relative">
+                                            {cat === 'all' ? 'All Publications' : t(`categories.${cat}`)}
+
+                                            {/* Animated Underline Indicator */}
+                                            {selectedCategory === cat && (
+                                                <motion.div
+                                                    layoutId="active-category"
+                                                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-primary"
+                                                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                                                />
+                                            )}
+                                        </span>
+
+                                        {/* Dynamic Count Indicator */}
+                                        <span
+                                            className={cn(
+                                                "ml-1 text-[13px] transition-all duration-300 font-bold",
+                                                selectedCategory === cat
+                                                    ? "text-primary opacity-100 translate-y-0"
+                                                    : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 text-foreground/60"
+                                            )}
+                                        >
+                                            {count}
+                                        </span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto">
+                            <div className="flex items-center gap-3">
+                                {/* View Mode Toggle */}
+                                <div className="flex bg-foreground/5 p-1 rounded-xl border border-foreground/10">
+                                    <button
+                                        onClick={() => setViewMode('grid')}
+                                        className={cn(
+                                            "p-2 rounded-lg transition-all duration-300",
+                                            viewMode === 'grid'
+                                                ? "bg-foreground text-background shadow-md"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-foreground/10"
+                                        )}
+                                        aria-label="Grid View"
+                                    >
+                                        <LayoutGrid size={18} />
+                                    </button>
+                                    <button
+                                        onClick={() => setViewMode('list')}
+                                        className={cn(
+                                            "p-2 rounded-lg transition-all duration-300",
+                                            viewMode === 'list'
+                                                ? "bg-foreground text-background shadow-md"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-foreground/10"
+                                        )}
+                                        aria-label="List View"
+                                    >
+                                        <List size={18} />
+                                    </button>
+                                </div>
+
+                                {/* Sort Badge */}
+                                <div className="relative group">
+                                    <AnimatePresence>
+                                        {isHoveringSort && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 10, x: '-50%' }}
+                                                animate={{ opacity: 1, y: 0, x: '-50%' }}
+                                                exit={{ opacity: 0, y: 5, x: '-50%' }}
+                                                className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-foreground text-background text-[10px] font-bold tracking-widest rounded shadow-xl whitespace-nowrap pointer-events-none z-50 uppercase"
+                                            >
+                                                {sortBy}
+                                                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+
+                                    <button
+                                        onClick={() => setSortBy(prev => prev === 'latest' ? 'oldest' : 'latest')}
+                                        onMouseEnter={() => setIsHoveringSort(true)}
+                                        onMouseLeave={() => setIsHoveringSort(false)}
+                                        className={cn(
+                                            "relative flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-500",
+                                            "bg-foreground/5 hover:bg-foreground text-muted-foreground hover:text-background",
+                                            "border border-foreground/10 hover:border-foreground shadow-sm hover:shadow-xl"
+                                        )}
+                                    >
+                                        {sortBy === 'latest' ? (
+                                            <SortDesc size={20} strokeWidth={1.5} />
+                                        ) : (
+                                            <SortAsc size={20} strokeWidth={1.5} />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="relative flex-1 md:w-80 group">
+                                <input
+                                    type="text"
+                                    placeholder="SEARCH ARCHIVE"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full bg-transparent border-b border-foreground/10 focus:border-primary/60 outline-none py-3 text-[14px] font-bold tracking-[0.1em] text-foreground transition-all placeholder:text-muted-foreground/20 uppercase"
+                                />
+                                <div className="absolute right-0 bottom-3 opacity-20 group-focus-within:opacity-100 transition-opacity">
+                                    <Search size={14} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        ref={gridRef}
+                        className="max-w-screen-2xl mx-auto pt-10 relative"
+                    >
+                        {/* High-Performance Framer Motion Cursor */}
+                        <motion.div
+                            className="pointer-events-none fixed left-0 top-0 z-[100] flex items-center justify-center mix-blend-exclusion"
+                            style={{
+                                x: springX,
+                                y: springY,
+                                opacity: cursorOpacity,
+                                position: 'fixed',
+                                top: 0,
+                                left: 0,
+                            }}
+                            initial={{ scale: 0.8 }}
+                            animate={{
+                                scale: !!hoveredCardId ? 1 : 0.8,
+                            }}
+                            transition={{
+                                scale: { duration: 0.4, ease: 'backOut' }
+                            }}
+                        >
+                            <div className="flex flex-col items-center text-center -translate-x-1/2 -translate-y-1/2 leading-[1.1]">
+                                <span className="text-[35px] font-black text-white uppercase tracking-[0.2em] drop-shadow-md">
+                                    Read
+                                </span>
+                                <span className="text-[35px] font-black text-white uppercase tracking-[0.2em] drop-shadow-md">
+                                    Detail
+                                </span>
+                            </div>
+                        </motion.div>
+
+                        {viewMode === 'grid' ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                                <AnimatePresence mode="popLayout">
+                                    {paginatedPosts.map((post, idx) => (
+                                        <BlogCard
+                                            key={post.id}
+                                            post={post}
+                                            index={idx}
+                                            isHovered={hoveredCardId === post.id}
+                                            isLowPowerMode={isLowPowerMode}
+                                        />
+                                    ))}
+                                </AnimatePresence>
+                            </div>
+                        ) : (
+                            <div style={{ height: '800px', position: 'relative' }} className="w-full overflow-hidden">
+                                <FlowingMenu
+                                    items={paginatedPosts.map(post => ({
+                                        link: `/blog/${post.slug}`,
+                                        text: post.title,
+                                        image: post.image,
+                                         category: t.has(`categories.${post.category}`) ? t(`categories.${post.category}`) : post.category,
+                                        date: new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase()
+                                    }))}
+                                />
+                            </div>
+                        )}
+
+                        {/* Pagination - Modern Minimalist Editorial */}
+                        {totalPages > 1 && (
+                            <div className="mt-24 border-t border-foreground/5 pt-12 flex items-center justify-between">
+                                <button
+                                    onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                                    disabled={currentPage === 1}
+                                    className="text-[18px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 hover:text-foreground disabled:opacity-0 transition-all duration-300"
+                                >
+                                    PREV
+                                </button>
+
+                                <div className="flex items-center gap-8">
+                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                        <button
+                                            key={page}
+                                            onClick={() => handlePageChange(page)}
+                                            className={cn(
+                                                "relative py-1 text-[20px] font-bold transition-all duration-300",
+                                                currentPage === page
+                                                    ? "text-primary"
+                                                    : "text-muted-foreground/40 hover:text-foreground"
+                                            )}
+                                        >
+                                            {page.toString().padStart(2, '0')}
+                                            {currentPage === page && (
+                                                <motion.div
+                                                    layoutId="active-page"
+                                                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-primary"
+                                                />
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button
+                                    onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                                    disabled={currentPage === totalPages}
+                                    className="text-[18px] font-bold uppercase tracking-[0.2em] text-muted-foreground/40 hover:text-foreground disabled:opacity-0 transition-all duration-300"
+                                >
+                                    NEXT
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* No Results */}
+                    {filteredPosts.length === 0 && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="py-32 text-center"
+                        >
+                            <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground opacity-50">
+                                {t('noResults')}
+                            </p>
+                        </motion.div>
+                    )}
+                </div>
+            </div>
+
+            <div className="w-full h-20" />
+            <DeferredMount>
+                <ErrorBoundary fallback={<div className="h-40 bg-background" />}>
+                    <MarqueeClosing isLowPowerMode={isLowPowerMode} />
+                </ErrorBoundary>
+            </DeferredMount>
+        </main>
+    );
+}
+export default function BlogPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-background animate-pulse" />}>
+            <BlogContent />
+        </Suspense>
+    );
+}
