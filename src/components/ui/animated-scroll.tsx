@@ -59,6 +59,36 @@ export default function ScrollAdventure() {
     const [currentPage, setCurrentPage] = useState(1);
     const containerRef = useRef<HTMLDivElement>(null);
 
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start start", "end end"]
+    });
+
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 100,
+        damping: 30,
+        mass: 0.1,
+        restDelta: 0.001
+    });
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        const totalPages = pages.length;
+        const step = 1 / totalPages;
+        const index = Math.min(Math.floor(latest / step) + 1, totalPages);
+        if (currentPage !== index) setCurrentPage(index);
+    });
+
+    const { scrollYProgress: enterProgressRaw } = useScroll({
+        target: containerRef,
+        offset: ["start end", "start start"]
+    });
+
+    const enterProgress = useSpring(enterProgressRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+    const enterScale = useTransform(enterProgress, [0, 1], [0.85, 1]);
+    const enterOpacity = useTransform(enterProgress, [0, 1], [0, 1]);
+    const enterBorderRadius = useTransform(enterProgress, [0, 1], ["40px", "0px"]);
+
     if (isMobile) {
         return (
             <div className="w-full bg-background px-4 py-12 flex flex-col gap-8 relative z-20">
@@ -118,36 +148,6 @@ export default function ScrollAdventure() {
             </div>
         );
     }
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    const smoothProgress = useSpring(scrollYProgress, {
-        stiffness: 100,
-        damping: 30,
-        mass: 0.1,
-        restDelta: 0.001
-    });
-
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        const totalPages = pages.length;
-        const step = 1 / totalPages;
-        const index = Math.min(Math.floor(latest / step) + 1, totalPages);
-        if (currentPage !== index) setCurrentPage(index);
-    });
-    const { scrollYProgress: enterProgressRaw } = useScroll({
-        target: containerRef,
-        offset: ["start end", "start start"]
-    });
-
-    // Spring physics wrapper for the entrance to mirror the buttery smooth exit
-    const enterProgress = useSpring(enterProgressRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
-    const enterScale = useTransform(enterProgress, [0, 1], [0.85, 1]);
-    const enterOpacity = useTransform(enterProgress, [0, 1], [0, 1]);
-    const enterBorderRadius = useTransform(enterProgress, [0, 1], ["40px", "0px"]);
 
     return (
         <div ref={containerRef} className="relative h-[800vh] w-full pointer-events-none">

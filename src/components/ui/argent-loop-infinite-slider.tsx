@@ -63,6 +63,42 @@ export function ArgentLoopInfiniteSlider() {
   const isMobile = useIsMobile();
   const containerRef = React.useRef<HTMLDivElement>(null);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 30, mass: 1 });
+
+  const projectArea = 0.85;
+  const projectStep = projectArea / PROJECT_DATA.length; 
+  const transWindow = 0.05; 
+
+  const scrollMap = [0];
+  const yMap = ["0vh"];
+  const internalYMap = ["0px"];
+
+  PROJECT_DATA.forEach((_, i) => {
+    if (i === 0) return;
+    const boundary = i * projectStep;
+    scrollMap.push(boundary - transWindow / 2, boundary + transWindow / 2);
+    yMap.push(`-${(i-1)*100}vh`, `-${i*100}vh`);
+    internalYMap.push(`-${(i-1)*250}px`, `-${i*250}px`);
+  });
+
+  scrollMap.push(projectArea, 1);
+  yMap.push(`-${(PROJECT_DATA.length-1)*100}vh`, `-${(PROJECT_DATA.length-1)*100}vh`);
+  internalYMap.push(`-${(PROJECT_DATA.length-1)*250}px`, `-${(PROJECT_DATA.length-1)*250}px`);
+
+  const currentY = useTransform(smoothProgress, scrollMap, yMap);
+  const contentInternalY = useTransform(smoothProgress, scrollMap, internalYMap);
+
+  const bgOpacity = useTransform(smoothProgress, [0, 0.05, projectArea, 1], [0, 1, 1, 0]);
+  const mainUIOpacity = useTransform(smoothProgress, [0, 0.05, projectArea, 1], [0, 1, 1, 0]);
+  const buttonOpacity = useTransform(smoothProgress, [projectArea, projectArea + 0.05], [0, 1]);
+  const finalContainerY = useTransform(smoothProgress, [projectArea, projectArea + 0.05], ["0px", "-250px"]);
+  const imageY = useTransform(smoothProgress, [0, 1], ["-12%", "12%"]);
+
   if (isMobile) {
     return (
       <div className="w-full bg-background px-4 py-12 flex flex-col gap-8 relative z-20">
@@ -143,42 +179,6 @@ export function ArgentLoopInfiniteSlider() {
       </div>
     );
   }
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 60, damping: 30, mass: 1 });
-
-  const projectArea = 0.85;
-  const projectStep = projectArea / PROJECT_DATA.length; 
-  const transWindow = 0.05; 
-
-  const scrollMap = [0];
-  const yMap = ["0vh"];
-  const internalYMap = ["0px"];
-
-  PROJECT_DATA.forEach((_, i) => {
-    if (i === 0) return;
-    const boundary = i * projectStep;
-    scrollMap.push(boundary - transWindow / 2, boundary + transWindow / 2);
-    yMap.push(`-${(i-1)*100}vh`, `-${i*100}vh`);
-    internalYMap.push(`-${(i-1)*250}px`, `-${i*250}px`);
-  });
-
-  scrollMap.push(projectArea, 1);
-  yMap.push(`-${(PROJECT_DATA.length-1)*100}vh`, `-${(PROJECT_DATA.length-1)*100}vh`);
-  internalYMap.push(`-${(PROJECT_DATA.length-1)*250}px`, `-${(PROJECT_DATA.length-1)*250}px`);
-
-  const currentY = useTransform(smoothProgress, scrollMap, yMap);
-  const contentInternalY = useTransform(smoothProgress, scrollMap, internalYMap);
-
-  const bgOpacity = useTransform(smoothProgress, [0, 0.05, projectArea, 1], [0, 1, 1, 0]);
-  const mainUIOpacity = useTransform(smoothProgress, [0, 0.05, projectArea, 1], [0, 1, 1, 0]);
-  const buttonOpacity = useTransform(smoothProgress, [projectArea, projectArea + 0.05], [0, 1]);
-  const finalContainerY = useTransform(smoothProgress, [projectArea, projectArea + 0.05], ["0px", "-250px"]);
-  const imageY = useTransform(smoothProgress, [0, 1], ["-12%", "12%"]);
 
   return (
     <div ref={containerRef} className="relative h-[500vh]">
