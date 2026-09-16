@@ -69,7 +69,7 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
     const cardBorderRadiusTransform = useTransform(localProgress, [0.1, 0.4], ["60px", "0px"], { ease: easeInOut });
 
     // 2. Internal Content Scroll
-    const contentYTransform = useTransform(localProgress, [0.35, 1], ["0%", "-70%"], { ease: easeInOut });
+    const contentYTransform = useTransform(localProgress, [0.35, 1], ["0%", "-61%"], { ease: easeInOut });
     const imageParallaxYTransform = useTransform(localProgress, [0.35, 1], ["-10%", "10%"], { ease: easeInOut });
 
     // 3. Elements specific animations
@@ -302,45 +302,51 @@ export const IdentitySequence = ({ scrollYProgress, isVisible }: IdentitySequenc
                         </div>
                     </div>
 
-                    {/* Phase 3: Final Layout Text */}
-                    <motion.div
-                        style={{ opacity: textOpacity }}
-                        className="w-full max-w-[1700px] mx-auto px-5 md:px-16 lg:px-24 pt-10 pb-6 md:pt-32 md:pb-12 flex-shrink-0"
-                    >
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
-                            {/* Header Left */}
-                            <div className="md:col-span-7">
-                                <h3
-                                    className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug text-black dark:text-white"
-                                    dangerouslySetInnerHTML={{ __html: t.raw("profile.title") }}
-                                />
-                            </div>
-
-                            {/* Paragraph Right */}
-                            <div className="md:col-span-5 pt-1">
-                                <p className="text-[13px] md:text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
-                                    <BlurInUpText 
-                                        text={`${t("profile.narrative")} ${t("profile.narrative2")}`} 
-                                        animate={shouldAnimateText} 
+                    {/* Phase 3 & 4: Final Layout Text & Tech Stack centered in viewport */}
+                    <div className={cn(
+                        "w-full flex flex-col justify-center flex-shrink-0",
+                        !isMobile && "min-h-screen py-12"
+                    )}>
+                        {/* Phase 3: Final Layout Text */}
+                        <motion.div
+                            style={{ opacity: textOpacity }}
+                            className="w-full max-w-[1700px] mx-auto px-5 md:px-16 lg:px-24 pt-4 pb-6 md:pt-6 md:pb-8 flex-shrink-0"
+                        >
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
+                                {/* Header Left */}
+                                <div className="md:col-span-7">
+                                    <h3
+                                        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug text-black dark:text-white"
+                                        dangerouslySetInnerHTML={{ __html: t.raw("profile.title") }}
                                     />
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
+                                </div>
 
-                    {/* Phase 4: Tech Stack & Tools Scrollers */}
-                    <motion.div
-                        style={{ opacity: textOpacity }}
-                        className="w-full max-w-[1700px] mx-auto py-6 md:py-20 flex flex-col gap-6 md:gap-8 flex-shrink-0"
-                    >
-                        <div className="px-5 md:px-16 lg:px-24 mb-2 md:mb-6">
-                            <h4 className="text-base md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">
-                                Tech Stack & Ecosystem
-                            </h4>
-                        </div>
-                        <BrandScroller />
-                        <BrandScrollerReverse />
-                    </motion.div>
+                                {/* Paragraph Right */}
+                                <div className="md:col-span-5 pt-1">
+                                    <p className="text-[13px] md:text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-normal">
+                                        <BlurInUpText 
+                                            text={`${t("profile.narrative")} ${t("profile.narrative2")}`} 
+                                            animate={shouldAnimateText} 
+                                        />
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Phase 4: Tech Stack & Tools Scrollers */}
+                        <motion.div
+                            style={{ opacity: textOpacity }}
+                            className="w-full max-w-[1700px] mx-auto py-4 md:py-8 flex flex-col gap-4 md:gap-6 flex-shrink-0"
+                        >
+                            <div className="px-5 md:px-16 lg:px-24 mb-1 md:mb-3">
+                                <h4 className="text-base md:text-xl uppercase tracking-[0.15em] font-bold text-zinc-500 dark:text-zinc-400">
+                                    Tech Stack & Ecosystem
+                                </h4>
+                            </div>
+                            <BrandScroller />
+                            <BrandScrollerReverse />
+                        </motion.div>
+                    </div>
                 </motion.div>
             </motion.div>
         </div>

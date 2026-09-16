@@ -188,7 +188,7 @@ const AboutLeadIn = () => {
                         transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
                     }
                 }}
-                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-10 lg:p-12 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"
+                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-8 lg:p-10 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"
             >
 
                 {/* 1. Grid Background Overlay (Dynamic Colors) */}
@@ -216,15 +216,15 @@ const AboutLeadIn = () => {
                 {/* 4. Content Layer */}
                 <div className="relative z-10">
                     {/* Top Tagline */}
-                    <div className="flex justify-between items-start mb-6 md:mb-10">
+                    <div className="flex justify-between items-start mb-4 md:mb-6 lg:mb-5">
                         <span className="text-red-600 dark:text-red-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.3em]">{t('leadIn.tagline')}</span>
                         <span className="text-zinc-400 dark:text-zinc-600 text-[9px] font-mono tracking-widest uppercase hidden md:block">{t('leadIn.role')}</span>
                     </div>
 
                     {/* Massive Typography - Quote Style */}
-                    <div className="mb-8 md:mb-14 relative cursor-default">
+                    <div className="mb-6 md:mb-8 lg:mb-7 relative cursor-default">
                         {/* Original Text with glow */}
-                        <h2 className="text-[28px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[88px] font-bold tracking-tight leading-[0.92] text-zinc-900 dark:text-white transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                        <h2 className="text-[28px] sm:text-[48px] md:text-[58px] lg:text-[62px] xl:text-[72px] 2xl:text-[88px] font-bold tracking-tight leading-[0.92] text-zinc-900 dark:text-white transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                             <span className="text-zinc-300 dark:text-zinc-700 mr-2 transition-colors duration-700 group-hover:text-zinc-400 dark:group-hover:text-zinc-500">"</span>
                             {t('leadIn.headlineAI')} <span className="text-zinc-400 dark:text-zinc-500 font-medium transition-colors duration-700 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">{t('leadIn.headlineData')}</span> <br className="hidden md:block" />
                             <span className="font-serif italic font-normal text-zinc-900 dark:text-white lowercase opacity-90 transition-opacity duration-700 group-hover:opacity-100">{t('leadIn.headlineSoftware')}</span>
@@ -233,11 +233,11 @@ const AboutLeadIn = () => {
                     </div>
 
                     {/* Detail Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 border-t border-zinc-100 dark:border-zinc-900 pt-8 md:pt-12">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-6 border-t border-zinc-100 dark:border-zinc-900 pt-5 md:pt-6 lg:pt-5">
                         {/* Left narrative */}
                         <div className="md:col-span-5">
                             <p
-                                className="text-base md:text-lg lg:text-xl font-medium text-zinc-600 dark:text-zinc-400 leading-relaxed tracking-tight"
+                                className="text-sm md:text-base lg:text-[15px] font-medium text-zinc-600 dark:text-zinc-400 leading-relaxed tracking-tight"
                                 dangerouslySetInnerHTML={{ __html: t.raw('leadIn.thesis') }}
                             />
                         </div>
@@ -604,7 +604,7 @@ export default function AboutSection() {
                     </div>
                 </div>
             ) : (
-                <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start z-0 overflow-hidden overflow-x-clip pointer-events-none pt-28 md:pt-32 lg:pt-36 pb-4">
+                <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none pt-20 md:pt-24 lg:pt-20 pb-4">
                     <motion.div
                         style={{ scale, opacity, y: yLeadIn }}
                         className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
