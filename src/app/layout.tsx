@@ -92,6 +92,7 @@ import { ArcPreloaderWrapper } from '@/components/layout/ArcPreloaderWrapper';
 import { ChatBot } from '@/components/layout/ChatBot';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Script from 'next/script';
 
 export default async function RootLayout({
     children,
@@ -104,6 +105,26 @@ export default async function RootLayout({
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
             <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${signature.variable} font-sans relative`}>
+                {/* Google Analytics GA4 */}
+                <Script
+                    strategy="afterInteractive"
+                    src="https://www.googletagmanager.com/gtag/js?id=G-ZYYEXZORYX"
+                />
+                <Script
+                    id="google-analytics"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-ZYYEXZORYX', {
+                                page_path: window.location.pathname,
+                            });
+                        `,
+                    }}
+                />
+
                 <ThemeProvider>
                     <I18nProvider locale={locale} messages={messages}>
                         <SmoothScrollProvider>
