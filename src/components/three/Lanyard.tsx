@@ -483,17 +483,23 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
 
     const [curve] = useState(
         () =>
-            new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
+            new THREE.CatmullRomCurve3([
+                new THREE.Vector3(),
+                new THREE.Vector3(),
+                new THREE.Vector3(),
+                new THREE.Vector3(),
+                new THREE.Vector3()
+            ])
     );
     const [dragged, drag] = useState<false | THREE.Vector3>(false);
     const [hovered, hover] = useState(false);
 
-    useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-    useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-    useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+    useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 0.6]);
+    useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 0.6]);
+    useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 0.6]);
     useSphericalJoint(j3, card, [
         [0, 0, 0],
-        [0, 1.25, 0]
+        [0, 1.45, 0]
     ]);
 
     useEffect(() => {
@@ -526,14 +532,17 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
                     delta * (minSpeed + clampedDistance * (maxSpeed - minSpeed))
                 );
             });
-            curve.points[0].copy(j3.current.translation());
-            curve.points[1].copy(j2.current.lerped);
-            curve.points[2].copy(j1.current.lerped);
-            curve.points[3].copy(fixed.current.translation());
-            band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
-            ang.copy(card.current.angvel());
-            rot.copy(card.current.rotation());
-            card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
+            if (card.current && j3.current && j2.current && j1.current) {
+                curve.points[0].copy(card.current.translation()).add(new THREE.Vector3(0, 1.45, 0));
+                curve.points[1].copy(j3.current.translation());
+                curve.points[2].copy(j2.current.lerped);
+                curve.points[3].copy(j1.current.lerped);
+                curve.points[4].copy(fixed.current.translation());
+                band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+                ang.copy(card.current.angvel());
+                rot.copy(card.current.rotation());
+                card.current.setAngvel({ x: ang.x * 0.9, y: (ang.y - rot.y * 0.25) * 0.9, z: ang.z * 0.9 });
+            }
         }
     });
 
@@ -548,21 +557,23 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
 
     return (
         <>
-            <group position={[0, 3.6, 0]}>
+            <group position={[0, 4.2, 0]}>
                 <RigidBody ref={fixed} {...segmentProps} type={'fixed' as RigidBodyProps['type']} />
-                <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
+                <RigidBody position={[0, -0.5, 0]} ref={j1} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
                     <BallCollider args={[0.1]} />
                 </RigidBody>
-                <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
+                <RigidBody position={[0, -1.0, 0]} ref={j2} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
                     <BallCollider args={[0.1]} />
                 </RigidBody>
-                <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
+                <RigidBody position={[0, -1.5, 0]} ref={j3} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
                     <BallCollider args={[0.1]} />
                 </RigidBody>
                 <RigidBody
-                    position={[2, 0, 0]}
+                    position={[0, -2.2, 0]}
                     ref={card}
                     {...segmentProps}
+                    linearDamping={8}
+                    angularDamping={8}
                     type={dragged ? ('kinematicPosition' as RigidBodyProps['type']) : ('dynamic' as RigidBodyProps['type'])}
                 >
                     <CuboidCollider args={[0.9, 1.3, 0.01]} />
