@@ -6,14 +6,15 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 function Counter({ value, decimals = 0 }: { value: number; decimals?: number }) {
-  const count = useMotionValue(1);
+  const count = useMotionValue(value);
   const rounded = useTransform(count, (latest) => latest.toFixed(decimals));
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
 
   useEffect(() => {
     if (isInView) {
-      const controls = animate(count, value, { duration: 2, ease: "easeOut" });
+      count.set(0);
+      const controls = animate(count, value, { duration: 1.5, ease: "easeOut" });
       return () => controls.stop();
     }
   }, [count, value, isInView]);
