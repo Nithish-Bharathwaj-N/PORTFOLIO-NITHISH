@@ -92,7 +92,6 @@ import { ArcPreloaderWrapper } from '@/components/layout/ArcPreloaderWrapper';
 import { ChatBot } from '@/components/layout/ChatBot';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import Script from 'next/script';
 
 export default async function RootLayout({
     children,
@@ -105,20 +104,20 @@ export default async function RootLayout({
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
             <head>
-                <Script
+                <script
+                    async
                     src="https://www.googletagmanager.com/gtag/js?id=G-ZYYEXZORYX"
-                    strategy="afterInteractive"
                 />
-                <Script id="google-analytics" strategy="afterInteractive">
-                    {`
-                        window.dataLayer = window.dataLayer || [];
-                        function gtag(){dataLayer.push(arguments);}
-                        gtag('js', new Date());
-                        gtag('config', 'G-ZYYEXZORYX', {
-                            send_page_view: true
-                        });
-                    `}
-                </Script>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-ZYYEXZORYX');
+                        `,
+                    }}
+                />
             </head>
             <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${signature.variable} font-sans relative`}>
 
