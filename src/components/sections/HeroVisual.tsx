@@ -79,7 +79,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         <div className="absolute inset-0 z-0 bg-[radial-gradient(circle,_#888_0.5px,_transparent_0.5px)] dark:bg-[radial-gradient(circle,_#444_0.5px,_transparent_0.5px)] opacity-20 [background-size:20px_20px]" />
 
         {/* Portrait — top half, faded bottom */}
-        <div className="relative w-full h-[45vh] overflow-hidden z-[1]">
+        <div className="relative w-full h-[48vh] pt-20 sm:pt-24 overflow-hidden z-[1]">
           <Image
             src="/images/nithish-suit.jpg"
             alt="Nithish Bharathwaj N"

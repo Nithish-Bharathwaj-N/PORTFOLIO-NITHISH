@@ -292,19 +292,22 @@ const TECH_LOGOS = [
 // --- Component 2: Core Engineering Panel ---
 // --- Component 1: Core Engineering Panel (Stats) ---
 const CoreEngineeringPanel = ({ scrollYProgress }: { scrollYProgress: any }) => {
-    // Panel 1 exits between 0.45 and 0.65
-    const opacity = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
-    const scale = useTransform(scrollYProgress, [0.45, 0.6], [1, 0.9]);
-    const blur = useTransform(scrollYProgress, [0.45, 0.6], [0, 10]);
+    const isMobile = useIsMobile();
+    const opacityTransform = useTransform(scrollYProgress, [0.45, 0.6], [1, 0]);
+    const scaleTransform = useTransform(scrollYProgress, [0.45, 0.6], [1, 0.9]);
+    const blurTransform = useTransform(scrollYProgress, [0.45, 0.6], [0, 10]);
+
+    const opacity = isMobile ? 1 : opacityTransform;
+    const scale = isMobile ? 1 : scaleTransform;
 
     return (
-        <div className="w-screen h-full flex items-center justify-center bg-background transition-colors duration-500 overflow-hidden overflow-x-clip">
+        <div className="w-full h-full flex items-center justify-center bg-background transition-colors duration-500 overflow-hidden">
             <motion.div
                 style={{
                     opacity,
                     scale,
-                    filter: `blur(${blur}px)`,
-                    willChange: "transform, opacity, filter",
+                    filter: isMobile ? "none" : `blur(${blurTransform}px)`,
+                    willChange: isMobile ? undefined : "transform, opacity, filter",
                 }}
                 className="w-full h-full flex items-center justify-center"
             >
@@ -595,7 +598,7 @@ export default function AboutSection() {
         >
             {/* 1. Lead-in — sticky on desktop, static on mobile */}
             {isMobile ? (
-                <div className="w-full flex items-center justify-center py-10 overflow-hidden">
+                <div className="w-full flex items-center justify-center pt-28 sm:pt-32 pb-10 overflow-hidden">
                     <div className="relative px-4 w-full max-w-[1700px] mx-auto">
                         <AboutLeadIn />
                     </div>
