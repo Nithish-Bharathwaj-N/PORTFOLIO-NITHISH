@@ -605,12 +605,8 @@ export default function ContactPage() {
                 <div className="container-creative px-4 md:px-8 max-w-[1800px] mx-auto pb-40">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
 
-                        {/* LEFT COLUMN: Lanyard / Profile ID Card */}
+                        {/* LEFT COLUMN: Profile ID Card */}
                         <div className="col-span-1 lg:col-span-4 relative lg:sticky top-28 h-auto min-h-[520px] sm:min-h-[620px] lg:h-[780px] flex items-center justify-center z-20 overflow-hidden rounded-3xl border border-white/5 bg-white/[0.01]">
-                            {/* Anchor Slot/Bar for Lanyard */}
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 md:w-64 lg:w-80 h-2 bg-gradient-to-r from-transparent via-foreground/20 to-transparent blur-[2px] rounded-full z-30 mt-[-1px]" />
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 md:w-32 lg:w-40 h-[3px] bg-gradient-to-r from-transparent via-foreground/40 to-transparent rounded-full z-30" />
-
                             <DeferredMount fallback={<div className="w-full h-full flex items-center justify-center opacity-50"><Loader2 className="w-8 h-8 animate-spin" /></div>}>
                                 <div className="w-full h-full pointer-events-auto flex items-center justify-center">
                                     {!isLowPowerMode ? (

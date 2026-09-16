@@ -44,15 +44,6 @@ export function ProfileIDCard() {
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 select-none relative">
-            {/* Hanging Lanyard Strap Visual */}
-            <div className="w-12 h-14 sm:h-16 bg-gradient-to-b from-zinc-700 via-zinc-800 to-zinc-900 border-x border-white/10 relative z-10 shadow-lg flex items-center justify-center rounded-t-sm">
-                <div className="w-6 h-full border-x border-dashed border-white/20 bg-primary/10" />
-                {/* Metallic Clip */}
-                <div className="absolute -bottom-3.5 w-10 h-6 bg-gradient-to-b from-zinc-300 via-zinc-400 to-zinc-600 rounded-md border border-white/40 shadow-md flex items-center justify-center z-20">
-                    <div className="w-4 h-1.5 rounded-full bg-zinc-800 border border-zinc-900" />
-                </div>
-            </div>
-
             {/* Interactive Card Container */}
             <motion.div
                 onMouseMove={handleMouseMove}
