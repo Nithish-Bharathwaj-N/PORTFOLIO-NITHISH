@@ -90,6 +90,8 @@ import { ThemeAwareClickSpark } from '@/components/ui/ThemeAwareClickSpark';
 import { ConditionalNavigation } from '@/components/layout/ConditionalNavigation';
 import { ArcPreloaderWrapper } from '@/components/layout/ArcPreloaderWrapper';
 import { ChatBot } from '@/components/layout/ChatBot';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export default async function RootLayout({
     children,
@@ -116,6 +118,8 @@ export default async function RootLayout({
                         </SmoothScrollProvider>
                     </I18nProvider>
                 </ThemeProvider>
+                <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
