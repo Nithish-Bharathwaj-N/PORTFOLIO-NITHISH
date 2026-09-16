@@ -63,7 +63,9 @@
         "tailwindcss-animate": "^1.0.7",
         "three": "^0.170.0",
         "three-globe": "^2.45.0",
-        "tsparticles": "^3.9.1"
+        "tsparticles": "^3.9.1",
+        "@vercel/analytics": "^1.5.0",
+        "@vercel/speed-insights": "^1.2.0"
     },
     "devDependencies": {
         "@types/aos": "^3.0.7",
