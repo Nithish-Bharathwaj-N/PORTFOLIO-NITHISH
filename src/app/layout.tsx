@@ -92,7 +92,7 @@ import { ArcPreloaderWrapper } from '@/components/layout/ArcPreloaderWrapper';
 import { ChatBot } from '@/components/layout/ChatBot';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export default async function RootLayout({
     children,
@@ -104,25 +104,6 @@ export default async function RootLayout({
 
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
-            <head>
-                {/* Google Analytics GA4 */}
-                <script
-                    async
-                    src="https://www.googletagmanager.com/gtag/js?id=G-ZYYEXZORYX"
-                />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-ZYYEXZORYX', {
-                                send_page_view: true
-                            });
-                        `,
-                    }}
-                />
-            </head>
             <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${signature.variable} font-sans relative`}>
 
                 <ThemeProvider>
@@ -141,6 +122,7 @@ export default async function RootLayout({
                 </ThemeProvider>
                 <Analytics />
                 <SpeedInsights />
+                <GoogleAnalytics gaId="G-ZYYEXZORYX" />
             </body>
         </html>
     );
