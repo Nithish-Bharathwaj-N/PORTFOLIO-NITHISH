@@ -13,7 +13,7 @@ import InfiniteMenu from "@/components/InfiniteMenu";
 import { portfolioData } from "@/data/portfolio";
 import { BeamDivider } from "@/components/ui/BeamDivider";
 import ScrollReveal from "@/components/ScrollReveal";
-import { Github, Linkedin, Instagram, MessageSquare, ArrowRight, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Instagram, MessageSquare, ArrowRight, ArrowUpRight, Terminal, Cpu, Award, Shield, Code2, Zap, Sparkles, ExternalLink, CheckCircle2, Server, Lock, Layers, Copy, Check } from "lucide-react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useCountUp } from "@/hooks/useCountUp";
 import { SocialCorner } from "@/components/layout/SocialCorner";
@@ -576,19 +576,312 @@ const ScrollHijackSection = () => {
     );
 };
 
+const DesktopAboutBento = () => {
+    const [activeTab, setActiveTab] = useState<'all' | 'ai' | 'cyber' | 'fullstack' | 'tools'>('all');
+
+    const techGrid = [
+        { name: 'Python', category: 'ai', icon: '🐍', desc: 'AI/ML, PyTorch, Scikit-Learn & Automation' },
+        { name: 'TypeScript', category: 'fullstack', icon: '⚡', desc: 'Full-Stack Type-Safe Web Architectures' },
+        { name: 'C++', category: 'cyber', icon: '🛡️', desc: 'Low-Level Systems & Memory Security' },
+        { name: 'FastAPI', category: 'ai', icon: '🚀', desc: 'High-Performance Asynchronous Microservices' },
+        { name: 'React 19 & Next.js', category: 'fullstack', icon: '⚛️', desc: 'Modern SSR/SSG Web Applications' },
+        { name: 'Three.js & WebGL', category: 'fullstack', icon: '🌐', desc: 'Aerospace 3D Digital Twin Visualizations' },
+        { name: 'Docker & Linux', category: 'tools', icon: '🐳', desc: 'Containerization & Offensive Cyber Labs' },
+        { name: 'PostgreSQL & SQL', category: 'fullstack', icon: '🐘', desc: 'Relational Schemas & High-Concurrency DBs' },
+        { name: 'PyTorch & LLMs', category: 'ai', icon: '🔥', desc: 'Deep Learning & Foundation Model Pipelines' },
+        { name: 'Kali Linux & Cyber Tools', category: 'cyber', icon: '⚙️', desc: 'Nmap, Wireshark, Burp Suite, Metasploit' },
+    ];
+
+    const filteredTech = activeTab === 'all' ? techGrid : techGrid.filter(t => t.category === activeTab);
+
+    return (
+        <div className="w-full max-w-[1700px] mx-auto px-6 py-12 flex flex-col gap-12">
+            {/* Header Banner */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 p-8 md:p-10 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl relative overflow-hidden shadow-2xl">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+                <div className="relative z-10 max-w-3xl space-y-3">
+                    <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-mono font-bold uppercase tracking-widest">
+                            <Shield className="w-3.5 h-3.5" />
+                            <span>Cyber Risk & Autonomous AI</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold uppercase tracking-widest">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>Online // IST (UTC+5:30)</span>
+                        </div>
+                    </div>
+                    <h3 className="text-3xl lg:text-5xl font-black text-foreground tracking-tight leading-tight">
+                        Engineering Resilient Cyber Platforms & Predictive AI Systems.
+                    </h3>
+                    <p className="text-base lg:text-lg text-muted-foreground leading-relaxed font-normal">
+                        B.E. Computer Science (Cyber Security) student at Chennai Institute of Technology. Merging offensive security research, LLM application architecture, and 3D WebGL aerospace digital twins into production software.
+                    </p>
+                </div>
+
+                <div className="relative z-10 flex flex-col sm:flex-row md:flex-col gap-3 shrink-0 w-full sm:w-auto">
+                    <a
+                        href="/projects"
+                        className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-primary text-primary-foreground font-bold text-sm hover:scale-105 transition-transform shadow-lg shadow-primary/20"
+                    >
+                        <Layers className="w-4 h-4" />
+                        <span>Explore Featured Projects</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                    <a
+                        href="/resume"
+                        className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-foreground font-bold text-sm hover:bg-white/10 transition-colors"
+                    >
+                        <Shield className="w-4 h-4 text-cyan-400" />
+                        <span>View Verified Resume</span>
+                    </a>
+                </div>
+            </div>
+
+            {/* 4-Tile Interactive Bento Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Tile 1: Securox Cyber Intelligence Terminal (Span 7) */}
+                <div className="lg:col-span-7 group p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl hover:border-cyan-500/40 transition-all duration-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-[90px] pointer-events-none" />
+                    
+                    <div className="relative z-10 space-y-4 mb-6">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-widest">
+                                <Terminal className="w-4 h-4" />
+                                <span>Securox Platform // Cyber Intelligence</span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-bold">
+                                ACTIVE DEVELOPMENT
+                            </span>
+                        </div>
+                        <h4 className="text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
+                            Autonomous Threat Detection & Attack Surface Monitoring
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Securox continuously ingests threat telemetry, audits attack vectors, and performs automated risk scoring across enterprise endpoints and Web APIs.
+                        </p>
+                    </div>
+
+                    {/* Interactive Terminal Mock */}
+                    <div className="relative z-10 w-full p-4 rounded-2xl bg-black/80 border border-white/10 font-mono text-xs text-zinc-300 space-y-2 shadow-inner">
+                        <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[10px] text-zinc-500">
+                            <span>nithish@securox-node-01:~</span>
+                            <span className="text-emerald-400 font-bold">● SYSTEM SECURE</span>
+                        </div>
+                        <p className="text-cyan-400">$ securox audit --target attack-surface --mode AI-predictive</p>
+                        <p className="text-zinc-400">[+] Port scan complete: 0 unauthenticated exposures found</p>
+                        <p className="text-purple-400">[+] Neural Threat Analyzer: 98.4/100 Security Index</p>
+                        <p className="text-emerald-400 font-bold">[✔] Defensive posture verified. Real-time logging streaming...</p>
+                    </div>
+
+                    <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-white/10">
+                        <span className="text-xs font-mono text-zinc-400 font-semibold">TryHackMe & HTB Active Practitioner</span>
+                        <a href="https://github.com/Nithish-Bharathwaj-N/Securox" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:underline">
+                            <span>Repository</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Tile 2: Aerospace AI — SubAERO (Span 5) */}
+                <div className="lg:col-span-5 group p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl hover:border-purple-500/40 transition-all duration-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute -top-20 -left-20 w-60 h-60 bg-purple-500/10 rounded-full blur-[80px] pointer-events-none" />
+
+                    <div className="relative z-10 space-y-4">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-purple-400 font-mono text-xs font-bold uppercase tracking-widest">
+                                <Cpu className="w-4 h-4" />
+                                <span>SubAERO // Aerothon 2026</span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-bold">
+                                TOP 8 FINALIST
+                            </span>
+                        </div>
+                        <h4 className="text-2xl font-bold text-foreground tracking-tight">
+                            Aerospace Digital Twin & PHM Engine
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Built for HAL & IIT Indore Aerothon 2026. Interactive 3D WebGL turbojet visualization paired with multi-target ML regression for Remaining Useful Life (RUL) prediction.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 my-4 p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex flex-col gap-2">
+                        <div className="flex items-center justify-between text-xs font-mono">
+                            <span className="text-purple-300 font-bold">ML Predictive R² Accuracy:</span>
+                            <span className="text-emerald-400 font-bold">98.7% - 99.9%</span>
+                        </div>
+                        <div className="w-full bg-black/40 h-2 rounded-full overflow-hidden">
+                            <div className="bg-gradient-to-r from-purple-500 to-emerald-400 h-full w-[99%]" />
+                        </div>
+                        <span className="text-[10px] text-zinc-400 font-mono">Tested on aero-thermal turbojet sensor dataset</span>
+                    </div>
+
+                    <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/10">
+                        <span className="text-xs font-mono text-zinc-400 font-semibold">HAL Tejas Engine Digital Twin</span>
+                        <a href="https://null-pointers-aerothon-2026.vercel.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-purple-400 hover:underline">
+                            <span>Live WebGL Demo</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Tile 3: LeetCode & Competitive Programming (Span 5) */}
+                <div className="lg:col-span-5 group p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl hover:border-amber-500/40 transition-all duration-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div className="relative z-10 space-y-4">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-amber-400 font-mono text-xs font-bold uppercase tracking-widest">
+                                <Award className="w-4 h-4" />
+                                <span>Competitive Programming</span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 font-bold">
+                                TOP 10% GLOBAL
+                            </span>
+                        </div>
+                        <h4 className="text-2xl font-bold text-foreground tracking-tight">
+                            Algorithmic Mastery & Problem Solving
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Continuous practice across Data Structures, Dynamic Programming, Graph Theory, and System Design patterns.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 grid grid-cols-2 gap-3 my-4">
+                        <div className="p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-center">
+                            <span className="block text-2xl font-black text-amber-400">1771</span>
+                            <span className="text-[10px] font-mono font-bold text-zinc-300 uppercase">LeetCode Rating</span>
+                        </div>
+                        <div className="p-3.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-center">
+                            <span className="block text-2xl font-black text-cyan-400">551+</span>
+                            <span className="text-[10px] font-mono font-bold text-zinc-300 uppercase">Problems Solved</span>
+                        </div>
+                    </div>
+
+                    <div className="relative z-10 flex items-center justify-between pt-4 border-t border-white/10">
+                        <span className="text-xs font-mono text-zinc-400 font-semibold">118-Day Active Streak</span>
+                        <a href="https://leetcode.com/u/nithish_cit/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:underline">
+                            <span>LeetCode Stats</span>
+                            <ExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    </div>
+                </div>
+
+                {/* Tile 4: Academic & AWS Credentials (Span 7) */}
+                <div className="lg:col-span-7 group p-8 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl hover:border-emerald-500/40 transition-all duration-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div className="relative z-10 space-y-4 mb-4">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest">
+                                <Shield className="w-4 h-4" />
+                                <span>Academic & Cloud Credentials</span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-bold">
+                                CGPA: 8.48/10
+                            </span>
+                        </div>
+                        <h4 className="text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
+                            Chennai Institute of Technology & AWS Academy
+                        </h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            B.E. Computer Science (Cyber Security) degree program integrated with AWS Academy Generative AI specialization, foundation models, and cloud infrastructure.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                            <span className="text-xs font-bold text-foreground">Chennai Institute of Technology</span>
+                            <p className="text-[11px] text-zinc-400">B.E. CSE — Cybersecurity Specialization</p>
+                            <span className="text-[10px] font-mono text-emerald-400 font-semibold block">August 2025 – 2029</span>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1">
+                            <span className="text-xs font-bold text-foreground">AWS Academy × AICTE × EduSkills</span>
+                            <p className="text-[11px] text-zinc-400">Generative AI Virtual Intern Certification</p>
+                            <span className="text-[10px] font-mono text-cyan-400 font-semibold block">October – December 2025</span>
+                        </div>
+                    </div>
+
+                    <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-white/10">
+                        <span className="text-xs font-mono text-zinc-400 font-semibold">15+ Hackathons · 5+ National Finals</span>
+                        <a href="/experience" className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:underline">
+                            <span>View All Experiences</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {/* Tech Stack & Ecosystem Categorized Matrix */}
+            <div className="w-full p-8 md:p-10 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-2xl relative overflow-hidden shadow-2xl space-y-8">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                    <div>
+                        <span className="text-xs font-mono font-bold uppercase tracking-widest text-muted-foreground block mb-1">Interactive Technology Matrix</span>
+                        <h4 className="text-2xl md:text-3xl font-bold text-foreground">Tech Stack & Ecosystem</h4>
+                    </div>
+
+                    {/* Filter Tabs */}
+                    <div className="flex flex-wrap gap-2">
+                        {[
+                            { id: 'all', label: 'All Stack' },
+                            { id: 'ai', label: 'AI & ML' },
+                            { id: 'cyber', label: 'Cyber Security' },
+                            { id: 'fullstack', label: 'Full-Stack' },
+                            { id: 'tools', label: 'DevOps & Tools' },
+                        ].map(tab => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id as any)}
+                                className={cn(
+                                    "px-4 py-2 rounded-full text-xs font-bold transition-all duration-200",
+                                    activeTab === tab.id
+                                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-105"
+                                        : "bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/10"
+                                )}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Tech Cards Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    {filteredTech.map(tech => (
+                        <div
+                            key={tech.name}
+                            className="group relative p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-primary/50 hover:bg-white/10 transition-all duration-300 shadow-md flex flex-col justify-between"
+                        >
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="text-2xl">{tech.icon}</span>
+                                <span className="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/10">
+                                    {tech.category}
+                                </span>
+                            </div>
+                            <div>
+                                <h5 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
+                                    {tech.name}
+                                </h5>
+                                <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2 leading-tight">
+                                    {tech.desc}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function AboutSection() {
     const isMobile = useIsMobile();
     const containerRef = useRef<HTMLElement>(null);
+    const leadInTriggerRef = useRef<HTMLDivElement>(null);
+
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
     });
 
-    const scale = useTransform(scrollYProgress, [0, 0.12], [1, 0.92]);
-    const opacity = useTransform(scrollYProgress, [0.03, 0.12], [1, 0]);
-    const yLeadIn = useTransform(scrollYProgress, [0, 0.12], [0, -80]);
-
-    const leadInTriggerRef = useRef(null);
+    const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.94]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.2]);
+    const yLeadIn = useTransform(scrollYProgress, [0, 0.2], ["0vh", "-10vh"]);
 
     return (
         <section
@@ -604,19 +897,14 @@ export default function AboutSection() {
                     </div>
                 </div>
             ) : (
-                <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-start z-0 overflow-hidden overflow-x-clip pointer-events-none pt-28 md:pt-32 lg:pt-36 pb-4">
-                    <motion.div
-                        style={{ scale, opacity, y: yLeadIn }}
-                        className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
-                        ref={leadInTriggerRef}
-                    >
-                        <AboutLeadIn />
-                    </motion.div>
+                <div className="w-full pt-28 sm:pt-32 pb-6 px-4 md:px-6">
+                    <AboutLeadIn />
+                    <DesktopAboutBento />
                 </div>
             )}
 
             {/* 2. OVERLAY LAYER - Hijack Zone & Footer */}
-            <div className="relative pointer-events-none mt-0 md:mt-[20vh]">
+            <div className="relative pointer-events-none mt-0">
                 {/* Content wrapper with background - rounded corners removed to allow animated border to control the shape */}
                 <div className="bg-background dark:bg-black transition-colors duration-500 pointer-events-auto relative">
 
@@ -707,7 +995,6 @@ export default function AboutSection() {
                     <AuditFunnel />
                 </div>
             </div>
-        </section >
+        </section>
     );
 };
-
