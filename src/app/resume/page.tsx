@@ -13,12 +13,7 @@ const PdfViewer = dynamic(
 
 export default function ResumePage() {
     const { isLowPowerMode } = usePerformance();
-    // File ID: 1mfYs2MOHpwEFLe-Ld4OCcgS1Lbo6wW7O
-    const fileId = "1mfYs2MOHpwEFLe-Ld4OCcgS1Lbo6wW7O";
-    const resumeUrl = `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
-
-    // Standard preview URL with sharing context
-    const previewUrl = `https://drive.google.com/file/d/${fileId}/preview?usp=sharing`;
+    const resumePdfUrl = "/resume.pdf";
 
     return (
         <div className="h-screen bg-background relative flex flex-col pt-24 pb-4 overflow-hidden">
@@ -37,15 +32,23 @@ export default function ResumePage() {
                     <span>Back to Portfolio</span>
                 </Link>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                     <a
-                        href={resumeUrl}
+                        href={resumePdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-all active:scale-95 shadow-sm"
+                        className="flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-all active:scale-95 shadow-sm text-sm"
                     >
                         <ExternalLink className="w-4 h-4" />
                         <span>Open in New Tab</span>
+                    </a>
+                    <a
+                        href={resumePdfUrl}
+                        download="NITHISH_BHARATHWAJ_N_Resume.pdf"
+                        className="flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all active:scale-95 shadow-sm text-sm"
+                    >
+                        <Download className="w-4 h-4" />
+                        <span>Download PDF</span>
                     </a>
                 </div>
             </motion.div>
@@ -58,7 +61,7 @@ export default function ResumePage() {
                 className="flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-6 min-h-0 pb-4 relative"
             >
                 <div className="w-full h-full bg-muted/30 rounded-2xl border border-border/50 overflow-hidden relative group">
-                    <PdfViewer url="/resume.pdf" />
+                    <PdfViewer url={resumePdfUrl} />
                 </div>
             </motion.div>
         </div>
