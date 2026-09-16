@@ -159,7 +159,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
             transition={{ delay: 0.6 }}
             className="text-[10px] text-muted-foreground font-mono uppercase tracking-[0.15em]"
           >
-            LeetCode 1771 · 500+ Solved · 118-day streak
+            Autonomous AI · Cyber Intelligence · Full-Stack Architect
           </motion.p>
 
           {/* Divider + Quick links */}
@@ -292,7 +292,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
         </span>
       </motion.div>
 
-      <main className="relative flex-1 flex flex-col justify-center pt-24 pb-12 md:pt-40 md:pb-20 z-10 max-w-[105rem] w-full mx-auto">
+      <main className="relative flex-1 flex flex-col justify-center pt-32 pb-12 md:pt-48 lg:pt-52 md:pb-20 z-10 max-w-[105rem] w-full mx-auto">
         <div className="flex relative gap-2 px-4 md:px-12 w-full max-w-full md:max-w-[56vw] flex-col justify-center items-start text-left">
 
           {/* Follow-Cursor Tooltip */}
@@ -445,7 +445,7 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-[10px] md:text-xs text-muted-foreground font-mono font-medium uppercase tracking-[0.2em] pt-3 text-left"
           >
-            LeetCode Rating 1771 · 500+ Solved · 118-day streak
+            Autonomous AI · Threat Intelligence · High-Performance Architectures
           </motion.p>
         </div>
 
@@ -519,8 +519,8 @@ export function HeroVisual({ isExiting = false }: { isExiting?: boolean }) {
             >
               <ProfileCard
                 name={personal.name}
-                title="Cybersecurity · AI Engineer · Full-Stack Developer"
-                description={`${personal.name} is a B.E. CSE (Cyber Security) student at Chennai Institute of Technology. Cybersecurity engineer, AI developer & full-stack builder. Top 8 Finalist in Aerothon 2026 (HAL & IIT Indore). 500+ LeetCode solved, rating 1771.`}
+                title="Cybersecurity · AI Engineer · Full-Stack Architect"
+                description={`${personal.name} is a Cybersecurity & AI Engineer dedicated to building autonomous threat intelligence platforms, predictive machine learning engines, and resilient full-stack web architectures.`}
                 imageUrl={personal.avatar}
                 githubUrl={personal.socialLinks.find(s => s.platform === 'GitHub')?.url}
                 linkedinUrl={personal.socialLinks.find(s => s.platform === 'LinkedIn')?.url}
