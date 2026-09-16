@@ -150,23 +150,108 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const drawFullPhoto = (x: number, y: number, w: number, h: number) => {
+        const drawIDCardFront = (x: number, y: number, w: number, h: number) => {
             ctx.save();
             ctx.beginPath();
-            if (ctx.roundRect) ctx.roundRect(x + 20, y + 20, w - 40, h - 40, 48);
+            if (ctx.roundRect) ctx.roundRect(x + 20, y + 20, w - 40, h - 40, 60);
             else ctx.rect(x + 20, y + 20, w - 40, h - 40);
             ctx.clip();
 
-            // Background fallback
-            ctx.fillStyle = '#0a0e17';
+            // 1. Dark Metallic Background Gradient
+            const bgGrad = ctx.createLinearGradient(x, y, x, y + h);
+            bgGrad.addColorStop(0, '#0c0d14');
+            bgGrad.addColorStop(0.5, '#08090e');
+            bgGrad.addColorStop(1, '#040508');
+            ctx.fillStyle = bgGrad;
             ctx.fillRect(x, y, w, h);
+
+            // Grid background texture dots
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+            for (let gx = x + 60; gx < x + w - 60; gx += 80) {
+                for (let gy = y + 60; gy < y + h - 60; gy += 80) {
+                    ctx.beginPath();
+                    ctx.arc(gx, gy, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Outer Card Border Glow
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+            ctx.lineWidth = 16;
+            if (ctx.roundRect) ctx.roundRect(x + 30, y + 30, w - 60, h - 60, 56);
+            else ctx.rect(x + 30, y + 30, w - 60, h - 60);
+            ctx.stroke();
+
+            // 2. Lanyard Slot / Punch Hole at top
+            ctx.fillStyle = '#000000';
+            const holeW = 320, holeH = 70;
+            const holeX = x + (w - holeW) / 2;
+            const holeY = y + 100;
+            if (ctx.roundRect) ctx.roundRect(holeX, holeY, holeW, holeH, 35);
+            else ctx.rect(holeX, holeY, holeW, holeH);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            // 3. Top Header: Logo/Title & Status Badge
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = 'bold 50px monospace';
+            ctx.textAlign = 'left';
+            ctx.fillText('CIT // OFFICIAL ID', x + 120, y + 340);
+
+            // "AVAILABLE" Badge
+            const badgeW = 380, badgeH = 80;
+            const badgeX = x + w - 120 - badgeW;
+            const badgeY = y + 280;
+            ctx.fillStyle = 'rgba(6, 78, 59, 0.5)';
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 40);
+            else ctx.rect(badgeX, badgeY, badgeW, badgeH);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            // Green pulsing dot
+            ctx.fillStyle = '#34d399';
+            ctx.beginPath();
+            ctx.arc(badgeX + 50, badgeY + 40, 14, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#34d399';
+            ctx.font = 'bold 40px sans-serif';
+            ctx.fillText('AVAILABLE', badgeX + 85, badgeY + 54);
+
+            // Header Separator Line
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(x + 100, y + 420);
+            ctx.lineTo(x + w - 100, y + 420);
+            ctx.stroke();
+
+            // 4. Centered Avatar Photo Frame
+            const photoW = 1050, photoH = 1250;
+            const photoX = x + (w - photoW) / 2;
+            const photoY = y + 500;
+
+            // Photo frame background shadow & border
+            ctx.save();
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(photoX, photoY, photoW, photoH, 70);
+            else ctx.rect(photoX, photoY, photoW, photoH);
+            ctx.clip();
+
+            ctx.fillStyle = '#11131f';
+            ctx.fillRect(photoX, photoY, photoW, photoH);
 
             const photoImg = photoTexture?.image;
             if (photoImg && (photoImg.width || photoImg.naturalWidth)) {
                 const iw = photoImg.width || photoImg.naturalWidth;
                 const ih = photoImg.height || photoImg.naturalHeight;
                 const imgRatio = iw / ih;
-                const targetRatio = w / h;
+                const targetRatio = photoW / photoH;
                 let sx = 0, sy = 0, sw = iw, sh = ih;
                 if (imgRatio > targetRatio) {
                     sw = ih * targetRatio;
@@ -175,24 +260,181 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
                     sh = iw / targetRatio;
                     sy = (ih - sh) / 4;
                 }
-                ctx.drawImage(photoImg, sx, sy, sw, sh, x, y, w, h);
+                ctx.drawImage(photoImg, sx, sy, sw, sh, photoX, photoY, photoW, photoH);
             }
+            ctx.restore();
 
-            // Subtle inner border
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+            // Photo Frame Border
+            ctx.strokeStyle = '#38bdf8';
             ctx.lineWidth = 12;
-            if (ctx.roundRect) ctx.roundRect(x + 20, y + 20, w - 40, h - 40, 48);
-            else ctx.rect(x + 20, y + 20, w - 40, h - 40);
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(photoX, photoY, photoW, photoH, 70);
+            else ctx.rect(photoX, photoY, photoW, photoH);
             ctx.stroke();
+
+            // Verified Badge Icon at bottom right of photo
+            const vBadgeX = photoX + photoW - 70;
+            const vBadgeY = photoY + photoH - 70;
+            ctx.fillStyle = '#0284c7';
+            ctx.beginPath();
+            ctx.arc(vBadgeX, vBadgeY, 45, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#08090e';
+            ctx.lineWidth = 10;
+            ctx.stroke();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 50px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('✓', vBadgeX, vBadgeY + 16);
+
+            // 5. Identity Details
+            ctx.textAlign = 'center';
+            
+            // Name
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 95px system-ui, sans-serif';
+            ctx.fillText('Nithish Bharathwaj N', x + w / 2, y + 1950);
+
+            // Role
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 60px system-ui, sans-serif';
+            ctx.fillText('Cybersecurity & AI Engineer', x + w / 2, y + 2080);
+
+            // Institution
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = 'bold 48px monospace';
+            ctx.fillText('Chennai Institute of Technology', x + w / 2, y + 2190);
+
+            // 6. Highlight Achievement Cards Grid
+            const card1X = x + 120;
+            const card1Y = y + 2300;
+            const card1W = 760;
+            const card1H = 450;
+
+            const card2X = x + w - 120 - card1W;
+            const card2Y = card1Y;
+
+            // Card 1: Aerothon '26
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(card1X, card1Y, card1W, card1H, 45);
+            else ctx.rect(card1X, card1Y, card1W, card1H);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 60px sans-serif';
+            ctx.fillText('★ Aerothon \'26', card1X + card1W / 2, card1Y + 180);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 52px sans-serif';
+            ctx.fillText('Top 8 Finalist', card1X + card1W / 2, card1Y + 280);
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '40px monospace';
+            ctx.fillText('National Aerospace Hack', card1X + card1W / 2, card1Y + 360);
+
+            // Card 2: LeetCode 1771
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(card2X, card2Y, card1W, card1H, 45);
+            else ctx.rect(card2X, card2Y, card1W, card1H);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+            ctx.lineWidth = 6;
+            ctx.stroke();
+
+            ctx.fillStyle = '#22d3ee';
+            ctx.font = 'bold 60px sans-serif';
+            ctx.fillText('</> LeetCode 1771', card2X + card1W / 2, card2Y + 180);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 52px sans-serif';
+            ctx.fillText('500+ Solved', card2X + card1W / 2, card2Y + 280);
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '40px monospace';
+            ctx.fillText('DSA & Algorithms', card2X + card1W / 2, card2Y + 360);
+
+            // 7. Footer: Serial Number & Barcode
+            const footerY = y + 2900;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+            ctx.lineWidth = 6;
+            ctx.beginPath();
+            ctx.moveTo(x + 100, footerY);
+            ctx.lineTo(x + w - 100, footerY);
+            ctx.stroke();
+
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#6b7280';
+            ctx.font = 'bold 40px monospace';
+            ctx.fillText('CARD SERIAL', x + 120, footerY + 100);
+            ctx.fillStyle = '#e5e7eb';
+            ctx.font = 'bold 55px monospace';
+            ctx.fillText('NB-2026-CIT', x + 120, footerY + 180);
+
+            // Barcode graphic
+            const barX = x + w - 750;
+            const barY = footerY + 60;
+            const barH = 140;
+            const barPattern = [12, 4, 18, 6, 8, 4, 24, 6, 10, 4, 16, 8, 6, 4, 20, 6, 12, 4];
+            let currentX = barX;
+            ctx.fillStyle = '#ffffff';
+            barPattern.forEach((width, idx) => {
+                if (idx % 2 === 0) {
+                    ctx.fillRect(currentX, barY, width * 2.5, barH);
+                }
+                currentX += width * 2.5 + 4;
+            });
+
+            ctx.restore();
+        };
+
+        const drawIDCardBack = (x: number, y: number, w: number, h: number) => {
+            ctx.save();
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(x + 20, y + 20, w - 40, h - 40, 60);
+            else ctx.rect(x + 20, y + 20, w - 40, h - 40);
+            ctx.clip();
+
+            const bgGrad = ctx.createLinearGradient(x, y, x, y + h);
+            bgGrad.addColorStop(0, '#0a0b12');
+            bgGrad.addColorStop(1, '#030406');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(x, y, w, h);
+
+            // Back punch hole
+            ctx.fillStyle = '#000000';
+            const holeW = 320, holeH = 70;
+            const holeX = x + (w - holeW) / 2;
+            const holeY = y + 100;
+            if (ctx.roundRect) ctx.roundRect(holeX, holeY, holeW, holeH, 35);
+            else ctx.rect(holeX, holeY, holeW, holeH);
+            ctx.fill();
+
+            // Large Monogram / Logo
+            ctx.textAlign = 'center';
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.15)';
+            ctx.font = 'bold 320px sans-serif';
+            ctx.fillText('NB', x + w / 2, y + 1000);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 80px system-ui, sans-serif';
+            ctx.fillText('Nithish Bharathwaj N', x + w / 2, y + 1400);
+
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '50px monospace';
+            ctx.fillText('nithishbharathwajn@gmail.com', x + w / 2, y + 1550);
+            ctx.fillText('+91 9363958388', x + w / 2, y + 1670);
 
             ctx.restore();
         };
 
         // FRONT FACE (Left Half)
-        drawFullPhoto(0, 0, 1875, 4219);
+        drawIDCardFront(0, 0, 1875, 4219);
 
         // BACK FACE (Right Half)
-        drawFullPhoto(1875, 0, 1875, 4219);
+        drawIDCardBack(1875, 0, 1875, 4219);
 
         const tex = new THREE.CanvasTexture(canvas);
         tex.flipY = false;
@@ -358,7 +600,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
                 <meshLineGeometry />
                 <meshLineMaterial
                     color="white"
-                    depthTest={false}
+                    depthTest={true}
                     resolution={isMobile ? [1000, 2000] : [1000, 1000]}
                     useMap={1}
                     map={stringTexture}
