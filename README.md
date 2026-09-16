@@ -4,7 +4,11 @@
 
 ### Cybersecurity Engineer • AI Engineer • Full-Stack Developer
 
+[![Live Portfolio](https://img.shields.io/badge/Live_Website-nithishbharathwaj.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://nithishbharathwaj.vercel.app?utm_source=github)
+
 A high-performance, interactive portfolio engineered to showcase expertise across Cybersecurity, Artificial Intelligence, and Modern Web Engineering.
+
+🌐 **Live Demo:** [https://nithishbharathwaj.vercel.app](https://nithishbharathwaj.vercel.app?utm_source=github)
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.1.6-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
