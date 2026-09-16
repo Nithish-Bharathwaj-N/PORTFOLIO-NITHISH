@@ -29,12 +29,106 @@ function DirectContactCards() {
         setTimeout(() => setCopiedEmail(false), 2000);
     };
 
+    const githubLink = portfolioData.personal.socialLinks.find(s => s.platform === 'GitHub')?.url || 'https://github.com/Nithish-Bharathwaj-N';
+    const linkedinLink = portfolioData.personal.socialLinks.find(s => s.platform === 'LinkedIn')?.url || 'https://www.linkedin.com/in/nithish-bharathwaj-n-847a00379';
+    const leetcodeLink = portfolioData.personal.socialLinks.find(s => s.platform === 'LeetCode')?.url || 'https://leetcode.com/u/nithish_cit/';
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-12">
-            {/* Email Card */}
-            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-primary/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full mb-12">
+            {/* GitHub Card */}
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-purple-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center border border-purple-500/20 group-hover:scale-110 transition-transform">
+                        <Github className="w-6 h-6" />
+                    </div>
+                    <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 hover:bg-purple-500/20 transition-colors"
+                        title="View GitHub Profile"
+                    >
+                        <span>Profile</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                </div>
+                <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">GitHub Profile</span>
+                    <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-base font-bold text-foreground hover:text-purple-400 transition-colors truncate mt-1"
+                    >
+                        @Nithish-Bharathwaj-N
+                    </a>
+                </div>
+            </div>
+
+            {/* LinkedIn Card */}
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-blue-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center border border-blue-500/20 group-hover:scale-110 transition-transform">
+                        <Linkedin className="w-6 h-6" />
+                    </div>
+                    <a
+                        href={linkedinLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 hover:bg-blue-500/20 transition-colors"
+                        title="Connect on LinkedIn"
+                    >
+                        <span>Connect</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                </div>
+                <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">LinkedIn Network</span>
+                    <a
+                        href={linkedinLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-base font-bold text-foreground hover:text-blue-400 transition-colors truncate mt-1"
+                    >
+                        Nithish Bharathwaj N
+                    </a>
+                </div>
+            </div>
+
+            {/* LeetCode Card */}
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-amber-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20 group-hover:scale-110 transition-transform">
+                        <Code className="w-6 h-6" />
+                    </div>
+                    <a
+                        href={leetcodeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 hover:bg-amber-500/20 transition-colors"
+                        title="View LeetCode Stats"
+                    >
+                        <span>1771 Rating</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                </div>
+                <div>
+                    <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">LeetCode (500+ Solved)</span>
+                    <a
+                        href={leetcodeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-base font-bold text-foreground hover:text-amber-400 transition-colors truncate mt-1"
+                    >
+                        @nithish_cit
+                    </a>
+                </div>
+            </div>
+
+            {/* Direct Email Card */}
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-emerald-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:scale-110 transition-transform">
                         <Mail className="w-6 h-6" />
                     </div>
                     <button
@@ -50,7 +144,7 @@ function DirectContactCards() {
                     <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Direct Email</span>
                     <a
                         href={`mailto:${portfolioData.personal.email}`}
-                        className="block text-base font-bold text-foreground hover:text-primary transition-colors truncate mt-1"
+                        className="block text-base font-bold text-foreground hover:text-emerald-400 transition-colors truncate mt-1"
                     >
                         {portfolioData.personal.email}
                     </a>
@@ -58,7 +152,7 @@ function DirectContactCards() {
             </div>
 
             {/* Phone Card */}
-            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-primary/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-cyan-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border border-cyan-500/20 group-hover:scale-110 transition-transform">
                         <Phone className="w-6 h-6" />
@@ -80,9 +174,9 @@ function DirectContactCards() {
             </div>
 
             {/* Location & Status Card */}
-            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-primary/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
+            <div className="group relative p-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl hover:border-rose-500/50 hover:bg-white/[0.08] transition-all duration-300 shadow-xl flex flex-col justify-between">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center border border-purple-500/20 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-rose-500/10 text-rose-400 flex items-center justify-center border border-rose-500/20 group-hover:scale-110 transition-transform">
                         <MapPin className="w-6 h-6" />
                     </div>
                     <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold">
@@ -149,7 +243,7 @@ function SocialCard({ item }: { item: any }) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-[140px] w-[280px] flex-col justify-between rounded-3xl border border-neutral-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-6 shadow-sm dark:shadow-2xl transition-all hover:bg-neutral-50 dark:hover:bg-white/5 hover:border-neutral-300 hover:scale-[1.02] hover:-translate-y-1 backdrop-blur-md overflow-hidden flex-shrink-0"
+            className="group relative flex h-[140px] w-[240px] sm:w-[280px] flex-col justify-between rounded-3xl border border-neutral-200 dark:border-white/5 bg-white dark:bg-white/[0.02] p-6 shadow-sm dark:shadow-2xl transition-all hover:bg-neutral-50 dark:hover:bg-white/5 hover:border-neutral-300 hover:scale-[1.02] hover:-translate-y-1 backdrop-blur-md overflow-hidden flex-shrink-0"
         >
             <div className="absolute -top-6 -right-6 p-6 opacity-[0.03] group-hover:opacity-10 transition-opacity transform group-hover:scale-125 duration-700">
                 <Icon className="w-40 h-40" />
