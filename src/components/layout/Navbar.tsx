@@ -78,6 +78,10 @@ export function Navbar() {
 
     useEffect(() => {
         setMounted(true);
+        if (typeof document !== 'undefined' && document.cookie.includes('locale=id')) {
+            document.cookie = 'locale=en;path=/;max-age=31536000';
+            window.location.reload();
+        }
         const interval = setInterval(() => {
             setLabelIndex((prev) => (prev + 1) % menuLabels.length);
         }, 3000);

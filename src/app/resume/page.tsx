@@ -4,7 +4,12 @@ import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { usePerformance } from '@/hooks/usePerformance';
-import { PdfViewer } from '@/components/ui/pdf-viewer';
+import dynamic from 'next/dynamic';
+
+const PdfViewer = dynamic(
+    () => import('@/components/ui/pdf-viewer').then((mod) => mod.PdfViewer),
+    { ssr: false, loading: () => <div className="w-full h-full bg-muted/20 animate-pulse flex items-center justify-center text-xs text-muted-foreground font-mono">Loading PDF...</div> }
+);
 
 export default function ResumePage() {
     const { isLowPowerMode } = usePerformance();
