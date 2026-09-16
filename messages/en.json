@@ -49,11 +49,11 @@
     },
     "about": {
         "title": "About Me",
-        "subtitle": "Cybersecurity • AI Engineering • Full-Stack Development",
-        "description": "B.E. CSE (Cyber Security) student at Chennai Institute of Technology. Top 8 Finalist in Aerothon 2026 (HAL & IIT Indore). 500+ LeetCode problems solved, rating 1771.",
+        "subtitle": "Cybersecurity • AI Engineering • Full-Stack Architecture",
+        "description": "Cybersecurity and AI Engineer dedicated to building autonomous threat intelligence platforms, predictive machine learning engines, and resilient full-stack web applications.",
         "stats": {
-            "experience": "LeetCode Solved",
-            "projects": "Projects Built",
+            "experience": "Core Domains",
+            "projects": "Production Systems",
             "certifications": "Certifications",
             "competitions": "Hackathon Finals"
         },
@@ -61,41 +61,41 @@
         "architecting": "Architecting",
         "digitalReality": "Digital Reality",
         "leadIn": {
-            "label": "WHAT I DO",
-            "tagline": "CORE FOCUS",
-            "headlineAI": "Applied AI.",
-            "headlineData": "Cybersecurity.",
-            "headlineSoftware": "full-stack engineering",
-            "thesis": "I build systems that <span class='text-primary italic font-serif-elegant font-normal'>protect against threats</span>, predict outcomes with AI, and ship as production-grade full-stack products.",
-            "scope": "Specializing in cybersecurity engineering, AI-powered applications, and modern full-stack architectures designed to solve real-world problems at scale.",
-            "bridging": "Bridging cybersecurity with AI and software.",
-            "integration": "Beyond secure systems, I architect full-stack ecosystems: React/Next.js frontends, ML inference APIs, secure backends, and scalable CI/CD pipelines.",
+            "label": "ENGINEERING VISION",
+            "tagline": "CORE THESIS",
+            "headlineAI": "Autonomous AI.",
+            "headlineData": "Cyber Intelligence.",
+            "headlineSoftware": "resilient architecture",
+            "thesis": "I engineer software at the intersection of <span class='text-primary italic font-serif-elegant font-normal'>cyber defense</span>, predictive machine learning, and high-velocity web systems — building products that protect, predict, and scale.",
+            "scope": "Architecting zero-trust threat monitoring platforms, real-time ML inference services, and immersive WebGL applications designed for mission-critical reliability.",
+            "bridging": "Securing code. Synthesizing AI. Shipping scale.",
+            "integration": "From kernel-level attack surface analysis to production React/Next.js micro-frontends and automated backend microservices — crafted with precision from day one.",
             "signature": "Nithish Bharathwaj N",
-            "role": "Cybersecurity Engineer • AI Engineer • Full-Stack Developer",
+            "role": "Cybersecurity Engineer • AI Engineer • Full-Stack Architect",
             "aboutMe": "About Me",
             "scroll": "Scroll to Explore",
-            "shortStory": "My Short Story"
+            "shortStory": "My Journey"
         },
         "coreEngineering": {
             "label": "Core Engineering",
-            "title": "Proven <span class='text-primary italic font-serif font-light lowercase'>stack.</span> <br /> Measurable <span class='italic font-serif font-light text-foreground'>results.</span>",
-            "p1": "I engineer cybersecurity platforms with real-time threat detection, attack surface analysis, and vulnerability assessment dashboards using TypeScript, React, and Linux toolchains.",
-            "p2": "I build AI-powered applications using LLMs, Scikit-Learn, and Python/FastAPI — trained and deployed ML regression models with 98.7–99.9% R² accuracy.",
-            "p3": "Full-stack products ship with React 19, Next.js, Node.js, Socket.IO, PostgreSQL, Docker, and CI/CD pipelines — production-ready from day one.",
-            "gpa": "LeetCode Rating",
-            "projects": "Projects Built",
+            "title": "Resilient <span class='text-primary italic font-serif font-light lowercase'>systems.</span> <br /> Purpose-built <span class='italic font-serif font-light text-foreground'>software.</span>",
+            "p1": "I design cyber threat intelligence tools and attack surface monitoring platforms with real-time telemetry, vulnerability scoring, and automated alert engines using TypeScript, React, and Linux toolchains.",
+            "p2": "I develop high-accuracy AI models and microservices using Python, FastAPI, Scikit-Learn, and LLM agentic frameworks — bringing predictive analytics directly into active user workflows.",
+            "p3": "Full-stack architectures ship with React 19, Next.js, Node.js, WebSockets, PostgreSQL, Docker, and CI/CD pipelines — production-ready and built for zero-downtime scalability.",
+            "gpa": "Domain Mastery",
+            "projects": "Production Systems",
             "years": "Hackathon Finals"
         },
         "emergingResearch": {
             "label": "Beyond Engineering",
-            "title": "COMPETITIVE PROGRAMMING <span class='italic font-serif font-light text-primary lowercase'>&</span> LEARNING",
+            "title": "PROBLEM SOLVING <span class='italic font-serif font-light text-primary lowercase'>&</span> DISCIPLINE",
             "agentic": {
-                "title": "500+ LEETCODE PROBLEMS",
-                "desc": "Peak contest rating of 1771. Consistent 118-day coding streak. Focused on DSA, Dynamic Programming, Graph Theory and system design challenges."
+                "title": "ALGORITHMIC RIGOR",
+                "desc": "Deep focus on Data Structures, Algorithms, Dynamic Programming, and Graph Theory to engineer high-throughput systems with optimal space and time complexities."
             },
             "web3": {
                 "title": "CONTINUOUS LEARNING",
-                "desc": "AWS Generative AI certified, Cisco Cybersecurity certified, and continuously exploring new frontiers in threat intelligence, AI engineering, and full-stack architecture."
+                "desc": "AWS Generative AI certified, Cisco Cybersecurity certified, and continuously pushing frontiers in threat intelligence, autonomous AI systems, and cloud architecture."
             }
         },
         "profile": {

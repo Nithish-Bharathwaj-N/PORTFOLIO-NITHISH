@@ -172,7 +172,7 @@ const AboutLeadIn = () => {
     const t = useTranslations('about');
 
     return (
-        <div className="w-full max-w-[1650px] mx-auto px-6 py-6 flex justify-center items-center">
+        <div className="w-full max-w-[1650px] mx-auto px-4 sm:px-6 pt-16 md:pt-20 lg:pt-24 pb-6 flex justify-center items-center">
             {/* The Reference Card Container (Gambar 1 Style with Dark/Light Support) */}
             <motion.div
                 initial="hidden"
@@ -188,7 +188,7 @@ const AboutLeadIn = () => {
                         transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
                     }
                 }}
-                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-12 lg:p-16 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"
+                className="relative w-full bg-white dark:bg-black border border-red-600/20 dark:border-red-600/40 p-6 md:p-10 lg:p-12 overflow-hidden overflow-x-clip shadow-xl dark:shadow-2xl transition-colors duration-500 group"
             >
 
                 {/* 1. Grid Background Overlay (Dynamic Colors) */}
@@ -601,7 +601,7 @@ export default function AboutSection() {
                     </div>
                 </div>
             ) : (
-                <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none">
+                <div className="sticky top-0 h-screen w-full flex items-center justify-center z-0 overflow-hidden overflow-x-clip pointer-events-none pt-20 md:pt-24 lg:pt-28 pb-4">
                     <motion.div
                         style={{ scale, opacity, y: yLeadIn }}
                         className="relative px-4 md:px-6 w-full max-w-[1700px] mx-auto"
