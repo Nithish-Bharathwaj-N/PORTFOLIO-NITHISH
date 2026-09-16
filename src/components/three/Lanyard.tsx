@@ -545,7 +545,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
     }
 
     return (
-        <group position={[0, 0, 0]}>
+        <group position={[0, 2.2, 0]}>
             <RigidBody ref={fixed} {...segmentProps} type={'fixed' as RigidBodyProps['type']} />
             <RigidBody position={[0, -0.5, 0]} ref={j1} {...segmentProps} type={'dynamic' as RigidBodyProps['type']}>
                 <BallCollider args={[0.1]} />
@@ -557,7 +557,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
                 <BallCollider args={[0.1]} />
             </RigidBody>
             <RigidBody
-                position={[0, 0, 0]}
+                position={[0, -2.0, 0]}
                 ref={card}
                 {...segmentProps}
                 linearDamping={8}
@@ -567,7 +567,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false, isDark = false }:
                 <CuboidCollider args={[0.9, 1.3, 0.01]} />
                 <group
                     scale={2.6}
-                    position={[0, -0.2, -0.05]}
+                    position={[0, -0.4, -0.05]}
                     onPointerOver={() => hover(true)}
                     onPointerOut={() => hover(false)}
                     onPointerUp={(e: any) => {
